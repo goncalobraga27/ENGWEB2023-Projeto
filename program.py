@@ -5,6 +5,7 @@ def makeJson(cabecalho,rows):
     f = open('data/db.json','w')
     listaFicheiro=[]
     cabecalho = ['_id']+cabecalho
+    print(cabecalho)
     for row in rows:
         dic = dict()
         paramLinha =""
