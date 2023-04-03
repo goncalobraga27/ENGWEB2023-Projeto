@@ -23,6 +23,7 @@ def ligacoes(lig,fjson):
 
 
 def makeJson(cabecalho,rows):
+    rgx = re.compile(r"(?<=Inquirição de genere de )(\w+|\s)*")
     f = open('data/db.json','w',encoding="utf-8")
     listaFicheiro=[]
     listaligacoes=[]
@@ -47,12 +48,11 @@ def makeJson(cabecalho,rows):
             listaFicheiro.append(dic)
         
         if (len(paramLinha) > 63):
-            rgx = r"(?<=Inquirição de genere de)\w+"
-            print(paramLinha[8])
-            r = re.match(rgx, paramLinha[8])
-            print(r)
-            sleep(2)
-            dicligacoes[r.group(1)] = paramLinha[38]
+            #print(paramLinha[8])
+            r = re.search(rgx, paramLinha[8]).group()
+            #print(r)
+            #sleep(2)
+            dicligacoes[r] = paramLinha[38]
             listaligacoes.append(dicligacoes) 
             # vai ter que receber um key-value pair (dicionario) dos nomes e ir adicionando
             #ligacoes(paramLinha[64])#nao sei se vale a pena tratar desta informacao
