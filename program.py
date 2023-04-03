@@ -9,14 +9,21 @@ Notas a rever :
 - Ingnorar registos que nao nos interessam (depois rever este parametro com a api de dados)
 
 Pensar de quais dados deste csv e` que sao importantes para isto
+
+-- tratar bem os dados (essencial para depois mandar menos cenas ao servidor)
+
+falar com o ramalho
+
 """
 
 
 def ligacoes(lig,fjson):
+    print(fjson)
     res = list()
-    print(lig)
-    # 8
- 
+    #print(lig)
+    # 8    
+    for l in lig:
+        pass
 
     return res
 
@@ -52,8 +59,16 @@ def makeJson(cabecalho,rows):
             r = re.search(rgx, paramLinha[8]).group()
             #print(r)
             #sleep(2)
-            dicligacoes[r] = paramLinha[38]
-            listaligacoes.append(dicligacoes) 
+            print(paramLinha[38])
+            if(paramLinha[38] != ""):
+                try : # pensar noutra maneira
+                    rg = re.search(r"(?<=Filiação: )(\w+|\s)*(\w+|\s)*",paramLinha[38]).group().split(" e ")
+                except:
+                    print(row)
+                print(paramLinha[38])
+                print(rg)
+                dicligacoes[r] = rg
+                listaligacoes.append(dicligacoes) 
             # vai ter que receber um key-value pair (dicionario) dos nomes e ir adicionando
             #ligacoes(paramLinha[64])#nao sei se vale a pena tratar desta informacao
     #for j in listaFicheiro: #depois melhorar isto, nada de eficiente
