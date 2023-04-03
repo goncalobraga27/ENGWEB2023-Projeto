@@ -3,6 +3,7 @@ import json
 
 def makeJson(cabecalho,rows):
     f = open('data/db.json','w')
+    dicFicheiro = {}
     listaFicheiro=[]
     cabecalho = ['_id']+cabecalho
     print(cabecalho)
@@ -20,7 +21,8 @@ def makeJson(cabecalho,rows):
             for i in range(len(paramLinha)-1):
                 dic[cabecalho[i]] = paramLinha[i]
             listaFicheiro.append(dic)
-    json.dump(listaFicheiro, f)
+    dicFicheiro["data"]=listaFicheiro
+    json.dump(dicFicheiro, f)
     
 
 def main():

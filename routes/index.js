@@ -6,6 +6,7 @@ router.get('/', function(req, res, next) {
   var data = new Date().toISOString().substring(0, 16)
   Process.list()
     .then(processos => {
+      console.log(processos)
       res.render('index', { plist: processos, d: data });
     })
     .catch(erro => {
