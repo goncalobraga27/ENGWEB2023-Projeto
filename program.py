@@ -20,12 +20,13 @@ mas tratar -lo vai levar a um desempenho melhor do servidor
 
 
 def ligacoes(lig,fjson):
-    print(lig)
+    #print(lig)
     res = list()
     #print(lig)
     # 8    
     for l in lig:
-        pass
+        for n in l.keys():
+            print(n)
 
     return res
 
@@ -38,7 +39,7 @@ def makeJson(cabecalho,rows):
     listaligacoes=[]
     cabecalho = ['_id']+cabecalho
     #print(cabecalho[7])
-    # print(cabecalho.index("ScopeContent")) == 38
+    #print(cabecalho.index("ScopeContent")) == 38
     for row in rows:
         dic = dict()
         dicligacoes = dict()
@@ -57,29 +58,21 @@ def makeJson(cabecalho,rows):
             listaFicheiro.append(dic)
         
         if (len(paramLinha) > 63):
-            #print(paramLinha[8]) 
-
+            #print(paramLinha[8])
             """
-            nota: vamos ter em atencao aqueles com proc:numero do processo ou so` mesmo aqueles do Scope and Content?
-            temos de tratar bem o dataset antes de guardamos como json.
+                TRATAR DO DATASET -> RelatedMaterial
             """
             r = re.search(rgx, paramLinha[8]).group()
             #print(r)
             #sleep(2)
             #print(paramLinha[38])
             if(paramLinha[38] != ""):
-                try : # pensar noutra maneira
+                try : # pensar noutra maneira !!!!!!!!!! com search e se for vazio nao faz o split
                     rg = re.search(r"(?<=Filiação: )(\w+|\s)*(\w+|\s)*",paramLinha[38]).group().split(" e ")
                 except:
-                    print(row)
-                #print(paramLinha[38])
-                #print(rg)
+                    print(paramLinha[38])
                 dicligacoes[r] = rg
                 listaligacoes.append(dicligacoes) 
-            # vai ter que receber um key-value pair (dicionario) dos nomes e ir adicionando
-            #ligacoes(paramLinha[64])#nao sei se vale a pena tratar desta informacao
-    #for j in listaFicheiro: #depois melhorar isto, nada de eficiente
-    #    ligacoes(listaligacoes,j)
     res = ligacoes(listaligacoes,listaFicheiro)
     json.dump(res, f,indent=" ")
     f.close()
