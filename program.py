@@ -22,11 +22,29 @@ mas tratar -lo vai levar a um desempenho melhor do servidor
 def ligacoes(lig,fjson):
     #print(lig)
     res = list()
-    #print(lig)
-    # 8    
-    for l in lig:
+    
+
+
+    i = 0
+    for l in lig: #mudar isto por amor de deus
+        laux = {'ligacoes' : {}}
         for n in l.keys():
-            print(n)
+            uax = dict()
+            for nomes in l[n]:
+                for e in fjson:
+                    #print(e['UnitTitle'])
+                    try :
+                        if re.search(e['UnitTitle'],nomes) :
+                            laux['ligacoes'].update({e["_id"]:nomes})
+                    except:
+                        print(e) 
+
+            
+        fjson[i].update(laux)
+        res += [fjson[i]] 
+        #print(res)
+        #sleep(4)
+        i+=1
 
     return res
 
@@ -60,17 +78,14 @@ def makeJson(cabecalho,rows):
         if (len(paramLinha) > 63):
             #print(paramLinha[8])
             """
-                TRATAR DO DATASET -> RelatedMaterial
+                TRATAR DO DATASET -> RelatedMaterial !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             """
             r = re.search(rgx, paramLinha[8]).group()
-            #print(r)
-            #sleep(2)
-            #print(paramLinha[38])
             if(paramLinha[38] != ""):
-                try : # pensar noutra maneira !!!!!!!!!! com search e se for vazio nao faz o split
+                try :
                     rg = re.search(r"(?<=Filiação: )(\w+|\s)*(\w+|\s)*",paramLinha[38]).group().split(" e ")
                 except:
-                    print(paramLinha[38])
+                    pass
                 dicligacoes[r] = rg
                 listaligacoes.append(dicligacoes) 
     res = ligacoes(listaligacoes,listaFicheiro)
