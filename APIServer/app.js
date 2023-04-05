@@ -8,7 +8,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var mongoose = require ('mongoose');
 
-var mongoDB='mongodb://127.0.0.1/pessoas';
+var mongoDB='mongodb://127.0.0.1/tp';
 
 mongoose.connect(mongoDB,{useNewUrlParser:true,useUnifiedTopology:true});
 

@@ -90,6 +90,7 @@ var processSchema= new mongoose.Schema({
         ProcessInfoDate: String,
         OtherDescriptiveData: String,
         ProcessInfo: String,
+        ligacoes:[String]
 })
 
 module.exports = mongoose.model('process',processSchema)

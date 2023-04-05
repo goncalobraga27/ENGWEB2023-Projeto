@@ -3,25 +3,28 @@ extends layout
 block content
   .w3-card-4
     header.w3-container.w3-teal
-      h1 Process List #[a.w3-btn.w3-round.w3-grey(href="/process/registo") + ] [Nº de Processos: #{plist.length}]
+      h1 Process List #[a.w3-btn.w3-round.w3-grey(href="/processos/registo") + ] [Nº de Processos: #{plist.length}]
     .w3-container
       table.w3-table-all
         tr
           th Id
-          th Author
+          th Ligações
           th ScopeContent
+          th Related Material 
         
         each p in plist
           tr
             td= p.id
-            td
-              a(href="/process/"+p.id)= p.Author
+            td 
+              each l in p.ligacoes
+                a(href="/processos/"+l)= l+"|"
             td= p.ScopeContent
+            td= p.RelatedMaterial
             td
               button.w3-btn.w3-round.w3-indigo.w3-margin-right 
-                a(href="/process/edit/"+p.id) Edit
+                a(href="/processos/edit/"+p.id) Edit
               button.w3-btn.w3-round.w3-indigo.w3-margin-right  
-                a(href="/process/delete/"+p.id) Delete
+                a(href="/processos/delete/"+p.id) Delete
               
     footer.w3-container.w3-teal
       h5 Generated for TP_EngWeb2023 in #{d}
