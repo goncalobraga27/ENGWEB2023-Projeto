@@ -35,7 +35,7 @@ module.exports.addProcess = p => {
 }
 
 module.exports.updateProcess = p => {
-    return Process.updateOne({_id:p._id},p)
+    return Process.updateOne({_id:p.id},p)
     .then(dados=>{
         return dados
     })
