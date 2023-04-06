@@ -1,0 +1,6 @@
+extends layout
+
+block content
+  h1 Process Record: #{p.id}
+  pre= JSON.stringify(p) 
+  a(href="/processos") Return 

@@ -27,6 +27,7 @@ module.exports.getProcess = id => {
 module.exports.addProcess = p => {
     return Process.create(p)
     .then(dados=>{
+        console.log(dados)
         return dados
     })
     .catch(erro =>{

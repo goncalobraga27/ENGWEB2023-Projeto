@@ -11,12 +11,15 @@ router.get('/processos', function(req, res, next) {
     )
     .catch(erro=> res.status(601).json({erro:erro}))
 });
-
+router.get('/processos/registo', function(req, res, next) {
+  var data = new Date().toISOString().substring(0, 16)
+  res.render('addProcess', {d: data });
+});
 router.get('/processos/:id', function(req, res, next) {
   var data = new Date().toISOString().substring(0, 16)
   Process.getProcess(req.params.id)
     .then(dados => {
-      console.log(dados)
+      
       res.render('process', { p: dados, d: data });
     })
     .catch(erro => res.status(602).json(({erro: erro})))
@@ -30,8 +33,7 @@ router.get('/processos/edit/:id', function(req, res, next) {
     .catch(erro => {
       res.render('error', {error: erro, message: "Erro na edição do processo pedido"})
     })
-}
-);
+});
 router.post('/processos',(req,res) => {
   Process.addProcess(req.body)
     .then(dados => res.status(201).json(dados))
@@ -39,7 +41,7 @@ router.post('/processos',(req,res) => {
 
 })
 router.post('/processos/edit/:id', function(req, res, next) {
-  console.log(req.body)
+  
   Process.updateProcess(req.body)
     .then(process =>{
       res.redirect('/processos')
@@ -48,7 +50,16 @@ router.post('/processos/edit/:id', function(req, res, next) {
       res.render('error', {error: erro, message: "Erro na edição do processo"})
     })
 });
-
+router.post('/processos/registo', function(req, res, next) {
+  var data = new Date().toISOString().substring(0, 16)
+  Process.addProcess(req.body)
+  .then(processo=>{
+    res.redirect('/processos')
+  })
+  .catch(erro => {
+    res.render('error', {error: erro, message: "Erro no armazenamento do registo de aluno"})
+  })
+});
 router.put('/processos/:id',(req,res) => {
   Process.updateProcess(req.body)
     .then(dados => res.json(dados))
@@ -56,9 +67,9 @@ router.put('/processos/:id',(req,res) => {
 
 })
 
-router.delete('/processos/:id',(req,res) => {
+router.delete('/processos/delete/:id',(req,res) => {
   Process.deleteProcess(req.params.id)
-    .then(dados => res.json(dados))
+    .then(dados => res.redirect('/processos'))
     .catch(erro => res.status(605).json({erro:erro}))
 
 })
