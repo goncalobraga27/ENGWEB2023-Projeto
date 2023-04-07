@@ -1,0 +1,190 @@
+extends layout 
+
+block content 
+    .w3-card-4
+        header.w3-container.w3-purple
+            h2 Process Edit Form 
+    
+        form.w3-container(method="POST")
+            fieldset
+                legend MetaData
+                label Id
+                input.w3-input.w3-round(type="text" name="id" readonly value=p.id)
+                label DescriptionLevel
+                input.w3-input.w3-round(type="text" name="DescriptionLevel" readonly value=p.DescriptionLevel)
+                label EntityType
+                input.w3-input.w3-round(type="text" name="EntityType" readonly value=p.EntityType)
+                label CompleteUnitId
+                input.w3-input.w3-round(type="text" name="CompleteUnitId" readonly value=p.CompleteUnitId)
+                label UnitId 
+                input.w3-input.w3-round(type="text" name="UnitId" readonly value=p.UnitId)
+                label RepositoryCode
+                input.w3-input.w3-round(type="text" name="RepositoryCode" readonly value=p.RepositoryCode)
+                label CountryCode
+                input.w3-input.w3-round(type="text" name="CountryCode" readonly value=p.CountryCode)
+                label UnitTitleType
+                input.w3-input.w3-round(type="text" name="UnitTitleType" readonly value=p.UnitTitleType)
+                label UnitTitle
+                input.w3-input.w3-round(type="text" name="UnitTitle" readonly value=p.UnitTitle)
+                label AlternativeTitle
+                input.w3-input.w3-round(type="text" name="AlternativeTitle" readonly value=p.AlternativeTitle)
+                label NormalizedFormsName
+                input.w3-input.w3-round(type="text" name="NormalizedFormsName" readonly value=p.NormalizedFormsName)
+                label OtherFormsName
+                input.w3-input.w3-round(type="text" name="OtherFormsName" readonly value=p.OtherFormsName)
+                label UnitDateInitial
+                input.w3-input.w3-round(type="text" name="UnitDateInitial"  value=p.UnitDateInitial)
+                label UnitDateFinal
+                input.w3-input.w3-round(type="text" name="UnitDateFinal" readonly value=p.UnitDateFinal)
+                label UnitDateInitialCertainty
+                input.w3-input.w3-round(type="text" name="UnitDateInitialCertainty" readonly value=p.UnitDateInitialCertainty)
+                label UnitDateFinalCertainty
+                input.w3-input.w3-round(type="text" name="UnitDateFinalCertainty" readonly value=p.UnitDateFinalCertainty)
+                label AllowUnitDatesInference
+                input.w3-input.w3-round(type="text" name="AllowUnitDatesInference" readonly value=p.AllowUnitDatesInference)
+                label AccumulationDates
+                input.w3-input.w3-round(type="text" name="AccumulationDates" readonly value=p.AccumulationDates)
+                label UnitDateBulk
+                input.w3-input.w3-round(type="text" name="UnitDateBulk" readonly value=p.UnitDateBulk)
+                label UnitDateNotes
+                input.w3-input.w3-round(type="text" name="UnitDateNotes" readonly value=p.UnitDateNotes)
+                label Dimensions
+                input.w3-input.w3-round(type="text" name="Dimensions" readonly value=p.Dimensions)
+                label AllowExtentsInference
+                input.w3-input.w3-round(type="text" name="AllowExtentsInference" readonly value=p.AllowExtentsInference)
+                label Repository
+                input.w3-input.w3-round(type="text" name="Repository" readonly value=p.Repository)
+                label Producer
+                input.w3-input.w3-round(type="text" name="Producer" readonly value=p.Producer)
+                label Author
+                input.w3-input.w3-round(type="text" name="Author" readonly value=p.Author)
+                label MaterialAuthor
+                input.w3-input.w3-round(type="text" name="MaterialAuthor" readonly value=p.MaterialAuthor)
+                label Contributor
+                input.w3-input.w3-round(type="text" name="Contributor" readonly value=p.Contributor)
+                label Recipient
+                input.w3-input.w3-round(type="text" name="Recipient" readonly value=p.Recipient)
+                label BiogHist
+                input.w3-input.w3-round(type="text" name="BiogHist" readonly value=p.BiogHist)
+                label GeogName
+                input.w3-input.w3-round(type="text" name="GeogName" readonly value=p.GeogName)
+                label LegalStatus
+                input.w3-input.w3-round(type="text" name="LegalStatus" readonly value=p.LegalStatus)
+                label Functions
+                input.w3-input.w3-round(type="text" name="Functions" readonly value=p.Functions)
+                label Authorities
+                input.w3-input.w3-round(type="text" name="Authorities" readonly value=p.Authorities)
+                label InternalStructure
+                input.w3-input.w3-round(type="text" name="InternalStructure" readonly value=p.InternalStructure)
+                label GeneralContext
+                input.w3-input.w3-round(type="text" name="GeneralContext" readonly value=p.GeneralContext)
+                label CustodHist
+                input.w3-input.w3-round(type="text" name="CustodHist"  value=p.CustodHist)
+                label AcqInfo
+                input.w3-input.w3-round(type="text" name="AcqInfo" readonly value=p.AcqInfo)
+                label Classifier
+                input.w3-input.w3-round(type="text" name="Classifier" readonly value=p.Classifier)
+                label ScopeContent
+                input.w3-input.w3-round(type="text" name="ScopeContent" readonly value=p.ScopeContent)
+                label Terms
+                input.w3-input.w3-round(type="text" name="Terms" readonly value=p.Terms)
+                label DocumentalTradition
+                input.w3-input.w3-round(type="text" name="DocumentalTradition" readonly value=p.DocumentalTradition)
+                label DocumentalTypology
+                input.w3-input.w3-round(type="text" name="DocumentalTypology" readonly value=p.DocumentalTypology)
+                label Marks
+                input.w3-input.w3-round(type="text" name="Marks" readonly value=p.Marks)
+                label Monograms
+                input.w3-input.w3-round(type="text" name="Monograms" readonly value=p.Monograms)
+                label Stamps
+                input.w3-input.w3-round(type="text" name="Stamps" readonly value=p.Stamps)
+                label Inscriptions
+                input.w3-input.w3-round(type="text" name="Inscriptions" readonly value=p.Inscriptions)
+                label Signatures
+                input.w3-input.w3-round(type="text" name="Signatures" readonly value=p.Signatures)
+                label Appraisal
+                input.w3-input.w3-round(type="text" name="Appraisal" readonly value=p.Appraisal)
+                label AppraisalElimination
+                input.w3-input.w3-round(type="text" name="AppraisalElimination" readonly value=p.AppraisalElimination)
+                label AppraisalEliminationDate
+                input.w3-input.w3-round(type="text" name="AppraisalEliminationDate" readonly value=p.AppraisalEliminationDate)
+                label Accruals
+                input.w3-input.w3-round(type="text" name="Accruals" readonly value=p.Accruals)
+                label Arrangement
+                input.w3-input.w3-round(type="text" name="Arrangement" readonly value=p.Arrangement)
+                label AccessRestrict
+                input.w3-input.w3-round(type="text" name="AccessRestrict" readonly value=p.AccessRestrict)
+                label UseRestrict
+                input.w3-input.w3-round(type="text" name="UseRestrict" readonly value=p.UseRestrict)
+                label PhysLoc
+                input.w3-input.w3-round(type="text" name="PhysLoc" readonly value=p.PhysLoc)
+                label OriginalNumbering
+                input.w3-input.w3-round(type="text" name="OriginalNumbering" readonly value=p.OriginalNumbering)
+                label PreviousLoc
+                input.w3-input.w3-round(type="text" name="PreviousLoc" readonly value=p.PreviousLoc)
+                label LangMaterial
+                input.w3-input.w3-round(type="text" name="LangMaterial" readonly value=p.LangMaterial)
+                label PhysTech
+                input.w3-input.w3-round(type="text" name="PhysTech"  value=p.PhysTech)
+                label OtherFindAid
+                input.w3-input.w3-round(type="text" name="OtherFindAid" readonly value=p.OtherFindAid)
+                label ContainerTypeTerm
+                input.w3-input.w3-round(type="text" name="ContainerTypeTerm" readonly value=p.ContainerTypeTerm)
+                label OriginalsLoc
+                input.w3-input.w3-round(type="text" name="OriginalsLoc" readonly value=p.OriginalsLoc)
+                label AltFormAvail
+                input.w3-input.w3-round(type="text" name="AltFormAvail" readonly value=p.AltFormAvail)
+                label RelatedMaterial
+                input.w3-input.w3-round(type="text" name="RelatedMaterial" readonly value=p.RelatedMaterial)
+                label Note
+                input.w3-input.w3-round(type="text" name="Note" readonly value=p.Note)
+                label AllowTextualContentInference
+                input.w3-input.w3-round(type="text" name="AllowTextualContentInference" readonly value=p.AllowTextualContentInference)
+                label TextualContent
+                input.w3-input.w3-round(type="text" name="TextualContent" readonly value=p.TextualContent)
+                label RetentionDisposalDocumentState
+                input.w3-input.w3-round(type="text" name="RetentionDisposalDocumentState" readonly value=p.RetentionDisposalDocumentState)
+                label ApplySelectionTable
+                input.w3-input.w3-round(type="text" name="ApplySelectionTable" readonly value=p.ApplySelectionTable)
+                label RetentionDisposalPolicy
+                input.w3-input.w3-round(type="text" name="RetentionDisposalPolicy" readonly value=p.RetentionDisposalPolicy)
+                label RetentionDisposalReference
+                input.w3-input.w3-round(type="text" name="RetentionDisposalReference" readonly value=p.RetentionDisposalReference)
+                label RetentionDisposalClassification
+                input.w3-input.w3-round(type="text" name="RetentionDisposalClassification" readonly value=p.RetentionDisposalClassification)
+                label RetentionDisposalPeriod
+                input.w3-input.w3-round(type="text" name="RetentionDisposalPeriod" readonly value=p.RetentionDisposalPeriod)
+                label RetentionDisposalApplyDate
+                input.w3-input.w3-round(type="text" name="RetentionDisposalApplyDate"  value=p.RetentionDisposalApplyDate)
+                label RetentionDisposalFinalDestination
+                input.w3-input.w3-round(type="text" name="RetentionDisposalFinalDestination" readonly value=p.RetentionDisposalFinalDestination)
+                label RetentionDisposalObservations
+                input.w3-input.w3-round(type="text" name="RetentionDisposalObservations" readonly value=p.RetentionDisposalObservations)
+                label DescRules
+                input.w3-input.w3-round(type="text" name="DescRules" readonly value=p.DescRules)
+                label Revised
+                input.w3-input.w3-round(type="text" name="Revised" readonly value=p.Revised)
+                label Published
+                input.w3-input.w3-round(type="text" name="Published" readonly value=p.Published)
+                label Available
+                input.w3-input.w3-round(type="text" name="Available" readonly value=p.Available)
+                label Highlighted
+                input.w3-input.w3-round(type="text" name="Highlighted" readonly value=p.Highlighted)
+                label Creator
+                input.w3-input.w3-round(type="text" name="Creator" readonly value=p.Creator)
+                label Created
+                input.w3-input.w3-round(type="text" name="Created" readonly value=p.Created)
+                label Username
+                input.w3-input.w3-round(type="text" name="Username" readonly value=p.Username)
+                label ProcessInfoDate
+                input.w3-input.w3-round(type="text" name="ProcessInfoDate" readonly value=p.ProcessInfoDate)
+                label OtherDescriptiveData
+                input.w3-input.w3-round(type="text" name="OtherDescriptiveData" readonly value=p.OtherDescriptiveData)
+                label ligacoes
+                input.w3-input.w3-round(type="text" name="ligacoes" readonly value=p.ligacoes)
+           
+                button.w3-btn.w3-purple.w3-mb-2(type="submit") Register
+                button.w3-btn.w3-purple.w3-mb-2 #[a(href="/processos") Cancel]
+            
+        footer.w3-container.w3-purple
+            h5 Generated by EngWeb2023 in #{d} 

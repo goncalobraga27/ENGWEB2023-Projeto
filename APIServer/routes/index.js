@@ -34,6 +34,16 @@ router.get('/processos/edit/:id', function(req, res, next) {
       res.render('error', {error: erro, message: "Erro na edição do processo pedido"})
     })
 });
+router.get('/processos/delete/:id', function(req, res, next) {
+  var data = new Date().toISOString().substring(0, 16)
+  Process.getProcess(req.params.id)
+    .then(process => {
+      res.render('processDeletePage', { p: process, d: data });
+    })
+    .catch(erro => {
+      res.render('error', {error: erro, message: "Erro na obtenção do processo em questão"})
+    })
+});
 router.post('/processos',(req,res) => {
   Process.addProcess(req.body)
     .then(dados => res.status(201).json(dados))
@@ -74,4 +84,15 @@ router.delete('/processos/delete/:id',(req,res) => {
 
 })
 
+/* POST Delete Process */
+router.post('/processos/delete/:id', function(req, res, next) {
+  var data = new Date().toISOString().substring(0, 16)
+  Process.deleteProcess(req.params.id)
+    .then(processo =>{
+      res.redirect('/processos')
+    })
+    .catch(erro => {
+      res.render('error', {error: erro, message: "Erro na eliminação do processo"})
+    })
+});
 module.exports = router;
