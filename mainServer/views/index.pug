@@ -15,8 +15,10 @@ block content
         each p in plist
           tr
             td
-              a(href="/processos/"+p.id)= p.id
-            td= p.ligacoes
+              a(href="/processos/"+p._id)= p._id
+            td 
+              each l in p.ligacoes
+                a(href="/processos/"+l)= l+"|"
             td= p.ScopeContent
             td= p.RelatedMaterial
             td
