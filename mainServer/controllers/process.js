@@ -88,7 +88,7 @@ module.exports.addProcesso = p => {
 }
 // Adicionar um processo
 module.exports.updateProcesso = p => {
-    return axios.put('http://localhost:3000/processos/' + p.id,p)
+    return axios.put('http://localhost:3000/processos/' + p._id,p)
             .then(resposta => {
                 return resposta.data
             })

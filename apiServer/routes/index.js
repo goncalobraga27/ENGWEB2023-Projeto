@@ -54,7 +54,6 @@ router.post('/processos',(req,res) => {
 
 })
 router.post('/processos/edit/:id', function(req, res, next) {
-  
   Process.updateProcess(req.body)
     .then(process =>{
       /* res.redirect('/processos') */
@@ -77,7 +76,9 @@ router.post('/processos/registo', function(req, res, next) {
 });
 router.put('/processos/:id',(req,res) => {
   Process.updateProcess(req.body)
-    .then(dados => res.json(dados))
+    .then(
+      dados => {res.json(dados)}
+    )
     .catch(erro => res.status(604).json({erro:erro}))
 
 })
