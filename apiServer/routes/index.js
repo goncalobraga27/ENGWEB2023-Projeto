@@ -64,7 +64,6 @@ router.post('/processos/edit/:id', function(req, res, next) {
     })
 });
 router.post('/processos/registo', function(req, res, next) {
-  
   Process.addProcess(req.body)
   .then(process=>{
     /* res.redirect('/processos') */
@@ -85,21 +84,8 @@ router.put('/processos/:id',(req,res) => {
 
 router.delete('/processos/delete/:id',(req,res) => {
   Process.deleteProcess(req.params.id)
-    .then(dados => /* res.redirect('/processos') */res.json(dados))
+    .then(dados => /* res.redirect('/processos')*/ res.json(dados))
     .catch(erro => res.status(605).json({erro:erro}))
 
 })
-
-/* POST Delete Process */
-router.post('/processos/delete/:id', function(req, res, next) {
-  
-  Process.deleteProcess(req.params.id)
-    .then(process =>{
-      /* res.redirect('/processos') */
-      res.json(process)
-    })
-    .catch(erro => {
-      res.render('error', {error: erro, message: "Erro na eliminação do processo"})
-    })
-});
 module.exports = router;
