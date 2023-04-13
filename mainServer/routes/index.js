@@ -12,6 +12,40 @@ router.get('/processos', function(req, res, next) {
       res.render('error', {error: erro, message: "Erro na obtenção da lista de processos levantados"})
     })
 });
+/* GET /processos/nome */
+router.get('/processos/nome', function(req, res, next) {
+  var data = new Date().toISOString().substring(0, 16)
+  Process.listnome()
+    .then(processos => {
+      res.render('index', { plist: processos, d: data });
+    })
+    .catch(erro => {
+      res.render('error', {error: erro, message: "Erro na obtenção da lista de processos levantados"})
+    })
+});
+/* GET /processos/data */
+router.get('/processos/data', function(req, res, next) {
+  var data = new Date().toISOString().substring(0, 16)
+  Process.listdata()
+    .then(processos => {
+      res.render('index', { plist: processos, d: data });
+    })
+    .catch(erro => {
+      res.render('error', {error: erro, message: "Erro na obtenção da lista de processos levantados"})
+    })
+});
+/* GET /processos/lugar */
+router.get('/processos/lugar', function(req, res, next) {
+  var data = new Date().toISOString().substring(0, 16)
+  Process.listlugar()
+    .then(processos => {
+      
+      res.render('index', { plist: processos, d: data });
+    })
+    .catch(erro => {
+      res.render('error', {error: erro, message: "Erro na obtenção da lista de processos levantados"})
+    })
+});
 /* GET /processos/registo */ 
 router.get('/processos/registo', function(req, res, next) {
   var data = new Date().toISOString().substring(0, 16)

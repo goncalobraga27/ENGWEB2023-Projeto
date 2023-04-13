@@ -12,6 +12,36 @@ router.get('/processos', function(req, res, next) {
     )
     .catch(erro=> res.status(601).json({erro:erro}))
 });
+router.get('/processos/nome', function(req, res, next) {
+  
+  Process.listnome()
+    .then (dados=> {
+      /*res.render('index', { plist: dados, d: data });*/
+      res.json(dados)
+    }
+    )
+    .catch(erro=> res.status(601).json({erro:erro}))
+});
+router.get('/processos/lugar', function(req, res, next) {
+  
+  Process.listlugar()
+    .then (dados=> {
+      /*res.render('index', { plist: dados, d: data });*/
+      res.json(dados)
+    }
+    )
+    .catch(erro=> res.status(601).json({erro:erro}))
+});
+router.get('/processos/data', function(req, res, next) {
+  
+  Process.listdata()
+    .then (dados=> {
+      /*res.render('index', { plist: dados, d: data });*/
+      res.json(dados)
+    }
+    )
+    .catch(erro=> res.status(601).json({erro:erro}))
+});
 router.get('/processos/registo', function(req, res, next) {
   
   res.render('addProcess', {d: data });

@@ -12,7 +12,42 @@ module.exports.list = () => {
     })
 
 }
-
+module.exports.listnome = () => {
+    return  Process
+    .find()
+    .sort({UnitTitle:1})
+     .then(dados=>{
+         return dados
+     })
+     .catch(erro =>{
+         return erro
+     })
+ 
+ }
+ module.exports.listdata = () => {
+    return  Process
+    .find()
+    .sort({Created:1})
+     .then(dados=>{
+         return dados
+     })
+     .catch(erro =>{
+         return erro
+     })
+ 
+ }
+ module.exports.listlugar = () => {
+    return  Process
+    .find()
+    .sort({Repository:1})
+     .then(dados=>{
+         return dados
+     })
+     .catch(erro =>{
+         return erro
+     })
+ 
+ }
 module.exports.getProcess = id => {
     return Process
     .findOne({_id: id})
