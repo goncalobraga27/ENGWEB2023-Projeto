@@ -78,7 +78,7 @@ module.exports.getProcesso = id => {
 }
 // Adicionar de um processo
 module.exports.addProcesso = p => {
-    return axios.post('http://localhost:3000/processos' ,p)
+    return axios.post('http://localhost:3000/processos/registo' ,p)
             .then(resposta => {
                 return resposta.data
             })
@@ -98,7 +98,7 @@ module.exports.updateProcesso = p => {
 }
 // Remover um processo
 module.exports.deleteProcesso = p => {
-    return axios.delete('http://localhost:3000/processos/' + p.id)
+    return axios.delete('http://localhost:3000/processos/delete/' + p.id)
             .then(resposta => {
                 return resposta.data
             })
