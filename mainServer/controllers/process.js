@@ -42,6 +42,7 @@ module.exports.listdata = () => {
 module.exports.getProcesso = id => {
     return axios.get('http://localhost:3000/processos/' + id)
             .then(resposta => {
+                console.log(resposta.data)
                 return resposta.data
             })
             .catch(erro => {
@@ -60,6 +61,7 @@ module.exports.addProcesso = p => {
 }
 // Adicionar um processo
 module.exports.updateProcesso = p => {
+    console.log(p)
     return axios.put('http://localhost:3000/processos/' + p._id,p)
             .then(resposta => {
                 return resposta.data
