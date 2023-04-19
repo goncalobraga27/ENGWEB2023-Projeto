@@ -1,0 +1,23 @@
+extends layout
+
+block content
+  .w3-card-4
+    header.w3-indigo
+      h1 Autenticação na Aplicação
+    .w3-container 
+      h2 Área de Conteúdo
+      if u 
+        h3 Utilizador autenticado: #{u}
+    p Chegaste à página principal
+    p Podes fazer as seguintes operações: 
+      ul.w3-ul
+        li
+          a(href="/login") Login
+        li
+          a(href="/register") Registo 
+        li 
+          a(href="/logout") Logout 
+        li 
+          a(href="/protegida") Only authorized users
+    footer.w3-indigo 
+      address Genereted by auth::TP_EngWeb2023 
