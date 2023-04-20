@@ -3,13 +3,14 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+
 const { v4: uuidv4 } = require('uuid')
 var session = require('express-session')
 var FileStore = require('session-file-store')(session)
 var passport = require('passport')
 var LocalStrategy = require('passport-local').Strategy
 var mongoose = require ('mongoose');
-var mongoDB='mongodb://127.0.0.1/autenticacao';
+var mongoDB='mongodb://127.0.0.1/autenticacao_TP';
 
 mongoose.connect(mongoDB,{useNewUrlParser:true,useUnifiedTopology:true});
 
@@ -44,6 +45,7 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -52,7 +54,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(passport.initialize());
 app.use(passport.session());
-
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
