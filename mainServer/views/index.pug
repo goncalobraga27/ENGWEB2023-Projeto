@@ -11,6 +11,7 @@ block content
           th Ligações
           th ScopeContent
           th Related Material 
+          th Actions
         
         each p in plist
           tr
@@ -21,6 +22,11 @@ block content
                 a(href="/processos/"+l)= l+" "
             td= p.ScopeContent
             td= p.RelatedMaterial
+            td
+              button.w3-btn.w3-round.w3-indigo.w3-margin-right 
+                a(href="/processos/"+p._id+"/posts") See the posts
+              button.w3-btn.w3-round.w3-indigo.w3-margin-right  
+                a(href="/processos/"+p._id+"/posts/add") Add a new post
               
     footer.w3-container.w3-teal
       h5 Generated for TP_EngWeb2023 in #{d}

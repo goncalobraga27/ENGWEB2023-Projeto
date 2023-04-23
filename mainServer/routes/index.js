@@ -51,6 +51,11 @@ router.get('/processos/registo', function(req, res, next) {
   var data = new Date().toISOString().substring(0, 16)
   res.render('addProcess', {d: data });
 });
+/* GET /processos/:id/posts/add */ 
+router.get('/processos/:id/posts/add', function(req, res, next) {
+  var data = new Date().toISOString().substring(0, 16)
+  res.render('addPost', {d: data });
+});
 /* GET /processos/:id */
 router.get('/processos/:id', function(req, res, next) {
   var data = new Date().toISOString().substring(0, 16)
