@@ -12,6 +12,32 @@ module.exports.list = () => {
     })
 
 }
+
+module.exports.listLimit = (x) => {
+    return  Process
+    .find({ _id: { $gt: 1348406 +x*500 } })
+      .limit(500) // 1348406
+     .then(dados=>{
+         return dados
+     })
+     .catch(erro =>{
+         return erro
+     })
+ 
+ }
+module.exports.listLength = () => {
+    return  Process
+    .count()
+    .then(dados=>{
+        //console.log(dados)
+        return dados
+    })
+    .catch(erro =>{
+         return erro
+    })
+ 
+}
+
 module.exports.listnome = () => {
     return  Process
     .find()

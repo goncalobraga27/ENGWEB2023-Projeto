@@ -1,6 +1,21 @@
 var express = require('express');
 var router = express.Router();
 var Process = require('../controllers/process');
+
+function get_total(){
+   Process.listLength()
+    .then(p => {
+      console.log("->" + p);
+      return p;
+    })
+    .catch(erro => {
+      return 0;
+    })
+}
+
+var total = 0;
+
+
 /* GET /processos. */
 router.get('/processos', function(req, res, next) {
   var data = new Date().toISOString().substring(0, 16)
@@ -12,6 +27,10 @@ router.get('/processos', function(req, res, next) {
       res.render('error', {error: erro, message: "Erro na obtenção da lista de processos levantados"})
     })
 });
+
+
+
+
 /* GET /processos/nome */
 router.get('/processos/nome', function(req, res, next) {
   var data = new Date().toISOString().substring(0, 16)
@@ -83,6 +102,49 @@ router.get('/processos/delete/:id', function(req, res, next) {
     })
     .catch(erro => res.status(605).json(({erro: erro})))
 });
+
+router.get('/:num',function(req, res, next) {
+  //console.log(total)
+  var data = new Date().toISOString().substring(0, 16)
+  //console.log(0)
+  Process.lista500(0)
+    .then(processos => {
+           Process.listLength()
+             .then(total => {
+              var tp = Math.ceil(total / 500)
+              var act = parseInt(req.params.num)
+              res.render('indexMainPage', { plist: processos, d: data, t : total, pagTotal : tp , pagNow : act });
+            })
+                .catch(erro => {
+                  res.render('error', {error: erro, message: "total"})
+                })})
+    .catch(erro => {
+      res.render('error', {error: erro, message: "Erro na obtenção da lista de processos levantados"})
+    })
+});
+
+router.get('/',function(req, res, next) {
+  //console.log(total)
+  var data = new Date().toISOString().substring(0, 16)
+  //console.log(0)
+  Process.lista500(0)
+    .then(processos => {
+           Process.listLength()
+             .then(total => {
+              var tp = Math.ceil(total / 500)
+              
+              res.render('indexMainPage', { plist: processos, d: data, t : total, pagTotal : tp , pagNow : 0 });
+            })
+                .catch(erro => {
+                  res.render('error', {error: erro, message: "total"})
+                })})
+    .catch(erro => {
+      res.render('error', {error: erro, message: "Erro na obtenção da lista de processos levantados"})
+    })
+});
+
+
+
 
 /* POST /processos/edit/:id */
 router.post('/processos/edit/:id', function(req, res, next) {

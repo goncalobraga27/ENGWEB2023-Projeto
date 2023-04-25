@@ -3,7 +3,8 @@ var axios = require('axios')
 
 // Pedido da lista de processos
 module.exports.list = () => {
-    return axios.get('http://localhost:3000/processos')
+    return axios.get('http://localhost:3000/processos'
+      )
             .then(resposta => {
                 return resposta.data
             })
@@ -11,6 +12,32 @@ module.exports.list = () => {
                 return erro
             })
 }
+
+module.exports.listLength = () => {
+    return axios.get('http://localhost:3000/len'
+      )
+            .then(resposta => {
+                //console.log(resposta.data)
+                return resposta.data
+            })
+            .catch(erro => {
+                return erro
+            })
+}
+
+
+module.exports.lista500 = (x) => {
+    return axios.get('http://localhost:3000/' + x)
+            .then(resposta => {
+                //console.log(resposta.data)
+                return resposta.data
+            })
+            .catch(erro => {
+                return erro
+            })
+}
+
+
 module.exports.listnome = () => {
     return axios.get('http://localhost:3000/processos/nome')
             .then(resposta => {

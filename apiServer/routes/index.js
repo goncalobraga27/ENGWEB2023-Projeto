@@ -12,6 +12,18 @@ router.get('/processos', function(req, res, next) {
     )
     .catch(erro=> res.status(601).json({erro:erro}))
 });
+
+router.get('/len', function(req, res, next) {
+  Process.listLength()
+    .then (dados=> {
+      res.json(dados)
+    }
+    )
+    .catch(erro=> res.status(601).json({erro:erro}))
+});
+
+
+
 router.get('/processos/nome', function(req, res, next) {
   
   Process.listnome()
@@ -118,4 +130,19 @@ router.delete('/processos/delete/:id',(req,res) => {
     .catch(erro => res.status(605).json({erro:erro}))
 
 })
+
+// ver erros aqui
+router.get('/:pag', function(req, res, next) {
+  // console.log(req.params.pag)
+  Process.listLimit(req.params.pag)
+    .then (dados=> {
+      res.json(dados)
+    }
+    )
+    .catch(erro=> res.status(601).json({erro:erro}))
+});
+
+
+
+
 module.exports = router;
