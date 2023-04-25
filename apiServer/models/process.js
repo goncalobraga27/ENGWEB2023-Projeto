@@ -1,7 +1,10 @@
 var mongoose = require ('mongoose')
 
-
-
+const postSchema = new mongoose.Schema({
+        Title: String,
+        Type: String,
+        Description: String
+});
 var processSchema= new mongoose.Schema({
         _id:String,
         DescriptionLevel:String,
@@ -90,7 +93,11 @@ var processSchema= new mongoose.Schema({
         ProcessInfoDate: String,
         OtherDescriptiveData: String,
         ProcessInfo: String,
-        ligacoes:[String]
+        ligacoes:[String],
+        posts:[{
+                type: postSchema,
+                required: false 
+        }]
 })
 
 module.exports = mongoose.model('process',processSchema)
