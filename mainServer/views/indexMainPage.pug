@@ -28,14 +28,16 @@ block content
               button.w3-btn.w3-round.w3-indigo.w3-margin-right  
                 a(href="/processos/"+p._id+"/posts/add") Add a new post
     .w3-bar
-        a.w3-button(href=`/${pagNow-1}`) &laquo;
+        if pagNow > 0
+            a.w3-button(href=`/${pagNow-1}`) &laquo;
         a.w3-button(href=`/${pagNow}`)= pagNow
         each val in [pagNow+1,pagNow+2,pagNow+3,pagNow+4,pagNow+5]
             a.w3-button(href=`/${val}`)= val
         a.w3-button ...
         each val in [pagTotal-4,pagTotal-3,pagTotal-2,pagTotal-1,pagTotal]
             a.w3-button(href=`/${val}`)= val
-        a.w3-button(href=`/${pagNow+1}` ) &raquo;      
+        if pagNow < pagTotal
+            a.w3-button(href=`/${pagNow+1}` ) &raquo;      
     footer.w3-container.w3-teal
       h5 Generated for TP_EngWeb2023 in #{d}
     
