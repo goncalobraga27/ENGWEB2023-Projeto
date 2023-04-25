@@ -14,8 +14,7 @@ module.exports.list = () => {
 }
 
 module.exports.listLength = () => {
-    return axios.get('http://localhost:3000/len'
-      )
+    return axios.get('http://localhost:3000/len')
             .then(resposta => {
                 //console.log(resposta.data)
                 return resposta.data
@@ -37,7 +36,37 @@ module.exports.lista500 = (x) => {
             })
 }
 
+module.exports.lista500Nome = (x) => {
+    return axios.get('http://localhost:3000/' + x+'/nome')
+            .then(resposta => {
+                //console.log(resposta.data)
+                return resposta.data
+            })
+            .catch(erro => {
+                return erro
+            })
+}
 
+module.exports.lista500Data = (x) => {
+    return axios.get('http://localhost:3000/' + x+'/data')
+            .then(resposta => {
+                //console.log(resposta.data)
+                return resposta.data
+            })
+            .catch(erro => {
+                return erro
+            })
+}
+module.exports.lista500Lugar = (x) => {
+    return axios.get('http://localhost:3000/' + x+'/lugar')
+            .then(resposta => {
+                //console.log(resposta.data)
+                return resposta.data
+            })
+            .catch(erro => {
+                return erro
+            })
+}
 module.exports.listnome = () => {
     return axios.get('http://localhost:3000/processos/nome')
             .then(resposta => {
@@ -69,7 +98,7 @@ module.exports.listdata = () => {
 module.exports.getProcesso = id => {
     return axios.get('http://localhost:3000/processos/' + id)
             .then(resposta => {
-                console.log(resposta.data)
+                
                 return resposta.data
             })
             .catch(erro => {
@@ -88,7 +117,6 @@ module.exports.addProcesso = p => {
 }
 // Adicionar um processo
 module.exports.updateProcesso = p => {
-    console.log(p)
     return axios.put('http://localhost:3000/processos/' + p._id,p)
             .then(resposta => {
                 return resposta.data

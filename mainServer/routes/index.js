@@ -123,6 +123,65 @@ router.get('/:num',function(req, res, next) {
     })
 });
 
+router.get('/:num/lugar',function(req, res, next) {
+  //console.log(total)
+  var data = new Date().toISOString().substring(0, 16)
+  //console.log(0)
+  Process.lista500Lugar(0)
+    .then(processos => {
+           Process.listLength()
+             .then(total => {
+              var tp = Math.ceil(total / 500)
+              var act = parseInt(req.params.num)
+              res.render('indexMainPage', { plist: processos, d: data, t : total, pagTotal : tp , pagNow : act });
+            })
+                .catch(erro => {
+                  res.render('error', {error: erro, message: "total"})
+                })})
+    .catch(erro => {
+      res.render('error', {error: erro, message: "Erro na obtenção da lista de processos levantados"})
+    })
+});
+
+router.get('/:num/data',function(req, res, next) {
+  //console.log(total)
+  var data = new Date().toISOString().substring(0, 16)
+  //console.log(0)
+  Process.lista500Data(0)
+    .then(processos => {
+           Process.listLength()
+             .then(total => {
+              var tp = Math.ceil(total / 500)
+              var act = parseInt(req.params.num)
+              res.render('indexMainPage', { plist: processos, d: data, t : total, pagTotal : tp , pagNow : act });
+            })
+                .catch(erro => {
+                  res.render('error', {error: erro, message: "total"})
+                })})
+    .catch(erro => {
+      res.render('error', {error: erro, message: "Erro na obtenção da lista de processos levantados"})
+    })
+});
+
+router.get('/:num/nome',function(req, res, next) {
+  //console.log(total)
+  var data = new Date().toISOString().substring(0, 16)
+  //console.log(0)
+  Process.lista500Nome(0)
+    .then(processos => {
+           Process.listLength()
+             .then(total => {
+              var tp = Math.ceil(total / 500)
+              var act = parseInt(req.params.num)
+              res.render('indexMainPage', { plist: processos, d: data, t : total, pagTotal : tp , pagNow : act });
+            })
+                .catch(erro => {
+                  res.render('error', {error: erro, message: "total"})
+                })})
+    .catch(erro => {
+      res.render('error', {error: erro, message: "Erro na obtenção da lista de processos levantados"})
+    })
+});
 router.get('/',function(req, res, next) {
   //console.log(total)
   var data = new Date().toISOString().substring(0, 16)
@@ -142,9 +201,6 @@ router.get('/',function(req, res, next) {
       res.render('error', {error: erro, message: "Erro na obtenção da lista de processos levantados"})
     })
 });
-
-
-
 
 /* POST /processos/edit/:id */
 router.post('/processos/edit/:id', function(req, res, next) {

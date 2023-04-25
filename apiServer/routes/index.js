@@ -22,8 +22,6 @@ router.get('/len', function(req, res, next) {
     .catch(erro=> res.status(601).json({erro:erro}))
 });
 
-
-
 router.get('/processos/nome', function(req, res, next) {
   
   Process.listnome()
@@ -131,9 +129,7 @@ router.delete('/processos/delete/:id',(req,res) => {
 
 })
 
-// ver erros aqui
 router.get('/:pag', function(req, res, next) {
-  // console.log(req.params.pag)
   Process.listLimit(req.params.pag)
     .then (dados=> {
       res.json(dados)
@@ -142,7 +138,31 @@ router.get('/:pag', function(req, res, next) {
     .catch(erro=> res.status(601).json({erro:erro}))
 });
 
+router.get('/:pag/nome', function(req, res, next) {
+  Process.listLimitNome(req.params.pag)
+    .then (dados=> {
+      res.json(dados)
+    }
+    )
+    .catch(erro=> res.status(601).json({erro:erro}))
+});
 
+router.get('/:pag/data', function(req, res, next) {
+  Process.listLimitData(req.params.pag)
+    .then (dados=> {
+      res.json(dados)
+    }
+    )
+    .catch(erro=> res.status(601).json({erro:erro}))
+});
+router.get('/:pag/lugar', function(req, res, next) {
+  Process.listLimitLugar(req.params.pag)
+    .then (dados=> {
+      res.json(dados)
+    }
+    )
+    .catch(erro=> res.status(601).json({erro:erro}))
+});
 
 
 module.exports = router;

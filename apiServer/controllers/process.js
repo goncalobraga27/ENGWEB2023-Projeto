@@ -25,6 +25,45 @@ module.exports.listLimit = (x) => {
      })
  
  }
+module.exports.listLimitNome = (x) => {
+    return  Process
+    .find({ _id: { $gt: 1348406 +x*500 } })
+    .sort({UnitTitle:1})
+    .limit(500) // 1348406
+    .then(dados=>{
+        return dados
+    })
+    .catch(erro =>{
+        return erro
+    })
+ 
+}
+module.exports.listLimitData = (x) => {
+    return  Process
+    .find({ _id: { $gt: 1348406 +x*500 } })
+    .sort({Created:1})
+    .limit(500) // 1348406
+    .then(dados=>{
+        return dados
+    })
+    .catch(erro =>{
+        return erro
+    })
+ 
+}
+module.exports.listLimitLugar = (x) => {
+    return  Process
+    .find({ _id: { $gt: 1348406 +x*500 } })
+    .sort({Repository:1})
+    .limit(500) // 1348406
+    .then(dados=>{
+        return dados
+    })
+    .catch(erro =>{
+        return erro
+    })
+ 
+}
 module.exports.listLength = () => {
     return  Process
     .count()
