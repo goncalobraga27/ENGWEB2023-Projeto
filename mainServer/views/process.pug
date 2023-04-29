@@ -1,280 +1,289 @@
 extends layout
 
+block append head
+	title= title + p.UnitTitle
+
 block content
-  .w3-card-4
-    header.w3-container.w3-teal
-      h1 Process Number #{p._id}
-    .w3-container
-      table.w3-table-all
-        tr
-          th Id
-          td= p._id 
-        tr
-          th DescriptionLevel
-          td= p.DescriptionLevel 
-        tr
-          th EntityType
-          td= p.EntityType
-        tr
-          th CompleteUnitId
-          td= p.CompleteUnitId
-        tr
-          th UnitId 
-          td= p.UnitId
-        tr
-          th RepositoryCode
-          td= p.RepositoryCode
-        tr
-          th CountryCode
-          td= p.CountryCode
-        tr
-          th UnitTitleType
-          td= p.UnitTitleType
-        tr
-          th UnitTitle
-          td= p.UnitTitle
-        tr
-          th AlternativeTitle
-          td= p.AlternativeTitle
-        tr
-          th NormalizedFormsName
-          td= p.NormalizedFormsName
-        tr
-          th OtherFormsName
-          td= p.OtherFormsName
-        tr
-          th UnitDateInitial
-          td= p.UnitDateInitial
-        tr
-          th UnitDateFinal
-          td= p.UnitDateFinal
-        tr
-          th UnitDateInitialCertainty
-          td= p.UnitDateInitialCertainty
-        tr
-          th UnitDateFinalCertainty
-          td= p.UnitDateFinalCertainty
-        tr
-          th AllowUnitDatesInference
-          td= p.AllowUnitDatesInference
-        tr 
-          th AccumulationDates
-          td= p.AccumulationDates
-        tr
-          th UnitDateBulk
-          td= p.UnitDateBulk
-        tr
-          th UnitDateNotes
-          td= p.UnitDateNotes
-        tr
-          th Dimensions
-          td= p.Dimensions
-        tr
-          th AllowExtentsInference
-          td= p.AllowExtentsInference
-        tr
-          th Repository
-          td= p.Repository
-        tr
-          th Producer
-          td= p.Producer
-        tr
-          th Author
-          td= p.Author
-        tr
-          th MaterialAuthor
-          td= p.MaterialAuthor
-        tr
-          th Contributor
-          td= p.Contributor
-        tr
-          th Recipient
-          td= p.Recipient
-        tr
-          th BiogHist
-          td= p.BiogHist
-        tr
-          th GeogName
-          td= p.GeogName
-        tr
-          th LegalStatus
-          td= p.LegalStatus
-        tr
-          th Functions
-          td= p.Functions
-        tr
-          th Authorities
-          td= p.Authorities
-        tr
-          th InternalStructure
-          td= p.InternalStructure
-        tr
-          th GeneralContext
-          td= p.GeneralContext
-        tr
-          th CustodHist
-          td= p.CustodHist
-        tr
-          th AcqInfo
-          td= p.AcqInfo
-        tr
-          th Classifier
-          td= p.Classifier
-        tr
-          th ScopeContent
-          td= p.ScopeContent
-        tr
-          th Terms
-          td= p.Terms
-        tr
-          th DocumentalTradition
-          td= p.DocumentalTradition
-        tr
-          th DocumentalTypology
-          td= p.DocumentalTypology
-        tr
-          th Marks
-          td= p.Marks
-        tr 
-          th Monograms
-          td= p.Monograms
-        tr
-          th Stamps
-          td= p.Stamps
-        tr
-          th Inscriptions
-          td= p.Inscriptions
-        tr
-          th Signatures
-          td= p.Signatures
-        tr
-          th Appraisal
-          td= p.Appraisal
-        tr
-          th AppraisalElimination
-          td= p.AppraisalElimination
-        tr
-          th AppraisalEliminationDate
-          td= p.AppraisalEliminationDate
-        tr
-          th Accruals
-          td= p.Accruals
-        tr  
-          th Arrangement
-          td=  p.Arrangement
-        tr  
-          th AccessRestrict
-          td= p.AccessRestrict
-        tr  
-          th UseRestrict
-          td= p.UseRestrict
-        tr  
-          th PhysLoc
-          td= p.PhysLoc
-        tr  
-          th OriginalNumbering
-          td= p.OriginalNumbering
-        tr  
-          th PreviousLoc
-          td= p.PreviousLoc
-        tr  
-          th LangMaterial
-          td= p.LangMaterial
-        tr  
-          th PhysTech
-          td= p.PhysTech
-        tr  
-          th OtherFindAid
-          td= p.OtherFindAid
-        tr  
-          th ContainerTypeTerm
-          td= p.ContainerTypeTerm
-        tr  
-          th OriginalsLoc
-          td= p.OriginalsLoc
-        tr  
-          th AltFormAvail
-          td= p.AltFormAvail
-        tr  
-          th RelatedMaterial
-          td= p.RelatedMaterial
-        tr  
-          th Note
-          td= p.Note
-        tr  
-          th AllowTextualContentInference
-          td= p.AllowTextualContentInference
-        tr  
-          th TextualContent
-          td= p.TextualContent
-        tr  
-          th RetentionDisposalDocumentState
-          td= p.RetentionDisposalDocumentState
-        tr  
-          th ApplySelectionTable
-          td= p.ApplySelectionTable
-        tr  
-          th RetentionDisposalPolicy
-          td= p.RetentionDisposalPolicy
-        tr  
-          th RetentionDisposalReference
-          td= p.RetentionDisposalReference
-        tr  
-          th RetentionDisposalClassification
-          td= p.RetentionDisposalClassification
-        tr  
-          th RetentionDisposalPeriod
-          td= p.RetentionDisposalPeriod
-        tr  
-          th RetentionDisposalApplyDate
-          td= p.RetentionDisposalApplyDate
-        tr  
-          th RetentionDisposalFinalDestination
-          td= p.RetentionDisposalFinalDestination
-        tr  
-          th RetentionDisposalObservations
-          td= p.RetentionDisposalObservations
-        tr  
-          th DescRules
-          td= p.DescRules
-        tr  
-          th Revised
-          td= p.Revised
-        tr  
-          th Published
-          td= p.Published
-        tr  
-          th Available
-          td= p.Available
-        tr  
-          th Highlighted
-          td= p.Highlighted
-        tr  
-          th Creator
-          td= p.Creator
-        tr  
-          th Created
-          td= p.Created
-        tr  
-          th Username
-          td= p.Username
-        tr  
-          th ProcessInfoDate
-          td= p.ProcessInfoDate
-        tr  
-          th OtherDescriptiveData
-          td= p.OtherDescriptiveData
-        tr  
-          th ligacoes
-          td= p.ligacoes
-        tr 
-          td
-            button.w3-btn.w3-round.w3-indigo.w3-margin-right 
-              a(href="/processos/edit/"+p._id) Edit
-            button.w3-btn.w3-round.w3-indigo.w3-margin-right  
-              a(href="/processos/delete/"+p._id) Delete
-          
-            
-    footer.w3-container.w3-teal
-      h5 Generated for TP_EngWeb2023 in #{d}
-    
+	.w3-card-4
+		header.w3-container.w3-teal
+			h1 Process Number #{p._id}
+		.w3-container
+			table.w3-table-all
+					- for (var i = 0; i < atrib.length; i++) {
+					if p[atrib[i]] != ""
+							tr
+								th= trat[i]
+								td= p[atrib[i]]
+					- }
+			//-
+				tr
+					th Id
+					td= p._id 
+				tr
+					th DescriptionLevel
+					td= p.DescriptionLevel 
+				tr
+					th EntityType
+					td= p.EntityType
+				tr
+					th CompleteUnitId
+					td= p.CompleteUnitId
+				tr
+					th UnitId 
+					td= p.UnitId
+				tr
+					th RepositoryCode
+					td= p.RepositoryCode
+				tr
+					th CountryCode
+					td= p.CountryCode
+				tr
+					th UnitTitleType
+					td= p.UnitTitleType
+				tr
+					th UnitTitle
+					td= p.UnitTitle
+				tr
+					th AlternativeTitle
+					td= p.AlternativeTitle
+				tr
+					th NormalizedFormsName
+					td= p.NormalizedFormsName
+				tr
+					th OtherFormsName
+					td= p.OtherFormsName
+				tr
+					th UnitDateInitial
+					td= p.UnitDateInitial
+				tr
+					th UnitDateFinal
+					td= p.UnitDateFinal
+				tr
+					th UnitDateInitialCertainty
+					td= p.UnitDateInitialCertainty
+				tr
+					th UnitDateFinalCertainty
+					td= p.UnitDateFinalCertainty
+				tr
+					th AllowUnitDatesInference
+					td= p.AllowUnitDatesInference
+				tr 
+					th AccumulationDates
+					td= p.AccumulationDates
+				tr
+					th UnitDateBulk
+					td= p.UnitDateBulk
+				tr
+					th UnitDateNotes
+					td= p.UnitDateNotes
+				tr
+					th Dimensions
+					td= p.Dimensions
+				tr
+					th AllowExtentsInference
+					td= p.AllowExtentsInference
+				tr
+					th Repository
+					td= p.Repository
+				tr
+					th Producer
+					td= p.Producer
+				tr
+					th Author
+					td= p.Author
+				tr
+					th MaterialAuthor
+					td= p.MaterialAuthor
+				tr
+					th Contributor
+					td= p.Contributor
+				tr
+					th Recipient
+					td= p.Recipient
+				tr
+					th BiogHist
+					td= p.BiogHist
+				tr
+					th GeogName
+					td= p.GeogName
+				tr
+					th LegalStatus
+					td= p.LegalStatus
+				tr
+					th Functions
+					td= p.Functions
+				tr
+					th Authorities
+					td= p.Authorities
+				tr
+					th InternalStructure
+					td= p.InternalStructure
+				tr
+					th GeneralContext
+					td= p.GeneralContext
+				tr
+					th CustodHist
+					td= p.CustodHist
+				tr
+					th AcqInfo
+					td= p.AcqInfo
+				tr
+					th Classifier
+					td= p.Classifier
+				tr
+					th ScopeContent
+					td= p.ScopeContent
+				tr
+					th Terms
+					td= p.Terms
+				tr
+					th DocumentalTradition
+					td= p.DocumentalTradition
+				tr
+					th DocumentalTypology
+					td= p.DocumentalTypology
+				tr
+					th Marks
+					td= p.Marks
+				tr 
+					th Monograms
+					td= p.Monograms
+				tr
+					th Stamps
+					td= p.Stamps
+				tr
+					th Inscriptions
+					td= p.Inscriptions
+				tr
+					th Signatures
+					td= p.Signatures
+				tr
+					th Appraisal
+					td= p.Appraisal
+				tr
+					th AppraisalElimination
+					td= p.AppraisalElimination
+				tr
+					th AppraisalEliminationDate
+					td= p.AppraisalEliminationDate
+				tr
+					th Accruals
+					td= p.Accruals
+				tr  
+					th Arrangement
+					td=  p.Arrangement
+				tr  
+					th AccessRestrict
+					td= p.AccessRestrict
+				tr  
+					th UseRestrict
+					td= p.UseRestrict
+				tr  
+					th PhysLoc
+					td= p.PhysLoc
+				tr  
+					th OriginalNumbering
+					td= p.OriginalNumbering
+				tr  
+					th PreviousLoc
+					td= p.PreviousLoc
+				tr  
+					th LangMaterial
+					td= p.LangMaterial
+				tr  
+					th PhysTech
+					td= p.PhysTech
+				tr  
+					th OtherFindAid
+					td= p.OtherFindAid
+				tr  
+					th ContainerTypeTerm
+					td= p.ContainerTypeTerm
+				tr  
+					th OriginalsLoc
+					td= p.OriginalsLoc
+				tr  
+					th AltFormAvail
+					td= p.AltFormAvail
+				tr  
+					th RelatedMaterial
+					td= p.RelatedMaterial
+				tr  
+					th Note
+					td= p.Note
+				tr  
+					th AllowTextualContentInference
+					td= p.AllowTextualContentInference
+				tr  
+					th TextualContent
+					td= p.TextualContent
+				tr  
+					th RetentionDisposalDocumentState
+					td= p.RetentionDisposalDocumentState
+				tr  
+					th ApplySelectionTable
+					td= p.ApplySelectionTable
+				tr  
+					th RetentionDisposalPolicy
+					td= p.RetentionDisposalPolicy
+				tr  
+					th RetentionDisposalReference
+					td= p.RetentionDisposalReference
+				tr  
+					th RetentionDisposalClassification
+					td= p.RetentionDisposalClassification
+				tr  
+					th RetentionDisposalPeriod
+					td= p.RetentionDisposalPeriod
+				tr  
+					th RetentionDisposalApplyDate
+					td= p.RetentionDisposalApplyDate
+				tr  
+					th RetentionDisposalFinalDestination
+					td= p.RetentionDisposalFinalDestination
+				tr  
+					th RetentionDisposalObservations
+					td= p.RetentionDisposalObservations
+				tr  
+					th DescRules
+					td= p.DescRules
+				tr  
+					th Revised
+					td= p.Revised
+				tr  
+					th Published
+					td= p.Published
+				tr  
+					th Available
+					td= p.Available
+				tr  
+					th Highlighted
+					td= p.Highlighted
+				tr  
+					th Creator
+					td= p.Creator
+				tr  
+					th Created
+					td= p.Created
+				tr  
+					th Username
+					td= p.Username
+				tr  
+					th ProcessInfoDate
+					td= p.ProcessInfoDate
+				tr  
+					th OtherDescriptiveData
+					td= p.OtherDescriptiveData
+				tr  
+					th ligacoes
+					td= p.ligacoes
+				tr 
+					td
+						button.w3-btn.w3-round.w3-indigo.w3-margin-right 
+							a(href="/processos/edit/"+p._id) Edit
+						button.w3-btn.w3-round.w3-indigo.w3-margin-right  
+							a(href="/processos/delete/"+p._id) Delete
+			 
+		footer.w3-container.w3-teal
+			h5 João Loureiro, Gonçalo Braga e Simão Barroso | Engenharia Web 2023 - Universidade do Minho
+			h5 Generated by server in #{d} 

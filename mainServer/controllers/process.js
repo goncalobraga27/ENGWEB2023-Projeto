@@ -98,7 +98,6 @@ module.exports.listdata = () => {
 module.exports.getProcesso = id => {
     return axios.get('http://localhost:3000/processos/' + id)
             .then(resposta => {
-                
                 return resposta.data
             })
             .catch(erro => {

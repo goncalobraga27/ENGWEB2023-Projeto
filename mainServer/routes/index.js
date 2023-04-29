@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var Process = require('../controllers/process');
+var auxiliar = require('../auxiliary/auxiliary')
 
 function get_total(){
    Process.listLength()
@@ -80,7 +81,10 @@ router.get('/processos/:id', function(req, res, next) {
   var data = new Date().toISOString().substring(0, 16)
   Process.getProcesso(req.params.id)
     .then(dados => {
-      res.render('process', { p: dados, d: data }); 
+      const atributos = Object.keys(dados)
+      const tratados = auxiliar.typeSpacer(atributos)
+      console.log(atributos.length + " : " + tratados.length)
+      res.render('process', { p: dados, atrib: atributos, trat: tratados, d: data }); 
     })
     .catch(erro => res.status(602).json(({erro: erro})))
 });
