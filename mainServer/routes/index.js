@@ -83,7 +83,7 @@ router.get('/processos/:id', function(req, res, next) {
     .then(dados => {
       const atributos = Object.keys(dados)
       const tratados = auxiliar.typeSpacer(atributos)
-      console.log(atributos.length + " : " + tratados.length)
+      //console.log(atributos.length + " : " + tratados.length)
       res.render('process', { p: dados, atrib: atributos, trat: tratados, d: data }); 
     })
     .catch(erro => res.status(602).json(({erro: erro})))
