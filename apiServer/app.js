@@ -1,38 +1,54 @@
 var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
+var express = require('express'); 
 var logger = require('morgan');
-
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 var mongoose = require ('mongoose');
+var jwt = require('jsonwebtoken')
 
 var mongoDB='mongodb://127.0.0.1/tp';
-
 mongoose.connect(mongoDB,{useNewUrlParser:true,useUnifiedTopology:true});
-
 var db = mongoose.connection;
-
 db.on('error',console.error.bind(console,"MongoDB connection error ..."));
 db.once('open',function(){
   console.log('Conexão ao MongoDB realizada com sucesso ...')
 })
 
+var indexRouter = require('./routes/index');
+
 var app = express();
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug');
-
 app.use(logger('dev'));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+
+// É importante deixar tratar as query string e o body
+// Para o middleware de proteção
+
+app.use(function(req, res, next){
+  var myToken 
+  if (req.query && req.query.token)
+    myToken = req.query.token
+  else if (req.body && req.body.token)
+    myToken = req.body.token
+  else myToken = false
+  
+  if(myToken){
+    jwt.verify(myToken, "EngWeb2023_TP", function(e, payload){
+      if(e){
+        res.status(401).jsonp({error: e})
+      }
+      else{
+        next()
+      }
+    })
+  }
+  else{
+    res.status(401).jsonp({error: "Token inexistente!"})
+  }
+})
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
