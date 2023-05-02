@@ -1,7 +1,19 @@
 var express = require('express');
 var router = express.Router();
+var env = require('../config/env');
 var Process = require('../controllers/process');
-var auxiliar = require('../auxiliary/auxiliary')
+var auxiliar = require('../auxiliary/auxiliary');
+var axios = require('axios');
+var jwt = require('jsonwebtoken');
+
+function verificaToken(req, res, next){
+  if (req.cookies && req.cookies.token){
+    next()
+  }
+  else {
+    res.redirect('/login')
+  }
+}
 
 function get_total(){
    Process.listLength()
