@@ -28,6 +28,58 @@ function get_total(){
 
 var total = 0;
 
+/* GET home page. */
+router.get('/homepage', function(req, res){
+  if (req.cookies && req.cookies.token){
+    jwt.verify(req.cookies.token, "TP_ENGWEB2023", function(e, payload){
+      if(e){
+        res.render('login')
+      }
+      else{
+        res.render('login', {u: payload})
+      }
+    })
+  } 
+  else 
+  res.render('login')
+})
+
+// Login
+router.get('/login', function(req, res){
+  res.render('loginForm')
+})
+
+router.post('/login', (req, res) => {
+  axios.post(env.authAccessPoint + '/login', req.body)
+  .then(resp => {
+    res.cookie('token', resp.data.token)
+    res.redirect('/homepage')
+  })
+  .catch(err => {
+    res.render('error', {error: err})
+  })
+})
+
+router.get('/logout', verificaToken, (req, res) => {
+  res.cookie('token', "revogado.revogado.revogado")
+  res.redirect('/homepage')
+})
+
+router.get('/register', verificaToken, (req, res) => {
+  res.render('registerForm')
+})
+
+router.post('/register', verificaToken, (req, res) => {
+  axios.post(env.authAccessPoint + '/register?token=' + req.cookies.token, req.body )
+  .then(resp => {
+    // Falta fazer a template de confirmação do registo
+    res.cookie('token', resp.data.token)
+    res.redirect('/homepage')
+  })
+  .catch(err => {
+    res.render('error', {error: err})
+  })
+})
 
 /* GET /processos. */
 router.get('/processos', function(req, res, next) {
