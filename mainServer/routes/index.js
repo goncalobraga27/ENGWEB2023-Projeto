@@ -3,8 +3,10 @@ var router = express.Router();
 var env = require('../config/env');
 var Process = require('../controllers/process');
 var auxiliar = require('../auxiliary/auxiliary');
-var axios = require('axios');
-var jwt = require('jsonwebtoken');
+
+var env = require('../config/env')
+var axios = require('axios')
+var jwt = require('jsonwebtoken')
 
 function verificaToken(req, res, next){
   if (req.cookies && req.cookies.token){
@@ -15,6 +17,97 @@ function verificaToken(req, res, next){
   }
 }
 
+
+/* GET home page. */
+router.get('/home', function(req, res){
+  console.log("ESTOU NESTA ROTA GET /home")
+  if (req.cookies && req.cookies.token){
+    jwt.verify(req.cookies.token, "EngWeb2023", function(e, payload){
+      if(e){
+        res.render('homepage')
+      }
+      else{
+        res.render('homepage', {u: payload})
+      }
+    })
+  } 
+  else 
+  res.render('homepage')
+})
+
+router.get('/retrieveAll', verificaToken, function(req, res) {
+  var data = new Date().toISOString().substring(0,19)
+    axios.get(env.apiAccessPoint+"/listas?token=" + req.cookies.token)
+      .then(response => {
+        res.render('listas', { lists: response.data, d: data });
+      })
+      .catch(err => {
+        res.render('error', {error: err})
+      })
+});
+
+router.get('/retrieveList/:id', verificaToken, function(req, res) {
+  var data = new Date().toISOString().substring(0,19)
+    axios.get(env.apiAccessPoint+"/listas/" + req.params.id + "?token=" + req.cookies.token)
+      .then(response => {
+        res.render('listaCompras', { list: response.data, d: data });
+      })
+      .catch(err => {
+        res.render('error', {error: err})
+      })
+});
+
+router.get('/lista/:idLista/deleteProduto/:idProd', function(req, res) {
+  var data = new Date().toISOString().substring(0,19)
+  console.log(req.params.idProd)
+  axios.delete(env.apiAccessPoint+"/listas/"+ req.params.idLista +"/produtos/"+ req.params.idProd)
+    .then(response => {
+      res.redirect('/retrieveList/' + req.params.idLista)
+    })
+    .catch(err => {
+      res.render('error', {error: err})
+    })
+});
+
+// Login
+router.get('/login', function(req, res){
+  res.render('loginForm')
+})
+
+router.post('/login', (req, res) => {
+  axios.post(env.authAccessPoint + '/login', req.body)
+  .then(resp => {
+    res.cookie('token', resp.data.token)
+    res.redirect('/home')
+  })
+  .catch(error => {
+    res.render('error', {error: error})
+  })
+})
+
+router.get('/logout', verificaToken, (req, res) => {
+  res.cookie('token', "revogado.revogado.revogado")
+  res.redirect('/home')
+})
+
+router.get('/register', function(req, res){
+  console.log("ESTOU NESTA ROTA GET /register")
+  res.render('registerForm')
+})
+
+router.post('/register', (req, res) => {
+  axios.post(env.authAccessPoint + '/register?token=' + req.cookies.token, req.body )
+  .then(resp => {
+    // Falta fazer a template de confirmação do registo
+    res.cookie('token', resp.data.token)
+    res.redirect('/home')
+  })
+  .catch(error => {
+    console.log("Estou no error da rota POST /register")
+    res.render('error', {error: error})
+  })
+})
+/***************************************************************************************************************************************************/ 
 function get_total(){
    Process.listLength()
     .then(p => {
@@ -27,62 +120,6 @@ function get_total(){
 }
 
 var total = 0;
-
-/* GET home page. */
-router.get('/homepage', function(req, res){
-  if (req.cookies && req.cookies.token){
-    jwt.verify(req.cookies.token, "EngWeb2023", function(e, payload){
-      if(e){
-        res.render('login')
-      }
-      else{
-        res.render('login', {u: payload})
-      }
-    })
-  } 
-  else 
-  res.render('login')
-})
-
-// Login
-router.get('/register', function(req, res) {
-  console.log('Estou a ir pelo get do /register')
-  res.render('registerForm')
-})
-
-router.get('/login', function(req, res){
-  res.render('loginForm')
-})
-
-router.post('/login', (req, res) => {
-  axios.post(env.authAccessPoint + '/login', req.body)
-  .then(resp => {
-    res.cookie('token', resp.data.token)
-    res.redirect('/homepage')
-  })
-  .catch(err => {
-    res.render('error', {error: err})
-  })
-})
-
-router.get('/logout', verificaToken, (req, res) => {
-  res.cookie('token', "revogado.revogado.revogado")
-  res.redirect('/homepage')
-})
-
-router.post('/register', function(req, res){
-  console.log("Estou a ir pelo post do /register")
-  console.log(req.cookies)
-  axios.post(env.authAccessPoint + '/register?token=' + req.cookies.token, req.body )
-  .then(resp => {
-    // Falta fazer a template de confirmação do registo
-    res.cookie('token', resp.data.token)
-    res.redirect('/homepage')
-  })
-  .catch(err => {
-    res.render('error', {error: err})
-  })
-})
 
 
 /* GET /processos. */

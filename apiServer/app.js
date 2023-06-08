@@ -33,7 +33,7 @@ app.use(function(req, res, next){
   else myToken = false
   
   if(myToken){
-    jwt.verify(myToken, "EngWeb2023_TP", function(e, payload){
+    jwt.verify(myToken, "EngWeb2023", function(e, payload){
       if(e){
         res.status(401).jsonp({error: e})
       }
@@ -45,7 +45,7 @@ app.use(function(req, res, next){
   else{
     res.status(401).jsonp({error: "Token inexistente!"})
   }
-})
+})  
 
 app.use('/', indexRouter);
 
