@@ -90,13 +90,14 @@ router.get('/logout', verificaToken, (req, res) => {
   res.redirect('/home')
 })
 
-router.get('/register', function(req, res){
+router.get('/register', (req, res)=>{
   console.log("ESTOU NESTA ROTA GET /register")
   res.render('registerForm')
 })
 
 router.post('/register', (req, res)=>{
-  axios.post(env.authAccessPoint + '/register?token=' + req.cookies.token, req.body )
+  console.log("Token : "+req.cookies.token)
+  axios.post(env.authAccessPoint + '/register', req.body )
   .then(resp => {
     // Falta fazer a template de confirmação do registo
     res.cookie('token', resp.data.token)
