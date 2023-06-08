@@ -31,7 +31,7 @@ var total = 0;
 /* GET home page. */
 router.get('/homepage', function(req, res){
   if (req.cookies && req.cookies.token){
-    jwt.verify(req.cookies.token, "TP_ENGWEB2023", function(e, payload){
+    jwt.verify(req.cookies.token, "EngWeb2023", function(e, payload){
       if(e){
         res.render('login')
       }
@@ -45,6 +45,11 @@ router.get('/homepage', function(req, res){
 })
 
 // Login
+router.get('/register', function(req, res) {
+  console.log('Estou a ir pelo get do /register')
+  res.render('registerForm')
+})
+
 router.get('/login', function(req, res){
   res.render('loginForm')
 })
@@ -65,11 +70,9 @@ router.get('/logout', verificaToken, (req, res) => {
   res.redirect('/homepage')
 })
 
-router.get('/register', verificaToken, (req, res) => {
-  res.render('registerForm')
-})
-
-router.post('/register', verificaToken, (req, res) => {
+router.post('/register', function(req, res){
+  console.log("Estou a ir pelo post do /register")
+  console.log(req.cookies)
   axios.post(env.authAccessPoint + '/register?token=' + req.cookies.token, req.body )
   .then(resp => {
     // Falta fazer a template de confirmação do registo
@@ -80,6 +83,7 @@ router.post('/register', verificaToken, (req, res) => {
     res.render('error', {error: err})
   })
 })
+
 
 /* GET /processos. */
 router.get('/processos', function(req, res, next) {
