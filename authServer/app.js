@@ -2,12 +2,12 @@ var createError = require('http-errors');
 var express = require('express');
 var logger = require('morgan');
 
-var passport = require('passport');
+var passport = require('passport')
 var LocalStrategy = require('passport-local').Strategy
 
 var mongoose = require('mongoose');
 
-mongoose.connect('mongodb://127.0.0.1/authEW_TP', 
+mongoose.connect('mongodb://127.0.0.1/authdemoEW', 
       { useNewUrlParser: true,
         useUnifiedTopology: true,
         serverSelectionTimeoutMS: 5000});

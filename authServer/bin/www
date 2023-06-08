@@ -82,5 +82,5 @@ function onError(error) {
  */
 
 function onListening() {
-  console.log("À escuta na porta 8002 ... ");
+  console.log(" Á escuta na porta 8002 ...")
 }
