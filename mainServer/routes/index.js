@@ -24,26 +24,41 @@ router.get('/home', function(req, res){
   if (req.cookies && req.cookies.token){
     jwt.verify(req.cookies.token, "EngWeb2023", function(e, payload){
       if(e){
+        // Esta view tem de ser alterada para apenas permitir dar login ( Usada tanto por users como por Admins)
         res.render('homepage')
       }
       else{
+        // Esta view tem de ser alterada consoante o tipo de user, isto é : 
+        // User normal apenas tem de poder dar logout 
+        // User normal apenas tem de poder dar only authorized users 
+        // Admin deve poder dar logout 
+        // Admin deve poder dar register 
+        // Admin deve poder dar only authorized users 
+        // Admin deve poder dar controlo dos users ( ainda temos de implementar)
         res.render('homepage', {u: payload})
       }
     })
   } 
   else 
+   // Esta view tem de ser alterada para apenas permitir dar login ( Usada tanto por users como por Admins)
   res.render('homepage')
 })
 
 router.get('/retrieveAll', verificaToken, function(req, res) {
   var data = new Date().toISOString().substring(0,19)
-    axios.get(env.apiAccessPoint+"/listas?token=" + req.cookies.token)
-      .then(response => {
-        res.render('listas', { lists: response.data, d: data });
-      })
-      .catch(err => {
-        res.render('error', {error: err})
-      })
+    axios.get(env.apiAccessPoint+"/"+"0"+"?token=" + req.cookies.token)
+    .then(processos => {
+      axios.get(env.apiAccessPoint+"/len"+"?token=" + req.cookies.token)
+        .then(total => {
+         var tp = Math.ceil(total / 500)
+         res.render('indexMainPage', { plist: processos.data, d: data, t : total.data, pagTotal : tp , pagNow : 0 });
+       })
+           .catch(erro => {
+             res.render('error', {error: erro, message: "total"})
+           })})
+    .catch(erro => {
+    res.render('error', {error: erro, message: "Erro na obtenção da lista de processos levantados"})
+    })
 });
 
 router.get('/retrieveList/:id', verificaToken, function(req, res) {
@@ -284,25 +299,6 @@ router.get('/:num/nome',function(req, res, next) {
               var tp = Math.ceil(total / 500)
               var act = parseInt(req.params.num)
               res.render('indexMainPage', { plist: processos, d: data, t : total, pagTotal : tp , pagNow : act });
-            })
-                .catch(erro => {
-                  res.render('error', {error: erro, message: "total"})
-                })})
-    .catch(erro => {
-      res.render('error', {error: erro, message: "Erro na obtenção da lista de processos levantados"})
-    })
-});
-router.get('/',function(req, res, next) {
-  //console.log(total)
-  var data = new Date().toISOString().substring(0, 16)
-  //console.log(0)
-  Process.lista500(0)
-    .then(processos => {
-           Process.listLength()
-             .then(total => {
-              var tp = Math.ceil(total / 500)
-              
-              res.render('indexMainPage', { plist: processos, d: data, t : total, pagTotal : tp , pagNow : 0 });
             })
                 .catch(erro => {
                   res.render('error', {error: erro, message: "total"})
