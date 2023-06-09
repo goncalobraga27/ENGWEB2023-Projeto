@@ -97,7 +97,7 @@ router.get('/register', (req, res)=>{
 
 router.post('/register', (req, res)=>{
   console.log("Token : "+req.cookies.token)
-  axios.post(env.authAccessPoint + '/register', req.body )
+  axios.post(env.authAccessPoint + '/register?token='+req.cookies.token, req.body )
   .then(resp => {
     // Falta fazer a template de confirmação do registo
     res.cookie('token', resp.data.token)
