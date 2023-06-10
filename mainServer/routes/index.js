@@ -61,6 +61,79 @@ router.get('/retrieveAll', verificaToken, function(req, res) {
     })
 });
 
+/* GET /processos/registo */ 
+router.get('/processos/registo',verificaToken, function(req, res, next) {
+    var data = new Date().toISOString().substring(0, 16)
+    res.render('addProcess', {d: data });
+});
+
+router.get('/:num/nome',verificaToken,function(req, res, next) {
+  var data = new Date().toISOString().substring(0, 16)
+  axios.get(env.apiAccessPoint+"/"+"0"+"/nome?token=" + req.cookies.token)
+    .then(processos => {
+      axios.get(env.apiAccessPoint+"/len"+"?token=" + req.cookies.token)
+             .then(total => {
+              var tp = Math.ceil(total / 500)
+              var act = parseInt(req.params.num)
+              res.render('indexMainPage', { plist: processos.data, d: data, t : total.data, pagTotal : tp , pagNow : act });
+            })
+                .catch(erro => {
+                  res.render('error', {error: erro, message: "total"})
+                })})
+    .catch(erro => {
+      res.render('error', {error: erro, message: "Erro na obtenção da lista de processos levantados"})
+    })
+});
+
+router.get('/:num/lugar',verificaToken,function(req, res, next) {
+  var data = new Date().toISOString().substring(0, 16)
+  axios.get(env.apiAccessPoint+"/"+"0"+"/lugar?token=" + req.cookies.token)
+    .then(processos => {
+      axios.get(env.apiAccessPoint+"/len"+"?token=" + req.cookies.token)
+             .then(total => {
+              var tp = Math.ceil(total / 500)
+              var act = parseInt(req.params.num)
+              res.render('indexMainPage', { plist: processos.data, d: data, t : total.data, pagTotal : tp , pagNow : act });
+            })
+                .catch(erro => {
+                  res.render('error', {error: erro, message: "total"})
+                })})
+    .catch(erro => {
+      res.render('error', {error: erro, message: "Erro na obtenção da lista de processos levantados"})
+    })
+});
+
+router.get('/:num/data',verificaToken,function(req, res, next) {
+  var data = new Date().toISOString().substring(0, 16)
+  axios.get(env.apiAccessPoint+"/"+"0"+"/data?token=" + req.cookies.token)
+    .then(processos => {
+            axios.get(env.apiAccessPoint+"/len"+"?token=" + req.cookies.token)
+             .then(total => {
+              var tp = Math.ceil(total / 500)
+              var act = parseInt(req.params.num)
+              res.render('indexMainPage', { plist: processos.data, d: data, t : total.data, pagTotal : tp , pagNow : act });
+            })
+                .catch(erro => {
+                  res.render('error', {error: erro, message: "total"})
+                })})
+    .catch(erro => {
+      res.render('error', {error: erro, message: "Erro na obtenção da lista de processos levantados"})
+    })
+});
+
+/* GET /processos. */
+router.get('/processos',verificaToken, function(req, res, next) {
+  var data = new Date().toISOString().substring(0, 16)
+  axios.get(env.apiAccessPoint+"/processos"+"?token=" + req.cookies.token)
+    .then(processos => {
+      res.render('index', { plist: processos.data, d: data });
+    })
+    .catch(erro => {
+      res.render('error', {error: erro, message: "Erro na obtenção da lista de processos levantados"})
+    })
+});
+
+
 router.get('/retrieveList/:id', verificaToken, function(req, res) {
   var data = new Date().toISOString().substring(0,19)
     axios.get(env.apiAccessPoint+"/listas/" + req.params.id + "?token=" + req.cookies.token)
@@ -138,180 +211,50 @@ function get_total(){
 var total = 0;
 
 
-/* GET /processos. */
-router.get('/processos', function(req, res, next) {
-  var data = new Date().toISOString().substring(0, 16)
-  Process.list()
-    .then(processos => {
-      res.render('index', { plist: processos, d: data });
-    })
-    .catch(erro => {
-      res.render('error', {error: erro, message: "Erro na obtenção da lista de processos levantados"})
-    })
-});
 
 
 
 
-/* GET /processos/nome */
-router.get('/processos/nome', function(req, res, next) {
-  var data = new Date().toISOString().substring(0, 16)
-  Process.listnome()
-    .then(processos => {
-      res.render('index', { plist: processos, d: data });
-    })
-    .catch(erro => {
-      res.render('error', {error: erro, message: "Erro na obtenção da lista de processos levantados"})
-    })
-});
-/* GET /processos/data */
-router.get('/processos/data', function(req, res, next) {
-  var data = new Date().toISOString().substring(0, 16)
-  Process.listdata()
-    .then(processos => {
-      res.render('index', { plist: processos, d: data });
-    })
-    .catch(erro => {
-      res.render('error', {error: erro, message: "Erro na obtenção da lista de processos levantados"})
-    })
-});
-/* GET /processos/lugar */
-router.get('/processos/lugar', function(req, res, next) {
-  var data = new Date().toISOString().substring(0, 16)
-  Process.listlugar()
-    .then(processos => {
-      
-      res.render('index', { plist: processos, d: data });
-    })
-    .catch(erro => {
-      res.render('error', {error: erro, message: "Erro na obtenção da lista de processos levantados"})
-    })
-});
-/* GET /processos/registo */ 
-router.get('/processos/registo', function(req, res, next) {
-  var data = new Date().toISOString().substring(0, 16)
-  res.render('addProcess', {d: data });
-});
+
+
 /* GET /processos/:id/posts/add */ 
-router.get('/processos/:id/posts/add', function(req, res, next) {
+router.get('/processos/:id/posts/add', verificaToken,function(req, res, next) {
   var data = new Date().toISOString().substring(0, 16)
   res.render('addPost', {d: data });
 });
 /* GET /processos/:id */
-router.get('/processos/:id', function(req, res, next) {
+router.get('/processos/:id',verificaToken,function(req, res, next) {
   var data = new Date().toISOString().substring(0, 16)
-  Process.getProcesso(req.params.id)
+  axios.get(env.apiAccessPoint+"/processos/"+req.params.id+"?token=" + req.cookies.token)
     .then(dados => {
-      const atributos = Object.keys(dados)
-      const tratados = auxiliar.typeSpacer(atributos)
-      //console.log(atributos.length + " : " + tratados.length)
-      res.render('process', { p: dados, atrib: atributos, trat: tratados, d: data }); 
+      // const atributos = Object.keys(dados.data)
+      // const tratados = auxiliar.typeSpacer(atributos)
+      res.render('process', { p: dados.data, d: data }); 
     })
     .catch(erro => res.status(602).json(({erro: erro})))
 });
 /* GET /processos/edit/:id */
-router.get('/processos/edit/:id', function(req, res, next) {
+router.get('/processos/edit/:id',verificaToken, function(req, res, next) {
   var data = new Date().toISOString().substring(0, 16)
-  Process.getProcesso(req.params.id)
+  axios.get(env.apiAccessPoint+"/processos/"+req.params.id+"?token=" + req.cookies.token)
     .then(dados => {
-      res.render('ProcessFormEditPage', {p: dados, d: data });
+      res.render('ProcessFormEditPage', {p: dados.data, d: data });
     })
     .catch(erro => res.status(603).json(({erro: erro})))
 });
 /* GET /processos/delete/:id */
-router.get('/processos/delete/:id', function(req, res, next) {
+router.get('/processos/delete/:id',verificaToken, function(req, res, next) {
   var data = new Date().toISOString().substring(0, 16)
-  Process.getProcesso(req.params.id)
+  axios.get(env.apiAccessPoint+"/processos/"+req.params.id+"?token=" + req.cookies.token)
     .then(dados => {
-      res.render('processDeletePage', {p: dados, d: data });
+      res.render('processDeletePage', {p: dados.data, d: data });
     })
     .catch(erro => res.status(605).json(({erro: erro})))
 });
 
-router.get('/:num',function(req, res, next) {
-  //console.log(total)
-  var data = new Date().toISOString().substring(0, 16)
-  //console.log(0)
-  Process.lista500(0)
-    .then(processos => {
-           Process.listLength()
-             .then(total => {
-              var tp = Math.ceil(total / 500)
-              var act = parseInt(req.params.num)
-              res.render('indexMainPage', { plist: processos, d: data, t : total, pagTotal : tp , pagNow : act });
-            })
-                .catch(erro => {
-                  res.render('error', {error: erro, message: "total"})
-                })})
-    .catch(erro => {
-      res.render('error', {error: erro, message: "Erro na obtenção da lista de processos levantados"})
-    })
-});
-
-router.get('/:num/lugar',function(req, res, next) {
-  //console.log(total)
-  var data = new Date().toISOString().substring(0, 16)
-  //console.log(0)
-  Process.lista500Lugar(0)
-    .then(processos => {
-           Process.listLength()
-             .then(total => {
-              var tp = Math.ceil(total / 500)
-              var act = parseInt(req.params.num)
-              res.render('indexMainPage', { plist: processos, d: data, t : total, pagTotal : tp , pagNow : act });
-            })
-                .catch(erro => {
-                  res.render('error', {error: erro, message: "total"})
-                })})
-    .catch(erro => {
-      res.render('error', {error: erro, message: "Erro na obtenção da lista de processos levantados"})
-    })
-});
-
-router.get('/:num/data',function(req, res, next) {
-  //console.log(total)
-  var data = new Date().toISOString().substring(0, 16)
-  //console.log(0)
-  Process.lista500Data(0)
-    .then(processos => {
-           Process.listLength()
-             .then(total => {
-              var tp = Math.ceil(total / 500)
-              var act = parseInt(req.params.num)
-              res.render('indexMainPage', { plist: processos, d: data, t : total, pagTotal : tp , pagNow : act });
-            })
-                .catch(erro => {
-                  res.render('error', {error: erro, message: "total"})
-                })})
-    .catch(erro => {
-      res.render('error', {error: erro, message: "Erro na obtenção da lista de processos levantados"})
-    })
-});
-
-router.get('/:num/nome',function(req, res, next) {
-  //console.log(total)
-  var data = new Date().toISOString().substring(0, 16)
-  //console.log(0)
-  Process.lista500Nome(0)
-    .then(processos => {
-           Process.listLength()
-             .then(total => {
-              var tp = Math.ceil(total / 500)
-              var act = parseInt(req.params.num)
-              res.render('indexMainPage', { plist: processos, d: data, t : total, pagTotal : tp , pagNow : act });
-            })
-                .catch(erro => {
-                  res.render('error', {error: erro, message: "total"})
-                })})
-    .catch(erro => {
-      res.render('error', {error: erro, message: "Erro na obtenção da lista de processos levantados"})
-    })
-});
-
 /* POST /processos/edit/:id */
-router.post('/processos/edit/:id', function(req, res, next) {
-  
-  Process.updateProcesso(req.body)
+router.post('/processos/edit/:id',verificaToken, function(req, res, next) {
+  axios.put(env.apiAccessPoint+"/processos/"+req.body._id+"?token=" + req.cookies.token,req.body)
     .then(dados => {
       res.redirect('/processos');
     })
@@ -321,7 +264,7 @@ router.post('/processos/edit/:id', function(req, res, next) {
 /* POST /processos/delete/:id */
 router.post('/processos/delete/:id', function(req, res, next) {
   var data = new Date().toISOString().substring(0, 16)
-  Process.deleteProcesso(req.body)
+  axios.delete(env.apiAccessPoint+"/processos/delete/"+req.body._id+"?token=" + req.cookies.token)
     .then(process=>{
       res.redirect('/processos')
     })

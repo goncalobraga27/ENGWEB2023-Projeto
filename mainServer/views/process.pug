@@ -6,18 +6,10 @@ block append head
 block content
 	.w3-card-4
 		header.w3-container.w3-teal
-			//-h1 Process Number #{p._id}
 			h1 Processo #{p._id} : #{p.UnitTitle}
 		br 
 		.w3-container
 			table.w3-table-all
-					- for (var i = 0; i < atrib.length; i++) {
-					if p[atrib[i]] != "" && p[atrib[i]] != '""'
-							tr
-								th= trat[i]
-								td= p[atrib[i]]
-					- }
-			//-
 				tr
 					th Id
 					td= p._id 
