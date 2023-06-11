@@ -262,7 +262,7 @@ router.post('/processos/edit/:id',verificaToken, function(req, res, next) {
 });
 
 /* POST /processos/delete/:id */
-router.post('/processos/delete/:id', function(req, res, next) {
+router.post('/processos/delete/:id',verificaToken, function(req, res, next) {
   var data = new Date().toISOString().substring(0, 16)
   axios.delete(env.apiAccessPoint+"/processos/delete/"+req.body._id+"?token=" + req.cookies.token)
     .then(process=>{
@@ -274,9 +274,9 @@ router.post('/processos/delete/:id', function(req, res, next) {
 });
 
 /* POST  /processos/registo*/
-router.post('/processos/registo', function(req, res, next) {
+router.post('/processos/registo',verificaToken, function(req, res, next) {
   var data = new Date().toISOString().substring(0, 16)
-  Process.addProcesso(req.body)
+  axios.post(env.apiAccessPoint+"/processos/registo?token=" + req.cookies.token,req.body)
     .then(process =>{
       res.redirect('/processos')
     })
