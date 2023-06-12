@@ -148,5 +148,24 @@ router.get('/api/:pag/lugar', function(req, res, next) {
     .catch(erro=> res.status(601).json({erro:erro}))
 });
 
+router.post('/api/processos/posts/add',function(req, res, next){
+  Process.addPost(req.body)
+  .then(process=>{
+    res.jsonp(process)
+  })
+  .catch(erro => {
+    res.render('error', {error: erro, message: "Erro no armazenamento do registo de um post"})
+  })
+});
+
+router.get('/processos/:id/posts', function(req, res, next) {
+  Process.getPosts(req.params.id)
+    .then(process => {
+      res.jsonp(process)
+    })
+    .catch(erro => {
+      res.render('error', {error: erro, message: "Erro na obtenção do processo em questão"})
+    })
+});
 
 module.exports = router;

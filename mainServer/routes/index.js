@@ -24,17 +24,10 @@ router.get('/home', function(req, res){
   if (req.cookies && req.cookies.token){
     jwt.verify(req.cookies.token, "EngWeb2023", function(e, payload){
       if(e){
-        // Esta view tem de ser alterada para apenas permitir dar login ( Usada tanto por users como por Admins)
+        
         res.render('login')
       }
       else{
-        // Esta view tem de ser alterada consoante o tipo de user, isto é : 
-        // User normal apenas tem de poder dar logout 
-        // User normal apenas tem de poder dar only authorized users 
-        // Admin deve poder dar logout 
-        // Admin deve poder dar register 
-        // Admin deve poder dar only authorized users 
-        // Admin deve poder dar controlo dos users (ainda temos de implementar)
         if (payload.level == "User"){
           res.render('homepage', {u: payload})
         }
@@ -225,7 +218,7 @@ var total = 0;
 /* GET /processos/:id/posts/add */ 
 router.get('/processos/:id/posts/add', verificaToken,function(req, res, next) {
   var data = new Date().toISOString().substring(0, 16)
-  res.render('addPost', {d: data });
+  res.render('addPost', {d: data, id: req.params.id});
 });
 /* GET /processos/:id */
 router.get('/processos/:id',verificaToken,function(req, res, next) {
@@ -280,7 +273,6 @@ router.post('/processos/delete/:id',verificaToken, function(req, res, next) {
 
 /* POST  /processos/registo*/
 router.post('/processos/registo',verificaToken, function(req, res, next) {
-  var data = new Date().toISOString().substring(0, 16)
   axios.post(env.apiAccessPoint+"/processos/registo?token=" + req.cookies.token,req.body)
     .then(process =>{
       res.redirect('/processos')
@@ -289,4 +281,26 @@ router.post('/processos/registo',verificaToken, function(req, res, next) {
       res.render('error', {error: erro, message: "Rota POST /processos/registo tem um erro"})
     })
 });
+
+/* POST /processos/:id/posts/add */
+router.post('/processos/:id/posts/add',verificaToken, function(req, res, next) {
+  axios.post(env.apiAccessPoint+"/processos/posts/add?token=" + req.cookies.token,req.body)
+    .then(process =>{
+      res.redirect('/retrieveAll')
+    })
+    .catch(erro => {
+      res.render('error', {error: erro, message: "Rota POST /processos/:id/posts/add tem um erro"})
+    })
+});
+/* GET /processos/:id/posts */
+router.post('/processos/:id/posts',verificaToken, function(req, res, next) {
+  axios.get(env.apiAccessPoint+"/processos/:id/posts?token=" + req.cookies.token)
+    .then(process =>{
+      res.redirect('/postsList')
+    })
+    .catch(erro => {
+      res.render('error', {error: erro, message: "Rota GET /processos/:id/posts/add tem um erro"})
+    })
+});
+
 module.exports = router;

@@ -153,3 +153,26 @@ module.exports.deleteProcess = id => {
         return erro
     })
 }
+
+module.exports.addPost = post =>{
+    try{
+        const proc = Process.find({_id:post._id})
+        proc.posts.push(post)
+        proc.save()
+        return { mensagem: 'Post adicionado com sucesso.' };
+    }
+    catch (error) { 
+        throw new Error('Ocorreu um erro ao adicionar o post.');
+    }
+}
+
+module.exports.getPosts = id => {
+    return Process
+    .findOne({_id: id})
+    .then(dados=>{
+        return dados
+    })
+    .catch(erro =>{
+        return erro
+    })
+}
