@@ -25,7 +25,7 @@ router.get('/home', function(req, res){
     jwt.verify(req.cookies.token, "EngWeb2023", function(e, payload){
       if(e){
         // Esta view tem de ser alterada para apenas permitir dar login ( Usada tanto por users como por Admins)
-        res.render('homepage')
+        res.render('login')
       }
       else{
         // Esta view tem de ser alterada consoante o tipo de user, isto é : 
@@ -34,14 +34,19 @@ router.get('/home', function(req, res){
         // Admin deve poder dar logout 
         // Admin deve poder dar register 
         // Admin deve poder dar only authorized users 
-        // Admin deve poder dar controlo dos users ( ainda temos de implementar)
-        res.render('homepage', {u: payload})
+        // Admin deve poder dar controlo dos users (ainda temos de implementar)
+        if (payload.level == "User"){
+          res.render('homepage', {u: payload})
+        }
+        else{
+          res.render('homepageAdmin', {u: payload})
+        }
       }
     })
   } 
   else 
-   // Esta view tem de ser alterada para apenas permitir dar login ( Usada tanto por users como por Admins)
-  res.render('homepage')
+   // Esta view tem de ser alterada para apenas permitir dar login (Usada tanto por users como por Admins)
+  res.render('login')
 })
 
 router.get('/retrieveAll', verificaToken, function(req, res) {
