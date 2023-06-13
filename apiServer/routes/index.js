@@ -158,7 +158,7 @@ router.post('/api/processos/posts/add',function(req, res, next){
   })
 });
 
-router.get('/processos/:id/posts', function(req, res, next) {
+router.get('/api/processos/:id/posts', function(req, res, next) {
   Process.getPosts(req.params.id)
     .then(process => {
       res.jsonp(process)

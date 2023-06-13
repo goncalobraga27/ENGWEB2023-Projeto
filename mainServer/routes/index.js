@@ -261,7 +261,6 @@ router.post('/processos/edit/:id',verificaToken, function(req, res, next) {
 
 /* POST /processos/delete/:id */
 router.post('/processos/delete/:id',verificaToken, function(req, res, next) {
-  var data = new Date().toISOString().substring(0, 16)
   axios.delete(env.apiAccessPoint+"/processos/delete/"+req.body._id+"?token=" + req.cookies.token)
     .then(process=>{
       res.redirect('/processos')
@@ -293,10 +292,11 @@ router.post('/processos/:id/posts/add',verificaToken, function(req, res, next) {
     })
 });
 /* GET /processos/:id/posts */
-router.post('/processos/:id/posts',verificaToken, function(req, res, next) {
-  axios.get(env.apiAccessPoint+"/processos/:id/posts?token=" + req.cookies.token)
+router.get('/processos/:id/posts',verificaToken, function(req, res, next) {
+  var data = new Date().toISOString().substring(0, 16)
+  axios.get(env.apiAccessPoint+"/processos/"+req.params.id+"/posts?token=" + req.cookies.token)
     .then(process =>{
-      res.redirect('/postsList')
+      res.render('postsList', {p: process.data, d: data });
     })
     .catch(erro => {
       res.render('error', {error: erro, message: "Rota GET /processos/:id/posts/add tem um erro"})

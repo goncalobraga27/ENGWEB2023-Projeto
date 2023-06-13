@@ -154,17 +154,21 @@ module.exports.deleteProcess = id => {
     })
 }
 
-module.exports.addPost = post =>{
-    try{
-        const proc = Process.find({_id:post._id})
-        proc.posts.push(post)
-        proc.save()
-        return { mensagem: 'Post adicionado com sucesso.' };
+module.exports.addPost = async (post) => {
+    try {
+      const process = await Process.findById(post._id);
+      if (!process) {
+        throw new Error('Process not found');
+      }
+  
+      process.posts.push(post);
+      await process.save();
+  
+      return { mensagem: 'Post adicionado com sucesso.' };
+    } catch (error) {
+      throw new Error('Ocorreu um erro ao adicionar o post: ' + error.message);
     }
-    catch (error) { 
-        throw new Error('Ocorreu um erro ao adicionar o post.');
-    }
-}
+};
 
 module.exports.getPosts = id => {
     return Process
