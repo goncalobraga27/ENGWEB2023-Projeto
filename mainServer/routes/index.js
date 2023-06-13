@@ -302,5 +302,33 @@ router.get('/processos/:id/posts',verificaToken, function(req, res, next) {
       res.render('error', {error: erro, message: "Rota GET /processos/:id/posts/add tem um erro"})
     })
 });
+/* POST /posts/addComments/:id */
+router.post('/posts/addComments/:id',verificaToken, function(req, res, next) {
+  axios.post(env.apiAccessPoint+"/posts/addComments/"+req.params.id+"?token=" + req.cookies.token,req.body)
+    .then(process =>{
+      res.redirect('/processos/'+req.params.id+'/posts');
+    })
+    .catch(erro => {
+      res.render('error', {error: erro, message: "Rota POST /processos/:id/posts/add tem um erro"})
+    })
+});
+
+/* GET /posts/addComments/:id */
+router.get('/posts/addComments/:id',verificaToken, function(req, res, next) {
+  var data = new Date().toISOString().substring(0, 16)
+  res.render('addComment', { d: data });
+});
+
+/* GET /posts/seeComments/:id */
+router.get('/posts/seeComments/:id',verificaToken, function(req, res, next) {
+  var data = new Date().toISOString().substring(0, 16)
+  axios.get(env.apiAccessPoint+"/posts/seeComments/"+req.params.id+"?token=" + req.cookies.token)
+    .then(process =>{
+      res.render('commentsList', {p: process.data, d: data });
+    })
+    .catch(erro => {
+      res.render('error', {error: erro, message: "Rota GET /processos/:id/posts/add tem um erro"})
+    })
+});
 
 module.exports = router;

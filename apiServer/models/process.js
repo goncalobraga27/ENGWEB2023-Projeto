@@ -1,10 +1,18 @@
 var mongoose = require ('mongoose')
-
+const commentSchema = new mongoose.Schema({
+        Autor: String,
+        Assunto: String,
+        Description: String
+});
 const postSchema = new mongoose.Schema({
         _id: String,
         Title: String,
         Type: String,
-        Description: String
+        Description: String,
+        Comments:[{
+                type: commentSchema,
+                required: false 
+        }]
 });
 var processSchema= new mongoose.Schema({
         _id:String,

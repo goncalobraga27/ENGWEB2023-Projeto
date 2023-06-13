@@ -168,4 +168,24 @@ router.get('/api/processos/:id/posts', function(req, res, next) {
     })
 });
 
+router.post('/api/posts/addComments/:id',function(req, res, next){
+  Process.addCommentToPost(req.params.id,req.body)
+  .then(process=>{
+    res.jsonp(process)
+  })
+  .catch(erro => {
+    res.render('error', {error: erro, message: "Erro no armazenamento do registo de um post"})
+  })
+});
+
+router.get('/api/posts/seeComments/:id', function(req, res, next) {
+  Process.getComments(req.params.id)
+    .then(process => {
+      res.jsonp(process)
+    })
+    .catch(erro => {
+      res.render('error', {error: erro, message: "Erro na obtenção do processo em questão"})
+    })
+});
+
 module.exports = router;

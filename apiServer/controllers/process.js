@@ -180,3 +180,35 @@ module.exports.getPosts = id => {
         return erro
     })
 }
+
+module.exports.addCommentToPost = async (postId, comment) => {
+    try {
+      const process = await Process.findById(postId);
+      if (!process) {
+        throw new Error('Process not found');
+      }
+  
+      const post = process.posts.find((p) => p._id === postId);
+      if (!post) {
+        throw new Error('Post not found');
+      }
+  
+      post.Comments.push(comment);
+      await process.save();
+  
+      return process;
+    } catch (error) {
+      throw new Error('Failed to add comment to post: ' + error.message);
+    }
+  };
+
+module.exports.getComments = id => {
+    return Process
+    .findOne({_id: id})
+    .then(dados=>{
+        return dados
+    })
+    .catch(erro =>{
+        return erro
+    })
+}
