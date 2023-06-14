@@ -20,7 +20,6 @@ function verificaToken(req, res, next){
 
 /* GET home page. */
 router.get('/home', function(req, res){
-  console.log("ESTOU NESTA ROTA GET /home")
   if (req.cookies && req.cookies.token){
     jwt.verify(req.cookies.token, "EngWeb2023", function(e, payload){
       if(e){
