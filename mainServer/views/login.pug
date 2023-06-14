@@ -2,12 +2,28 @@ extends layout
 block content
   .w3-card-4
     header.w3-container.w3-teal
-      h1 Trabalho Prático de EngWeb2023
-    .w3-container
-      h2 Funcionalidades disponíveis 
-      ul.w3-ul 
-        li 
-          a(href="/login") Login 
+      h1 Inquirição de Génere - Trabalho Prático de EngWeb2023
+    
+    .w3-container.w3-cell.w3-border.w3-light-grey(style="width:50%")
+      h3 Este site foi desenvolvido no âmbito do Trabalho Prático da Unidade Curricular de Engenharia Web da Licenciatura em Engenharia Informática, no ano letivo 2022/2023.
+      h3 Explore uma base de dados composta por processos de Justificação de Fraternidade que são requeridos quando há, na família, alguém ordenado e com inquirição de genere elaborada e concluída.
+      h3 Registe-se para consultar, fazer #[i posts], comentar os processos e/ou sugirer alterações.
+      h3 Administradores podem também acrescentar resgistos, editar-los e gerir todos estes.
+    
+    .w3-container.w3-cell.w3-border.w3-light-grey(style="width:50%")
+      form.w3-container(action="/login" method="POST")
+        fieldset 
+            legend Fazer Login: 
+            label #[b Username]
+            input.w3-input(type="text" name="username")
+            label #[b Password] 
+            input.w3-input(type="password" name="password")
+        br
+        input.w3-btn.w3-blue(type="submit" value="Efetuar Login")
+      
+      .w3-container.w3-cell
+        h2 Se ainda não criou uma conta, efetue o aqui:
+        button.w3-btn.w3-red #[a(href="/createAccount") #[b Criar Conta]] 
               
     footer.w3-container.w3-teal
       h5 Generated for TP_EngWeb2023 in #{d}
