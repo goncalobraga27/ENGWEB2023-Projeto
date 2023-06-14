@@ -19,7 +19,7 @@ block content
               a(href="/processos/"+p._id)= p._id
             td 
               each l in p.ligacoes
-                a(href="/processos/"+l)= l+" "
+                a(href="/processos/"+l)= l+"|"
             td= p.ScopeContent
             td= p.RelatedMaterial
             td
@@ -27,6 +27,8 @@ block content
                 a(href="/processos/"+p._id+"/posts") See the posts
               button.w3-btn.w3-round.w3-indigo.w3-margin-right  
                 a(href="/processos/"+p._id+"/posts/add") Add a new post
+              button.w3-btn.w3-round.w3-indigo.w3-margin-right  
+                a(href="/processos/"+p._id+"/addLigacoes") Add a new ligação
     .w3-bar
         if pagNow > 0
             a.w3-button(href=`/${pagNow-1}`) &laquo;

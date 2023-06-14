@@ -187,4 +187,14 @@ router.get('/api/posts/seeComments/:id', function(req, res, next) {
     })
 });
 
+router.post('/api/processos/:id/addLigacoes',function(req,res,next){
+  Process.addLigacao(req.body,req.params.id)
+  .then(process=>{
+    res.jsonp(process)
+  })
+  .catch(erro => {
+    res.render('error', {error: erro, message: "Erro no armazenamento do registo de um post"})
+  })
+})
+
 module.exports = router;

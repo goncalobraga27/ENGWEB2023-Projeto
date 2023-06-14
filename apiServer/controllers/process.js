@@ -212,3 +212,20 @@ module.exports.getComments = id => {
         return erro
     })
 }
+
+module.exports.addLigacao = async (link, processId) => {
+    try {
+      const process = await Process.findById(processId);
+      if (!process) {
+        return { error: 'Process not found' };
+      }
+  
+      process.ligacoes.push(link.Description);
+      await process.save();
+  
+      return { message: 'Link added successfully' };
+    } catch (error) {
+      console.error(error);
+      return { error: 'Server error' };
+    }
+  };

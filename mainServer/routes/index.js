@@ -387,4 +387,22 @@ router.get('/delete/user/:username',verificaToken, function(req, res, next) {
     })
     .catch(erro => res.status(605).json(({erro: erro})))
 });
+
+/* GET /processos/:id/addLigacoes  */
+router.get('/processos/:id/addLigacoes',verificaToken, function(req, res, next) {
+  var data = new Date().toISOString().substring(0, 16);
+  res.render('addLigacoesPage', {id:req.params.id,d: data});
+   
+});
+
+/* POST /processos/:id/addLigacoes */
+router.post('/processos/:id/addLigacoes',verificaToken, function(req, res, next) {
+  axios.post(env.apiAccessPoint+"/processos/"+req.params.id+"/addLigacoes?token=" + req.cookies.token,req.body)
+    .then(process=>{
+      res.redirect('/retrieveAll')
+    })
+    .catch(erro => {
+      res.render('error', {error: erro, message: "Rota POST /processos/delete/:id tem um erro"})
+    })
+});
 module.exports = router;
