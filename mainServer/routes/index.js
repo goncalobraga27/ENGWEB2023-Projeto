@@ -331,4 +331,17 @@ router.get('/posts/seeComments/:id',verificaToken, function(req, res, next) {
     })
 });
 
+/* GET /posts/seeComments/:id */
+router.get('/adminUsers',verificaToken, function(req, res, next) {
+  var data = new Date().toISOString().substring(0, 16)
+  axios.get(env.authAccessPoint+"/get?token=" + req.cookies.token)
+    .then(users =>{
+      res.render('usersList', {u: users.data, d: data });
+    })
+    .catch(erro => {
+      res.render('error', {error: erro, message: "Rota GET /processos/:id/posts/add tem um erro"})
+    })
+});
+
+
 module.exports = router;
