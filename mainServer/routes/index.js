@@ -343,5 +343,48 @@ router.get('/adminUsers',verificaToken, function(req, res, next) {
     })
 });
 
+/* GET /edit/user/:username */
+router.get('/edit/user/:username',verificaToken, function(req, res, next) {
+  var data = new Date().toISOString().substring(0, 16);
+  res.render('userEditPage', {u: req.params.username, d: data });
+   
+});
 
+/* POST /edit/user/:username */
+router.post('/edit/user/:username',verificaToken, function(req, res, next) {
+  axios.put(env.authAccessPoint+"/edit/user/"+req.params.username+"?token=" + req.cookies.token,req.body)
+    .then(process =>{
+      res.redirect('/adminUsers');
+    })
+    .catch(erro => {
+      res.render('error', {error: erro, message: "Rota POST /processos/:id/posts/add tem um erro"})
+    })
+});
+
+/* GET /edit/user/:username */
+router.get('/edit/user/:username',verificaToken, function(req, res, next) {
+  var data = new Date().toISOString().substring(0, 16);
+  res.render('userEditPage', {u: req.params.username, d: data });
+   
+});
+
+/* POST /delete/user/:username */
+router.post('/delete/user/:username',verificaToken, function(req, res, next) {
+  axios.delete(env.authAccessPoint+"/delete/user/"+req.body.username+"?token=" + req.cookies.token)
+    .then(process=>{
+      res.redirect('/adminUsers')
+    })
+    .catch(erro => {
+      res.render('error', {error: erro, message: "Rota POST /processos/delete/:id tem um erro"})
+    })
+});
+/* GET /delete/user/:username */
+router.get('/delete/user/:username',verificaToken, function(req, res, next) {
+  var data = new Date().toISOString().substring(0, 16)
+  axios.get(env.authAccessPoint+"/get/"+req.params.username+"?token=" + req.cookies.token)
+    .then(dados => {
+      res.render('userDeletePage', {u: dados.data, d: data });
+    })
+    .catch(erro => res.status(605).json(({erro: erro})))
+});
 module.exports = router;

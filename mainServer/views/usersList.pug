@@ -3,7 +3,7 @@ extends layout
 block content
   .w3-card-4
     header.w3-container.w3-teal
-      h1 Users List [Nº de Users: #{u.length}]
+      h1 Users List [Nº de Users: #{u.length}] #[a.w3-btn.w3-round.w3-grey(href="/register") New User]
     .w3-container
       table.w3-table-all
         tr
@@ -18,6 +18,11 @@ block content
             td= user.name
             td= user.username
             td= user.level
+            td 
+              button.w3-btn.w3-round.w3-indigo.w3-margin-right 
+                a(href="/edit/user/"+user.username) Edit User
+              button.w3-btn.w3-round.w3-indigo.w3-margin-right 
+                a(href="/delete/user/"+user.username) Delete User
     footer.w3-container.w3-teal
       h5 Generated for TP_EngWeb2023 in #{d}
     

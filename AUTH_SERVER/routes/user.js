@@ -44,7 +44,7 @@ router.get('/get/:username', auth.verificaAcesso, function(req, res){
 })
 
 // Edição de um utilizador
-router.put('/edit/:username', auth.verificaAcesso, function(req, res){
+router.put('/edit/user/:username', auth.verificaAcesso, function(req, res){
   User.updateUser(req.body)
     .then(user => {
       res.status(200).jsonp(user)
@@ -147,4 +147,10 @@ router.post('/login', passport.authenticate('local'), function(req, res){
 });
 })
 
+router.delete('/delete/user/:username',auth.verificaAcesso,function(req,res){
+  User.deleteUser(req.params.username)
+    .then(dados => res.jsonp(dados))
+    .catch(erro => res.status(605).json({erro:erro}))
+
+})
 module.exports = router;

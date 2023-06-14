@@ -113,7 +113,6 @@ router.delete('/api/processos/delete/:id',(req,res) => {
 })
 
 router.get('/api/:pag', function(req, res, next) {
-  console.log("Estou aqui")
   Process.listLimit(req.params.pag)
     .then (dados=> {
       res.jsonp(dados)

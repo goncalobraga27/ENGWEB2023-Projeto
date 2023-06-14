@@ -101,3 +101,13 @@ module.exports.activateUser = username => {
             return erro
         })
 }
+
+module.exports.deleteUser = username => {
+    return User.deleteOne({username:username})
+    .then(dados=>{
+        return dados
+    })
+    .catch(erro =>{
+        return erro
+    })
+}
