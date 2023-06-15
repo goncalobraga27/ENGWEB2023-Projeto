@@ -1,21 +1,53 @@
 extends layout
 block content
   .w3-card-4
-    header.w3-container.w3-teal
-      h1 Trabalho Prático de EngWeb2023
+    header.w3-container.w3-light-blue
+      h1 Inquirição de Génere - Trabalho Prático de EngWeb2023
       if u
-        h2 Utilizador: #{u.username} (#{u.level})
+        .w3-cell-row.w3-light-blue
+          .w3-cell
+            h2 Bem-Vindo #{u.username}!
+          .w3-cell.w3-border-black.w3-border-top.w3-border-left(style="width:14%") 
+            h3 &nbsp; Nivel de Acesso: #{u.level}
     .w3-container
       h2 Funcionalidades disponíveis 
-      ul.w3-ul 
-        li
-          a(href="/register") Registo de novos users
-        li 
-          a(href="/logout") Logout
-        li 
-          a(href="/retrieveAll") Inquirições de Génere
-        li 
-          a(href="/adminUsers") Controls and see users 
+      ul.w3-ul.w3-card-4 
+        li.w3-bar
+          span 
+            .w3-bar-item
+              img(src='../public/images/favicon.png' style="width:85px;")
+              .w3-bar-item
+                  a(href="/register") 
+                    span 
+                      .w3-large #[b Registar um novo #[i user]]
+                      h6 Adicione um novo perfil de utilizador, para que este fique disponível.
+          li.w3-bar
+              span 
+                .w3-bar-item
+                  img(src='../public/images/favicon.png' style="width:85px;")
+                  .w3-bar-item
+                      a(href="/retrieveAll") 
+                        span 
+                          .w3-large #[b Inquirições de Génere]
+                          h6 DESCRICAO PLACEHOLDER
+          li.w3-bar
+              span 
+                .w3-bar-item
+                  img(src='../public/images/favicon.png' style="width:85px;")
+                  .w3-bar-item
+                      a(href="/adminUsers") 
+                        span 
+                          .w3-large #[b Gestão de #[i users]]
+                          h6 DESCRICAO PLACEHOLDER
+          li.w3-bar
+              span 
+                .w3-bar-item
+                  img(src='../public/images/favicon.png' style="width:85px;")
+                  .w3-bar-item
+                      a(href="/logout") 
+                        span 
+                          .w3-large #[b Logout]
+                          h6 Mudar isto para um botao?                                            
               
     footer.w3-container.w3-teal
       h5 Generated for TP_EngWeb2023 in #{d}
