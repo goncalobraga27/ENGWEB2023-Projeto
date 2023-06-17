@@ -43,19 +43,36 @@ router.get('/home', function(req, res){
 
 router.get('/retrieveAll', verificaToken, function(req, res) {
   var data = new Date().toISOString().substring(0,19)
-    axios.get(env.apiAccessPoint+"/"+"0"+"?token=" + req.cookies.token)
-    .then(processos => {
-      axios.get(env.apiAccessPoint+"/len"+"?token=" + req.cookies.token)
+  axios.get(env.apiAccessPoint+"/len"+"?token=" + req.cookies.token)
         .then(total => {
-         var tp = Math.ceil(total / 500)
-         res.render('indexMainPage', { plist: processos.data, d: data, t : total.data, pagTotal : tp , pagNow : 0 });
-       })
-           .catch(erro => {
-             res.render('error', {error: erro, message: "total"})
-           })})
-    .catch(erro => {
-    res.render('error', {error: erro, message: "Erro na obtenção da lista de processos levantados"})
-    })
+          const currentPage = parseInt(req.query.page) || 0;
+          const prevPage = currentPage > 1 ? currentPage - 1 : 0;
+          const nextPage = currentPage < parseInt(total.data) ? currentPage + 1 : currentPage;
+         if(req.query.page){
+          axios.get(env.apiAccessPoint+"/"+req.query.page+"?token=" + req.cookies.token)
+              .then(processos => {
+                
+                res.render('indexMainPage', { plist: processos.data, d: data,prevPage:prevPage,nextPage:nextPage  });
+                })
+              .catch(erro => {
+              res.render('error', {error: erro, message: "Erro na obtenção da lista de processos levantados"})
+              })
+         }
+         else{
+          axios.get(env.apiAccessPoint+"/0?token=" + req.cookies.token)
+              .then(processos => {
+                
+                res.render('indexMainPage', { plist: processos.data, d: data,prevPage:prevPage,nextPage:nextPage  });
+                })
+              .catch(erro => {
+              res.render('error', {error: erro, message: "Erro na obtenção da lista de processos levantados"})
+              })
+         }
+         })
+        .catch(erro => {
+             res.render('error', {error: erro, message: "ERRO A OBTER LEN DA LISTA"})
+  })
+
 });
 
 /* GET /processos/registo */ 
