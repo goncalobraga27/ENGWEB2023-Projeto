@@ -8,6 +8,7 @@ var env = require('../config/env')
 var axios = require('axios')
 var jwt = require('jsonwebtoken')
 
+// Verificação do token recebido na comunicação
 function verificaToken(req, res, next){
   if (req.cookies && req.cookies.token){
     next()
@@ -18,7 +19,7 @@ function verificaToken(req, res, next){
 }
 
 
-/* GET home page. */
+/* GET /home */
 router.get('/home', function(req, res){
   if (req.cookies && req.cookies.token){
     jwt.verify(req.cookies.token, "EngWeb2023", function(e, payload){
@@ -37,10 +38,9 @@ router.get('/home', function(req, res){
     })
   } 
   else 
-   // Esta view tem de ser alterada para apenas permitir dar login (Usada tanto por users como por Admins)
   res.render('login')
 })
-
+// GET /retrieveAll
 router.get('/retrieveAll', verificaToken, function(req, res) {
   var data = new Date().toISOString().substring(0,19)
   axios.get(env.apiAccessPoint+"/len"+"?token=" + req.cookies.token)
@@ -51,8 +51,7 @@ router.get('/retrieveAll', verificaToken, function(req, res) {
          if(req.query.page){
           axios.get(env.apiAccessPoint+"/"+req.query.page+"?token=" + req.cookies.token)
               .then(processos => {
-                
-                res.render('indexMainPage', { plist: processos.data, d: data,prevPage:prevPage,nextPage:nextPage  });
+                res.render('indexMainPage', { plist: processos.data, d: data,prevPage:prevPage,nextPage:nextPage,t:processos.data.length});
                 })
               .catch(erro => {
               res.render('error', {error: erro, message: "Erro na obtenção da lista de processos levantados"})
@@ -80,7 +79,7 @@ router.get('/processos/registo',verificaToken, function(req, res, next) {
     var data = new Date().toISOString().substring(0, 16)
     res.render('addProcess', {d: data });
 });
-
+// GET /:num/nome 
 router.get('/:num/nome',verificaToken,function(req, res, next) {
   var data = new Date().toISOString().substring(0, 16)
   axios.get(env.apiAccessPoint+"/"+"0"+"/nome?token=" + req.cookies.token)
@@ -98,7 +97,7 @@ router.get('/:num/nome',verificaToken,function(req, res, next) {
       res.render('error', {error: erro, message: "Erro na obtenção da lista de processos levantados"})
     })
 });
-
+// GET /:num/lugar
 router.get('/:num/lugar',verificaToken,function(req, res, next) {
   var data = new Date().toISOString().substring(0, 16)
   axios.get(env.apiAccessPoint+"/"+"0"+"/lugar?token=" + req.cookies.token)
@@ -116,7 +115,7 @@ router.get('/:num/lugar',verificaToken,function(req, res, next) {
       res.render('error', {error: erro, message: "Erro na obtenção da lista de processos levantados"})
     })
 });
-
+// GET /:num/data
 router.get('/:num/data',verificaToken,function(req, res, next) {
   var data = new Date().toISOString().substring(0, 16)
   axios.get(env.apiAccessPoint+"/"+"0"+"/data?token=" + req.cookies.token)
@@ -147,35 +146,12 @@ router.get('/processos',verificaToken, function(req, res, next) {
     })
 });
 
-
-router.get('/retrieveList/:id', verificaToken, function(req, res) {
-  var data = new Date().toISOString().substring(0,19)
-    axios.get(env.apiAccessPoint+"/listas/" + req.params.id + "?token=" + req.cookies.token)
-      .then(response => {
-        res.render('listaCompras', { list: response.data, d: data });
-      })
-      .catch(err => {
-        res.render('error', {error: err})
-      })
-});
-
-router.get('/lista/:idLista/deleteProduto/:idProd', function(req, res) {
-  var data = new Date().toISOString().substring(0,19)
-  console.log(req.params.idProd)
-  axios.delete(env.apiAccessPoint+"/listas/"+ req.params.idLista +"/produtos/"+ req.params.idProd)
-    .then(response => {
-      res.redirect('/retrieveList/' + req.params.idLista)
-    })
-    .catch(err => {
-      res.render('error', {error: err})
-    })
-});
-
-// Login
+// GET /login
 router.get('/login', function(req, res){
   res.render('loginForm')
 })
 
+// POST /login
 router.post('/login', (req, res) => {
   axios.post(env.authAccessPoint + '/login', req.body)
   .then(resp => {
@@ -187,21 +163,21 @@ router.post('/login', (req, res) => {
   })
 })
 
+// GET /logout
 router.get('/logout', verificaToken, (req, res) => {
   res.cookie('token', "revogado.revogado.revogado")
   res.redirect('/home')
 })
-
+// GET /register
 router.get('/register', (req, res)=>{
-  console.log("ESTOU NESTA ROTA GET /register")
   res.render('registerForm')
 })
-
+// POST /register
 router.post('/register', (req, res)=>{
   console.log("Token : "+req.cookies.token)
   axios.post(env.authAccessPoint + '/register?token='+req.cookies.token, req.body )
   .then(resp => {
-    // Falta fazer a template de confirmação do registo
+    
     res.cookie('token', resp.data.token)
     res.redirect('/home')
   })
@@ -210,11 +186,11 @@ router.post('/register', (req, res)=>{
     res.render('error', {error: error})
   })
 })
-/***************************************************************************************************************************************************/ 
+
+// Função que nos dá o número total de processos
 function get_total(){
    Process.listLength()
     .then(p => {
-      console.log("->" + p);
       return p;
     })
     .catch(erro => {
@@ -223,13 +199,6 @@ function get_total(){
 }
 
 var total = 0;
-
-
-
-
-
-
-
 
 /* GET /processos/:id/posts/add */ 
 router.get('/processos/:id/posts/add', verificaToken,function(req, res, next) {
