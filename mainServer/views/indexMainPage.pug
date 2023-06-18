@@ -3,7 +3,7 @@ extends layout
 block content
   .w3-card-4
     header.w3-container.w3-teal
-      h1 Process List [Nº de Processos: #{plist.length}] #[a.w3-btn.w3-round.w3-grey(href="/processos/registo") New ] #[a.w3-btn.w3-round.w3-light-green(href=`/${pagNow}`+"/nome") Ord por nome ] #[a.w3-btn.w3-round.w3-light-green(href=`/${pagNow}`+"/lugar") Ord por lugar ] #[a.w3-btn.w3-round.w3-light-green(href=`/${pagNow}`+"/data") Ord por data ] #[a.w3-btn.w3-round.w3-light-green(href="/processos") Normal ]
+      h1 Process List [Nº de Processos: #{plist.length}] #[a.w3-btn.w3-round.w3-grey(href="/processos/registo") New ] #[a.w3-btn.w3-round.w3-light-green(href="/nome") Ord por nome ] #[a.w3-btn.w3-round.w3-light-green(href="/lugar") Ord por lugar ] #[a.w3-btn.w3-round.w3-light-green(href="/data") Ord por data ] #[a.w3-btn.w3-round.w3-light-green(href="/retrieveAll") Normal ]
     .w3-container
       table.w3-table-all
         tr
@@ -30,8 +30,8 @@ block content
               button.w3-btn.w3-round.w3-indigo.w3-margin-right  
                 a(href="/processos/"+p._id+"/addLigacoes") Add a new ligação
     .w3-bar
-      a.w3-button(href=`/retrieveAll?page=${prevPage}`) &laquo;
-      a.w3-button(href=`/retrieveAll?page=${nextPage}`) &raquo; 
+      a.w3-button(href= tipo + `?page=${prevPage}`) &laquo;
+      a.w3-button(href=tipo +`?page=${nextPage}`) &raquo;
     footer.w3-container.w3-teal
       h5 Generated for TP_EngWeb2023 in #{d}
     
