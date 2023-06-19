@@ -1,49 +1,55 @@
 extends layout
 
 block content
-  .w3-card-4
-    header.w3-container.w3-teal
-      h1 #[b Inquirição de Génere - Trabalho Prático de EngWeb2023]
-      .w3-cell-row
-        .w3-cell
-          h2 Criar Novo Utilizador
-        .w3-cell(style="width:16%") 
-          h3
-            button.w3-btn.w3-pale-red.w3-border.w3-border-black.w3-hover-red
-              //i.fa.fa-regular.fa-arrow-left-to-line(style="color: #000000;margin-right: 30px;")
-              .w3-cell-row
-                .w3-cell
-                  i.fa.fa-solid.fa-arrow-left(style="color: #000000;")
-                .w3-cell(style="width:84%")
-                  h3 &nbsp;&nbsp;#[a(href="/home") #[b Voltar ao Início]]
-    form.w3-container(action="/register" method="POST")
-        fieldset 
-            legend Insira a informação:
-            label #[b > Nome] 
-            input.w3-input.w3-border(type="text" name="name")
-            label #[b > Username]
-            input.w3-input.w3-border(type="text" name="username")
-            label #[b > Password]
-            .w3-cell-row
-              .w3-cell
-                input.w3-input.w3-border(type="password" name="password" id="currPass")
-              .w3-cell
-                i.fa.fa-sharp.fa-regular.fa-eye.fa-2xs(style="color: #97a0af;margin-left: -30px;cursor: pointer;" onclick="showPass()")
-            label #[b > Nível de Utilizador]
-            select.w3-select.w3-border(name="level")
-                option("") Escolha um nível...
-                        option(value="Admin") Admin
-                        option(value="User") User
-        button.w3-btn.w3-blue.w3-mb-2.w3-large(type="submit") #[b Criar]
-    footer.w3-container.w3-teal
-      h5 Gonçalo Braga, João Loureiro e Simão Barroso | Engenharia Web 2023 - Universidade do Minho
-      h5 Generated for TP_EngWeb2023 in #{d}
-    script.
-      function showPass() {
-        var x = document.getElementById("currPass");
-        if (x.type === "password") {
-          x.type = "text";
-        } else {
-          x.type = "password";
-        }
-      }
+	.w3-card-4
+		header.w3-container.w3-teal
+			h1 #[b Inquirição de Génere - Trabalho Prático de EngWeb2023]
+			.w3-cell-row
+				.w3-cell
+					h2 Criar Novo Utilizador
+				.w3-cell(style="width:16%") 
+					h3
+						a(href="/home")
+							button.w3-btn.w3-pale-red.w3-border.w3-border-black.w3-hover-red
+								//i.fa.fa-regular.fa-arrow-left-to-line(style="color: #000000;margin-right: 30px;")
+								.w3-cell-row
+									.w3-cell
+										i.fa.fa-solid.fa-arrow-left(style="color: #000000;")
+									.w3-cell(style="width:84%")
+										h3 &nbsp;&nbsp; #[b Voltar ao Início]
+		form.w3-container(action="/register" method="POST")
+				fieldset 
+						legend Insira a informação:
+						label #[b > Nome] 
+						input.w3-input.w3-border(type="text" name="name")
+						label #[b > Username]
+						input.w3-input.w3-border(type="text" name="username")
+						label #[b > Password]
+						.w3-cell-row
+							.w3-cell
+								input.w3-input.w3-border(type="password" name="password" id="currPass")
+							.w3-cell
+								i.fa.fa-sharp.fa-regular.fa-eye.fa-2xs(style="color: #97a0af;margin-left: -30px;cursor: pointer;" onclick="showPass()")
+						label #[b > Nível de Utilizador]
+						select.w3-select.w3-border(name="level")
+								option("") Escolha um nível...
+												option(value="Admin") Admin
+												option(value="User") User
+				.w3-panel              
+					button.w3-btn.w3-pale-blue.w3-mb-2.w3-border.w3-border-black.w3-hover-blue(type="submit")
+						.w3-cell
+							i.fa.fa-sharp.fa-solid.fa-user-plus.fa-lg
+						.w3-cell(style="width:84%")
+							h5  &nbsp;&nbsp;#[b Criar]
+		footer.w3-container.w3-teal
+			h5 Gonçalo Braga, João Loureiro e Simão Barroso | Engenharia Web 2023 - Universidade do Minho
+			h5 Generated for TP_EngWeb2023 in #{d}
+		script.
+			function showPass() {
+				var x = document.getElementById("currPass");
+				if (x.type === "password") {
+					x.type = "text";
+				} else {
+					x.type = "password";
+				}
+			}

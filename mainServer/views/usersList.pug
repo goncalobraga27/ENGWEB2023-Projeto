@@ -1,52 +1,60 @@
 extends layout
 
 block content
-  .w3-card-4
-    header.w3-container.w3-teal
-      h1 #[b Inquirição de Génere - Trabalho Prático de EngWeb2023]
-      .w3-cell-row
-        .w3-cell
-          h2 Gestão de #[i users]
-        .w3-cell(style="width:16%") 
-          h3
-            button.w3-btn.w3-pale-red.w3-border.w3-border-black.w3-hover-red
-              //i.fa.fa-regular.fa-arrow-left-to-line(style="color: #000000;margin-right: 30px;")
-              .w3-cell-row
-                .w3-cell
-                  i.fa.fa-solid.fa-arrow-left(style="color: #000000;")
-                .w3-cell(style="width:84%")
-                  h3 &nbsp;&nbsp;#[a(href="/home") #[b Voltar ao Início]]
-    .w3-panel.w3-leftbar.w3-border-blue.w3-pale-blue
-      h3 #[b Nº de Users:] #{u.length} 
-    .w3-container
-      table.w3-table-all
-        tr
-          th Data de Criação
-          th Nome
-          th Username
-          th Nível de Acesso
-        
-        each user in u
-          tr
-            td= user.dateCreated
-            td= user.name
-            td= user.username
-            td= user.level
-            td
-              .w3-panel
-                button.w3-btn.w3-round.w3-indigo.w3-margin-right
-                    i.fa.fa-regular.fa-pen-to-square
-                    a(href="/edit/user/"+user.username) &nbsp;&nbsp;Editar #[i User]
-                button.w3-btn.w3-round.w3-indigo.w3-margin-right
-                    i.fa.fa-solid.fa-trash
-                    a(href="/delete/user/"+user.username) &nbsp;&nbsp;Apagar #[i User]
-    .w3-panel
-       button.w3-btn.w3-pale-green.w3-border.w3-border-black.w3-hover-green
-        .w3-container.w3-cell
-          img(src='images/adicionar-usuario.png' style="width:35px;")
-        .w3-container.w3-cell
-          .w3-xlarge
-            a(href="/register") Criar Utlizador
-    footer.w3-container.w3-teal
-      h5 Generated for TP_EngWeb2023 in #{d}
-    
+	.w3-card-4
+		header.w3-container.w3-teal
+			h1 #[b Inquirição de Génere - Trabalho Prático de EngWeb2023]
+			.w3-cell-row
+				.w3-cell
+					h2 Gestão de #[i users]
+				.w3-cell(style="width:16%") 
+					h3
+						a(href="/home")
+							button.w3-btn.w3-pale-red.w3-border.w3-border-black.w3-hover-red
+								//i.fa.fa-regular.fa-arrow-left-to-line(style="color: #000000;margin-right: 30px;")
+								.w3-cell-row
+									.w3-cell
+										i.fa.fa-solid.fa-arrow-left(style="color: #000000;")
+									.w3-cell(style="width:84%")
+										h3 &nbsp;&nbsp; #[b Voltar ao Início]
+		.w3-panel.w3-leftbar.w3-border-blue.w3-pale-blue
+			h3 #[b Nº de Users:] #{u.length} 
+		.w3-container
+			table.w3-table-all
+				tr
+					th Data de Criação
+					th Nome
+					th Username
+					th Nível de Acesso
+				
+				each user in u
+					tr
+						td= user.dateCreated
+						td= user.name
+						td= user.username
+						td= user.level
+						td
+							.w3-panel
+								a(href="/edit/user/"+user.username)
+									button.w3-btn.w3-blue.w3-mb-2.w3-border.w3-border-black.w3-hover-blue.w3-margin-right
+										.w3-cell
+											i.fa.fa-regular.fa-pen-to-square
+										.w3-cell(style="width:84%")
+											h6 &nbsp;&nbsp;Editar #[i User]
+								a(href="/delete/user/"+user.username)
+									button.w3-btn.w3-red.w3-mb-2.w3-border.w3-border-black.w3-hover-red.w3-margin-right
+										.w3-cell
+											i.fa.fa-solid.fa-trash
+										.w3-cell(style="width:84%")
+											h6 &nbsp;&nbsp;Apagar #[i User]
+		.w3-panel
+			a(href="/register")
+				button.w3-btn.w3-pale-green.w3-border.w3-border-black.w3-hover-green
+					.w3-cell
+						i.fa.fa-sharp.fa-solid.fa-user-plus.fa-2xl
+					.w3-cell(style="width:84%")
+						h3 &nbsp;&nbsp;Criar Utilizador
+		footer.w3-container.w3-teal
+			h5 Gonçalo Braga, João Loureiro e Simão Barroso | Engenharia Web 2023 - Universidade do Minho
+			h5 Generated for TP_EngWeb2023 in #{d}
+		
