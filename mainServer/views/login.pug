@@ -3,7 +3,7 @@ block content
   link(rel="stylesheet" href="/stylesheets/style.css")
   .w3-card-4(style="height: 10%")
     header.w3-container.w3-teal
-      h1 Inquirição de Génere - Trabalho Prático de EngWeb2023
+      h1 #[b Inquirição de Génere - Trabalho Prático de EngWeb2023]
     
     .w3-container.w3-cell.w3-border.w3-light-grey(style="width:50%; height: 80%")
       h3 Este site foi desenvolvido no âmbito do Trabalho Prático da Unidade Curricular de Engenharia Web da Licenciatura em Engenharia Informática, no ano letivo 2022/2023.
@@ -15,13 +15,26 @@ block content
       form.w3-container(action="/login" method="POST")
         fieldset 
             legend Fazer Login: 
-            label #[b Username]
+            label #[b > Username]
             input.w3-input(type="text" name="username")
-            label #[b Password] 
-            input.w3-input(type="password" name="password")
+            label #[b > Password]
+            .w3-cell-row
+              .w3-cell
+                input.w3-input.w3-border(type="password" name="password" id="currPass")
+              .w3-cell
+                i.fa.fa-sharp.fa-regular.fa-eye.fa-2xs(style="color: #97a0af;margin-left: -30px;cursor: pointer;" onclick="showPass()")
         br
         input.w3-btn.w3-blue(type="submit" value="Efetuar Login")
            
     footer.w3-container.w3-teal
       h5 Gonçalo Braga, João Loureiro e Simão Barroso | Engenharia Web 2023 - Universidade do Minho
       h5 Generated for TP_EngWeb2023 in #{d}
+    script.
+      function showPass() {
+        var x = document.getElementById("currPass");
+        if (x.type === "password") {
+          x.type = "text";
+        } else {
+          x.type = "password";
+        }
+      }

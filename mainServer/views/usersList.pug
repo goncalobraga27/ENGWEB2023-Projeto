@@ -3,14 +3,28 @@ extends layout
 block content
   .w3-card-4
     header.w3-container.w3-teal
-      h1 Users List [Nº de Users: #{u.length}] #[a.w3-btn.w3-round.w3-grey(href="/register") New User]
+      h1 #[b Inquirição de Génere - Trabalho Prático de EngWeb2023]
+      .w3-cell-row
+        .w3-cell
+          h2 Gestão de #[i users]
+        .w3-cell(style="width:16%") 
+          h3
+            button.w3-btn.w3-pale-red.w3-border.w3-border-black.w3-hover-red
+              //i.fa.fa-regular.fa-arrow-left-to-line(style="color: #000000;margin-right: 30px;")
+              .w3-cell-row
+                .w3-cell
+                  i.fa.fa-solid.fa-arrow-left(style="color: #000000;")
+                .w3-cell(style="width:84%")
+                  h3 &nbsp;&nbsp;#[a(href="/home") #[b Voltar ao Início]]
+    .w3-panel.w3-leftbar.w3-border-blue.w3-pale-blue
+      h3 #[b Nº de Users:] #{u.length} 
     .w3-container
       table.w3-table-all
         tr
-          th DateCreated
-          th Name
+          th Data de Criação
+          th Nome
           th Username
-          th Level 
+          th Nível de Acesso
         
         each user in u
           tr
@@ -18,11 +32,21 @@ block content
             td= user.name
             td= user.username
             td= user.level
-            td 
-              button.w3-btn.w3-round.w3-indigo.w3-margin-right 
-                a(href="/edit/user/"+user.username) Edit User
-              button.w3-btn.w3-round.w3-indigo.w3-margin-right 
-                a(href="/delete/user/"+user.username) Delete User
+            td
+              .w3-panel
+                button.w3-btn.w3-round.w3-indigo.w3-margin-right
+                    i.fa.fa-regular.fa-pen-to-square
+                    a(href="/edit/user/"+user.username) &nbsp;&nbsp;Editar #[i User]
+                button.w3-btn.w3-round.w3-indigo.w3-margin-right
+                    i.fa.fa-solid.fa-trash
+                    a(href="/delete/user/"+user.username) &nbsp;&nbsp;Apagar #[i User]
+    .w3-panel
+       button.w3-btn.w3-pale-green.w3-border.w3-border-black.w3-hover-green
+        .w3-container.w3-cell
+          img(src='images/adicionar-usuario.png' style="width:35px;")
+        .w3-container.w3-cell
+          .w3-xlarge
+            a(href="/register") Criar Utlizador
     footer.w3-container.w3-teal
       h5 Generated for TP_EngWeb2023 in #{d}
     
