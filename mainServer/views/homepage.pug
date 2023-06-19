@@ -1,18 +1,42 @@
 extends layout
 block content
-  .w3-card-4
-    header.w3-container.w3-teal
-      h1 Inquirição de Génere - Trabalho Prático de EngWeb2023
-      if u
-        h2 Bem-Vindo #{u.username}!
-        h3 Nivel de Acesso: #{u.level}
-    .w3-container
-      h2 Funcionalidades disponíveis 
-      ul.w3-ul 
-        li 
-          a(href="/logout") Logout
-        li 
-          a(href="/retrieveAll") Inquirições de Génere
-              
-    footer.w3-container.w3-teal
-      h5 Generated for TP_EngWeb2023 in #{d}
+	.w3-card-4
+		header.w3-container.w3-light-blue
+			h1 #[b Inquirição de Génere - Trabalho Prático de EngWeb2023]
+			if u
+				.w3-cell-row.w3-light-blue
+					.w3-cell
+						h2 Bem-Vindo #{u.username}!
+					.w3-cell.w3-border-black.w3-border-top.w3-border-left(style="width:16%") 
+						h3 &nbsp;#[b Nível de Acesso:]  #{u.level}
+		.w3-container
+			.w3-cell(style="width:5%;")
+				img(src='images/avanco-rapido.png' style="width:25px; height: 35px; vertical-align:bottom;")
+			.w3-cell(style="width:95%;")
+				h3 &nbsp;&nbsp;&nbsp;Escolha uma opção:
+			ul.w3-ul.w3-card-4
+				li.w3-bar
+					span
+						.w3-bar-item
+							.w3-bar-item
+									 a(href="/retrieveAll") 
+										span
+											.w3-container.w3-cell(style="width:10%; height: 80%")
+												img(src='images/escrita-de-copia.png' style="width:55px;")
+											.w3-container.w3-cell(style="width:90%; height: 80%")
+												.w3-large #[b Inquirições de Génere]
+													h6 Acesse e edite vários registos, assim como os #[i posts] a eles referentes
+				li.w3-bar
+					span
+						.w3-bar-item
+							.w3-bar-item
+									 a(href="/logout") 
+										span
+											.w3-container.w3-cell(style="width:10%; height: 80%")
+												img(src='images/sair.png' style="width:55px;")
+											.w3-container.w3-cell(style="width:90%; height: 80%")
+												.w3-large #[b Logout]
+													h6 Termine a sessão                                                    
+		footer.w3-container.w3-teal
+			h5 Gonçalo Braga, João Loureiro e Simão Barroso | Engenharia Web 2023 - Universidade do Minho
+			h5 Generated for TP_EngWeb2023 in #{d}
