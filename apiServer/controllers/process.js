@@ -229,3 +229,14 @@ module.exports.addLigacao = async (link, processId) => {
       return { error: 'Server error' };
     }
   };
+
+module.exports.getProcessos = query => {
+    return  Process
+    .find(query)
+     .then(dados=>{
+         return dados
+     })
+     .catch(erro =>{
+         return erro
+     })
+}

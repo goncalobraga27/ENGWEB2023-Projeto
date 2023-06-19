@@ -1,6 +1,18 @@
 var express = require('express');
 var router = express.Router();
 var Process = require('../controllers/process');
+function removeTokenKey(obj) {
+  const { token, ...newObj } = obj;
+  return newObj;
+}
+router.get('/api/searchReg',function(req, res,next){
+  object = removeTokenKey(req.query)
+  Process.getProcessos(object)
+    .then(dados =>{
+      res.jsonp(dados)
+    })
+    .catch(erro=> res.status(601).json({erro:erro}))
+  });
 /* GET home page. */
 router.get('/api/processos', function(req, res, next) {
   Process.list()

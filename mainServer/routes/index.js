@@ -76,7 +76,7 @@ router.get('/retrieveAll', verificaToken, function(req, res) {
 /* GET /processos/registo */ 
 router.get('/processos/registo',verificaToken, function(req, res, next) {
     var data = new Date().toISOString().substring(0, 16)
-    res.render('addProcess', {d: data });
+    res.render('addProcess', {d: data});
 });
 // GET /nome 
 router.get('/nome',verificaToken,function(req, res, next) {
@@ -441,4 +441,51 @@ router.post('/processos/:id/addLigacoes',verificaToken, function(req, res, next)
       res.render('error', {error: erro, message: "Erro no process da rota POST /processos/:id/addLigacoes"})
     })
 });
+
+/* GET /search */
+router.get('/search',verificaToken, function(req, res, next) {
+  var data = new Date().toISOString().substring(0, 16);
+  res.render('searchPage', {d: data});
+   
+});
+// Função que nos dá o parametros que não são nulos
+function getFieldsWithContent(obj) {
+  const result = {};
+
+  for (const key in obj) {
+    if (obj.hasOwnProperty(key) && obj[key] !== '') {
+      result[key] = obj[key];
+    }
+  }
+
+  return result;
+}
+function convertObjectToQueryString(obj) {
+  const keyValuePairs = [];
+
+  for (const key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      const value = obj[key];
+      if (value !== '') {
+        keyValuePairs.push(`${encodeURIComponent(key)}=${encodeURIComponent(value)}`);
+      }
+    }
+  }
+
+  return keyValuePairs.join('&');
+}
+/* GET /searchReg?...*/
+router.get('/searchReg',verificaToken, function(req, res, next) {
+  var data = new Date().toISOString().substring(0, 16);
+  result = getFieldsWithContent(req.query)
+  queryString=convertObjectToQueryString(result)
+  axios.get(env.apiAccessPoint +"/searchReg?"+"token="+req.cookies.token+"&"+queryString)
+  .then (dados =>{
+    res.render ('searchList', {plist:dados.data,d:data});
+  })
+  .catch(erro => {
+    res.render('error', {error: erro, message: "Erro nos dados da rota GET /searchReg?..."});
+  })
+});
+
 module.exports = router;
