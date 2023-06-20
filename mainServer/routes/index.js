@@ -8,6 +8,8 @@ var env = require('../config/env')
 var axios = require('axios')
 var jwt = require('jsonwebtoken')
 
+var tipoUser = ""
+
 // Verificação do token recebido na comunicação
 function verificaToken(req, res, next){
   if (req.cookies && req.cookies.token){
@@ -30,9 +32,11 @@ router.get('/home', function(req, res){
       else{
         if (payload.level == "User"){
           res.render('homepage', {u: payload})
+          tipoUser = "User"
         }
         else{
           res.render('homepageAdmin', {u: payload})
+          tipoUser = "Admin"
         }
       }
     })
@@ -330,7 +334,12 @@ router.get('/processos/:id/posts',verificaToken, function(req, res, next) {
   var data = new Date().toISOString().substring(0, 16)
   axios.get(env.apiAccessPoint+"/processos/"+req.params.id+"/posts?token=" + req.cookies.token)
     .then(process =>{
+      if (tipoUser == "User"){
       res.render('postsList', {p: process.data, d: data });
+      }
+      else {
+        res.render('postsListAdmin', {p: process.data, d: data });
+      }
     })
     .catch(erro => {
       res.render('error', {error: erro, message: "Erro no process da rota GET /processos/:id/posts"})
@@ -358,7 +367,12 @@ router.get('/posts/seeComments/:id',verificaToken, function(req, res, next) {
   var data = new Date().toISOString().substring(0, 16)
   axios.get(env.apiAccessPoint+"/posts/seeComments/"+req.params.id+"?token=" + req.cookies.token)
     .then(process =>{
-      res.render('commentsList', {p: process.data, d: data });
+      if (tipoUser == "User"){
+        res.render('commentsList', {p: process.data, d: data });
+      }
+      else {
+        res.render('commentsListAdmin', {p: process.data, d: data });
+      }
     })
     .catch(erro => {
       res.render('error', {error: erro, message: "Erro no process da rota GET /posts/seeComments/:id"})

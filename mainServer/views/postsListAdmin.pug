@@ -1,0 +1,31 @@
+extends layout
+
+block content
+  .w3-card-4
+    header.w3-container.w3-teal
+      h1 Post List [Nº de Posts: #{p.posts.length}]
+    .w3-container
+      table.w3-table-all
+        tr
+          th Id
+          th Title
+          th Type
+          th Description
+        
+        each post in p.posts
+          tr
+            td= post._id
+            td= post.Title
+            td= post.Type
+            td= post.Description
+            td
+              button.w3-btn.w3-round.w3-indigo.w3-margin-right 
+                a(href="/posts/seeComments/"+post._id) See comments
+              button.w3-btn.w3-round.w3-indigo.w3-margin-right  
+                a(href="/posts/addComments/"+post._id) Add new comment
+              button.w3-btn.w3-round.w3-indigo.w3-margin-right  
+                a(href="/posts/deletePost/"+post._id+"?Title="+post.Title+"&Type="+post.Type+"&Description="+post.Description) Delete Post
+              
+    footer.w3-container.w3-teal
+      h5 Generated for TP_EngWeb2023 in #{d}
+    
