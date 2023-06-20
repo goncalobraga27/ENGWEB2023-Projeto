@@ -12,7 +12,25 @@ router.get('/api/searchReg',function(req, res,next){
       res.jsonp(dados)
     })
     .catch(erro=> res.status(601).json({erro:erro}))
-  });
+});
+router.delete('/api/posts/deletePost/:id',(req,res) => {
+  object = removeTokenKey(req.query)
+  Process.deletePost(object,req.params.id)
+  .then(dados =>{
+    res.jsonp(dados)
+  })
+  .catch(erro => res.status(605).json({erro:erro}))
+  
+})
+router.delete('/api/posts/deleteComment/:id',(req,res) => {
+  object = removeTokenKey(req.query)
+  Process.deleteComment(object,req.params.id)
+  .then(dados =>{
+    res.jsonp(dados)
+  })
+  .catch(erro => res.status(605).json({erro:erro}))
+  
+})
 /* GET home page. */
 router.get('/api/processos', function(req, res, next) {
   Process.list()

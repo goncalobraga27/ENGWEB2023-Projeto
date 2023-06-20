@@ -240,3 +240,63 @@ module.exports.getProcessos = query => {
          return erro
      })
 }
+
+module.exports.deletePost = async (postParams, processId) => {
+    try {
+      const process = await Process.findById(processId); // Encontre o processo com base no ID
+  
+      if (!process) {
+        return { success: false, message: 'Process not found' };
+      }
+  
+      const postIndex = process.posts.findIndex(post =>
+        post.Title === postParams.Title &&
+        post.Type === postParams.Type &&
+        post.Description === postParams.Description
+      );
+  
+      if (postIndex === -1) {
+        return { success: false, message: 'Post not found' };
+      }
+  
+      process.posts.splice(postIndex, 1); // Remova o post do array de subdocumentos
+  
+      await process.save(); // Salve as alterações no processo
+  
+      return { success: true, message: 'Post deleted successfully' };
+    } catch (error) {
+      console.error(error);
+      return { success: false, message: 'Internal server error' };
+    }
+  };
+
+  module.exports.deleteComment = async (postParams, processId) => {
+    try {
+      // Procura o processo pelo ID
+      const process = await Process.findById(processId);
+  
+      if (!process) {
+        return { status: 404, message: 'Processo não encontrado' };
+      }
+  
+      // Procura o índice do comentário com base no conteúdo
+      const commentIndex = process.posts.findIndex(
+        (post) => post.Comments.Description === postParams.commentContent
+      );
+  
+      if (commentIndex === -1) {
+        return { status: 404, message: 'Comentário não encontrado' };
+      }
+  
+      // Remove o comentário da array de comentários
+      process.posts[commentIndex].Comments.splice(commentIndex, 1);
+  
+      // Salva as alterações no processo
+      await process.save();
+  
+      return { status: 200, message: 'Comentário removido com sucesso' };
+    } catch (error) {
+      console.error(error);
+      return { status: 500, message: 'Erro ao apagar o comentário' };
+    }
+  };
