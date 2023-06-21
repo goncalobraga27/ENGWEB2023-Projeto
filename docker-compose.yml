@@ -1,0 +1,16 @@
+version: '3'
+services:
+  server1:
+    build:  # Substitua pelo caminho para o código-fonte do primeiro servidor
+    ports:
+      - 8001:8001 # Substitua as portas conforme necessário
+
+  server2:
+    build: ./path/to/server2 # Substitua pelo caminho para o código-fonte do segundo servidor
+    ports:
+      - 8002:8002 # Substitua as portas conforme necessário
+
+  server3:
+    build: ./path/to/server3 # Substitua pelo caminho para o código-fonte do terceiro servidor
+    ports:
+      - 8003:8003 # Substitua as portas conforme necessário
