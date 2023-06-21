@@ -3,6 +3,7 @@ $(function () {
 
 })
 
+/*
 function getOrder() {
     var id;
     var original_link = "";
@@ -14,3 +15,17 @@ function getOrder() {
             document.querySelector('#order').setAttribute("href", new_href);
     });
 }
+*/
+/*
+$('apply').on('click', function() {
+    var text = $('#myInput').val() + ' ' + $('#mySelect').val();
+    alert(text);
+  })
+  */
+
+
+$(document).on('change', '#order', function() {
+    var value = $(this).val();
+    console.log(value)
+    $('#apply').attr('href', value);
+});
