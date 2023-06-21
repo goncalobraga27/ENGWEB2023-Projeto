@@ -1,16 +1,55 @@
-version: '3'
+version: "3"
 services:
-  server1:
-    build:  # Substitua pelo caminho para o código-fonte do primeiro servidor
+  app:
+    container_name: tpApp
+    build: ./mainServer
+    restart: always
     ports:
-      - 8001:8001 # Substitua as portas conforme necessário
+      - "7777:7777"
+    networks:
+      - tpnet
 
-  server2:
-    build: ./path/to/server2 # Substitua pelo caminho para o código-fonte do segundo servidor
+  data_server:
+    container_name: tp_data_server
+    build: ./apiServer
+    restart: always
+    environment:
+      - MONGODB_URL=mongodb://mongodb:27018/tp
     ports:
-      - 8002:8002 # Substitua as portas conforme necessário
+      - "3000:3000"
+    depends_on:
+      - mongodb
+    networks:
+      - tpnet
 
-  server3:
-    build: ./path/to/server3 # Substitua pelo caminho para o código-fonte do terceiro servidor
+  mongodb:
+    container_name: tp-mongodb
+    image: mongo
+    restart: always
     ports:
-      - 8003:8003 # Substitua as portas conforme necessário
+      - '27018:27017'
+    volumes:
+      - tpData:/data/db
+    networks:
+      - tpnet
+
+  auth_server:
+    container_name: tp_auth_server
+    build: ./authServer
+    restart: always
+    environment:
+      - MONGODB_URL=mongodb://mongodb:27018/authEW_TP
+    ports:
+      - "7778:7778"
+    depends_on:
+      - mongodb
+    networks:
+      - tpnet
+      
+networks:
+  tpnet:
+    name: tpnet
+    driver: bridge
+volumes:
+  tpData:
+  
