@@ -11,7 +11,15 @@ db.on('error',console.error.bind(console,"MongoDB connection error ..."));
 db.once('open',function(){
   console.log('Conexão ao MongoDB realizada com sucesso ...')
 })
-
+/*
+var mongoDB = process.env.MONGODB_URL;
+mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true});
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error...'));
+db.on('open', function() {
+    console.log("Conexão ao MongoDB realizada com sucesso...")
+})
+*/
 var indexRouter = require('./routes/index');
 
 var app = express();
