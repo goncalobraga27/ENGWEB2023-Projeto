@@ -20,6 +20,12 @@ function verificaToken(req, res, next){
   }
 }
 
+/* GET / */
+router.get('/', function(req, res){
+  res.redirect('/home');
+})
+  
+
 
 /* GET /home */
 router.get('/home', function(req, res){
@@ -144,7 +150,7 @@ router.get('/lugar',verificaToken,function(req, res, next) {
          }
          })
         .catch(erro => {
-             res.render('error', {error: erro, message: "Erro na rota GET /lugar"})
+             res.render('error', {error: erro, message: "Erro na rota GET /lugar TAMANHO DA LISTA"})
   })
 });
 // GET /data
@@ -176,7 +182,7 @@ router.get('/data',verificaToken,function(req, res, next) {
          }
          })
         .catch(erro => {
-             res.render('error', {error: erro, message: "Erro na rota GET /data"})
+             res.render('error', {error: erro, message: "Erro na rota GET /data no Tamanho da Lista"})
   })
 });
 

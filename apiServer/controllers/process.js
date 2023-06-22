@@ -41,7 +41,7 @@ module.exports.listLimitNome = (x) => {
 module.exports.listLimitData = (x) => {
     return  Process
     .find({ _id: { $gt: 1348406 +x*500 } })
-    .sort({Created:1})
+    .sort({UnitDateInitial:1}) //.sort({Created:1})
     .limit(500) // 1348406
     .then(dados=>{
         return dados
@@ -53,8 +53,7 @@ module.exports.listLimitData = (x) => {
 }
 module.exports.listLimitLugar = (x) => {
     return  Process
-    .find({ _id: { $gt: 1348406 +x*500 } })
-    .sort({Repository:1})
+    .find({"ScopeContent": { $regex: /(?<=Natural e\/ou residente em ).+/}}).sort({ "ScopeContent": 1 })//.sort({Repository:1})
     .limit(500) // 1348406
     .then(dados=>{
         return dados
@@ -63,7 +62,7 @@ module.exports.listLimitLugar = (x) => {
         return erro
     })
  
-}
+} // db.processes.find({"ScopeContent": { $regex: /(?<=Natural e\/ou residente em ).+/i, $options: 'i' }}).sort()
 module.exports.listLength = () => {
     return  Process
     .count()
