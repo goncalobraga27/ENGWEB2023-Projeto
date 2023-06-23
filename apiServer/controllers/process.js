@@ -27,8 +27,9 @@ module.exports.listLimit = (x) => {
  }
 module.exports.listLimitNome = (x) => {
     return  Process
-    .find({ _id: { $gt: 1348406 +x*500 } })
+    .find()
     .sort({UnitTitle:1})
+    .skip(x * 500)
     .limit(500) // 1348406
     .then(dados=>{
         return dados
@@ -40,8 +41,9 @@ module.exports.listLimitNome = (x) => {
 }
 module.exports.listLimitData = (x) => {
     return  Process
-    .find({ _id: { $gt: 1348406 +x*500 } })
+    .find()
     .sort({UnitDateInitial:1}) //.sort({Created:1})
+    .skip(x * 500)
     .limit(500) // 1348406
     .then(dados=>{
         return dados
@@ -54,6 +56,7 @@ module.exports.listLimitData = (x) => {
 module.exports.listLimitLugar = (x) => {
     return  Process
     .find({"ScopeContent": { $regex: /(?<=Natural e\/ou residente em ).+/}}).sort({ "ScopeContent": 1 })//.sort({Repository:1})
+    .skip(x * 500)
     .limit(500) // 1348406
     .then(dados=>{
         return dados
