@@ -3,20 +3,29 @@ extends layout
 block content
 	.w3-card-4
 		header.w3-container.w3-teal
-			h1 #[b Inquirição de Génere - Trabalho Prático de EngWeb2023]
-			.w3-cell-row
-				.w3-cell
-					h2 Criar Novo Utilizador
-				.w3-cell(style="width:16%") 
-					h3
-						a(href="/home")
-							button.w3-btn.w3-pale-red.w3-border.w3-border-black.w3-hover-red.w3-round
-								//i.fa.fa-regular.fa-arrow-left-to-line(style="color: #000000;margin-right: 30px;")
-								.w3-cell-row
-									.w3-cell
-										i.fa.fa-solid.fa-arrow-left(style="color: #000000;")
-									.w3-cell(style="width:84%")
-										h3 &nbsp;&nbsp; #[b Voltar ao Início]
+			.w3-bar
+				.w3-bar-item
+					h3 #[b Inquirição de Génere - Trabalho Prático de EngWeb2023]
+				a.w3-bar-item.w3-button(href="/home" style="position:relative; top:5px;")
+					.w3-cell-row
+						.w3-cell
+							i.fa.fa-solid.fa-house(style="color: #000000;")
+						.w3-cell(style="width:80%")
+							h6 #[b Início]
+				a.w3-bar-item.w3-button(href="retrieveAll" style="position:relative; top:5px;")
+					.w3-cell-row
+						.w3-cell
+							i.fa.fa-solid.fa-folder-open(style="color: #000000;")
+						.w3-cell(style="width:84%")
+							h6 #[b Registos]
+				a.w3-bar-item.w3-button(href="/processos/registo" style="position:relative; top:5px;")
+					.w3-cell-row
+						.w3-cell
+							i.fa.fa-solid.fa-file-circle-plus(style="color: #000000;")
+						.w3-cell(style="width:84%")
+							h6 &nbsp; #[b Adicionar Registo]
+				input.w3-bar-item.w3-input.w3-border(type="text" name="quickSearch" style="position:relative; left:10px; top:15px;" placeholder="Pesquisa Rápida (ENTER)")
+			h3 &nbsp;&nbsp;&nbsp; #[b Criar Novo Utilizador]
 		form.w3-container(action="/register" method="POST")
 				fieldset 
 						legend Insira a informação:

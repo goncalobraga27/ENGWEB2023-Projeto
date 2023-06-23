@@ -3,23 +3,50 @@ extends layout
 block content
     .w3-card-4
         header.w3-container.w3-teal
-            h1 #[b Inquirição de Génere - Trabalho Prático de EngWeb2023]
-                .w3-cell-row
-                    .w3-cell
-                        h2 Registos de Inquirição de Génere
-                    .w3-cell(style="width:16%") 
-                        h3
-                            a(href="/home")
-                                button.w3-btn.w3-pale-red.w3-border.w3-border-black.w3-hover-red.w3-round
-                                    //i.fa.fa-regular.fa-arrow-left-to-line(style="color: #000000;margin-right: 30px;")
-                                    .w3-cell-row
-                                        .w3-cell
-                                            i.fa.fa-solid.fa-arrow-left(style="color: #000000;")
-                                        .w3-cell(style="width:84%")
-                                            h3 &nbsp;&nbsp; #[b Voltar ao Início]
+                .w3-bar
+                    .w3-bar-item
+                        h3 #[b Inquirição de Génere - Trabalho Prático de EngWeb2023]
+                    a.w3-bar-item.w3-button(href="/home" style="position:relative; top:5px;")
+                        .w3-cell-row
+                            .w3-cell
+                                i.fa.fa-solid.fa-house(style="color: #000000;")
+                            .w3-cell(style="width:80%")
+                                h6 #[b Início]
+                    a.w3-bar-item.w3-button(href="retrieveAll" style="position:relative; top:5px;")
+                        .w3-cell-row
+                            .w3-cell
+                                i.fa.fa-solid.fa-folder-open(style="color: #000000;")
+                            .w3-cell(style="width:84%")
+                                h6 #[b Registos]
+                    a.w3-bar-item.w3-button(href="/processos/registo" style="position:relative; top:5px;")
+                        .w3-cell-row
+                            .w3-cell
+                                i.fa.fa-solid.fa-file-circle-plus(style="color: #000000;")
+                            .w3-cell(style="width:84%")
+                                h6 &nbsp; #[b Adicionar Registo]
+                    input.w3-bar-item.w3-input.w3-border(type="text" name="quickSearch" style="position:relative; left:10px; top:15px;" placeholder="Pesquisa Rápida (ENTER)")
+                h3 &nbsp;&nbsp;&nbsp;#[b Registos de Inquirição de Génere]     
         .w3-panel.w3-leftbar.w3-border-blue.w3-pale-blue
-            h3 #[b Nº de Processos na Página:] #{plist.length} 
-            //h1 Process List [Nº de Processos: #{plist.length}] #[a.w3-btn.w3-round.w3-grey(href="/processos/registo") New ] #[a.w3-btn.w3-round.w3-light-green(href="/nome") Ord por nome ] #[a.w3-btn.w3-round.w3-light-green(href="/lugar") Ord por lugar ] #[a.w3-btn.w3-round.w3-light-green(href="/data") Ord por data ] #[a.w3-btn.w3-round.w3-light-green(href="/retrieveAll") Normal ]
+            .w3-cell-row
+                .w3-cell(style="width:90%")
+                    h3 #[b Nº de Processos na Página:] #{plist.length} 
+                    //h1 Process List [Nº de Processos: #{plist.length}] #[a.w3-btn.w3-round.w3-grey(href="/processos/registo") New ] #[a.w3-btn.w3-round.w3-light-green(href="/nome") Ord por nome ] #[a.w3-btn.w3-round.w3-light-green(href="/lugar") Ord por lugar ] #[a.w3-btn.w3-round.w3-light-green(href="/data") Ord por data ] #[a.w3-btn.w3-round.w3-light-green(href="/retrieveAll") Normal ]
+                .w3-cell(style="position:relative; left:-10px;")
+                    a(href="/search")
+                        button.w3-btn.w3-khaki.w3-border.w3-border-black.w3-hover-yellow.w3-round
+                            .w3-cell-row
+                                .w3-cell
+                                    i.fa.fa-solid.fa-magnifying-glass-plus(style="color: #000000;")
+                                .w3-cell(style="width:84%")
+                                    h4 &nbsp;&nbsp; #[b Pesquisa Avançada]                     
+                .w3-cell
+                    a(href="/processos/registo")
+                        button.w3-btn.w3-pale-green.w3-border.w3-border-black.w3-hover-green.w3-round
+                            .w3-cell-row
+                                .w3-cell
+                                    i.fa.fa-solid.fa-file-circle-plus(style="color: #000000;")
+                                .w3-cell(style="width:84%")
+                                    h4 &nbsp;&nbsp; #[b Adicionar Registo]               
         .w3-panel
             .w3-cell-row
                 .w3-cell(style="width:93%")
