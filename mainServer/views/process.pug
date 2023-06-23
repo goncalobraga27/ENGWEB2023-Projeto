@@ -1,286 +1,322 @@
 extends layout
 
 block append head
-	title #{p._id}
+	title Processo #{p._id}
 
 block content
 	.w3-card-4
 		header.w3-container.w3-teal
-			h1 Processo #{p._id} : #{p.UnitTitle}
+			.w3-bar.w3-border-bottom
+				.w3-bar-item
+					h3 #[b Inquirição de Génere - Trabalho Prático de EngWeb2023]
+				a.w3-bar-item.w3-button(href="/home" style="position:relative; top:5px;")
+					.w3-cell-row
+						.w3-cell
+							i.fa.fa-solid.fa-house(style="color: #000000;")
+						.w3-cell(style="width:80%")
+							h6 #[b Início]
+				a.w3-bar-item.w3-button(href="/retrieveAll" style="position:relative; top:5px;")
+					.w3-cell-row
+						.w3-cell
+							i.fa.fa-solid.fa-folder-open(style="color: #000000;")
+						.w3-cell(style="width:84%")
+							h6 #[b Registos]
+				a.w3-bar-item.w3-button(href="/processos/registo" style="position:relative; top:5px;")
+					.w3-cell-row
+						.w3-cell
+							i.fa.fa-solid.fa-file-circle-plus(style="color: #000000;")
+						.w3-cell(style="width:84%")
+							h6 &nbsp; #[b Adicionar Registo]
+				input.w3-bar-item.w3-input.w3-border(type="text" name="quickSearch" style="position:relative; left:10px; top:15px;" placeholder="Pesquisa Rápida (ENTER)")
+			h3 &nbsp;&nbsp;&nbsp;#[b Processo #{p._id} : #{p.UnitTitle}]
 		br 
 		.w3-container
 			table.w3-table-all
 				tr
-					th Id
+					th &#8226; Id
 					td= p._id 
 				tr
-					th DescriptionLevel
+					th &#8226; Description Level
 					td= p.DescriptionLevel 
 				tr
-					th EntityType
+					th &#8226; Entity Type
 					td= p.EntityType
 				tr
-					th CompleteUnitId
+					th &#8226; Complete Unit Id
 					td= p.CompleteUnitId
 				tr
-					th UnitId 
+					th &#8226; Unit Id 
 					td= p.UnitId
 				tr
-					th RepositoryCode
+					th &#8226; Repository Code
 					td= p.RepositoryCode
 				tr
-					th CountryCode
+					th &#8226; Country Code
 					td= p.CountryCode
 				tr
-					th UnitTitleType
+					th &#8226; Unit Title Type
 					td= p.UnitTitleType
 				tr
-					th UnitTitle
+					th &#8226; Unit Title
 					td= p.UnitTitle
 				tr
-					th AlternativeTitle
+					th &#8226; Alternative Title
 					td= p.AlternativeTitle
 				tr
-					th NormalizedFormsName
+					th &#8226; Normalized Forms Name
 					td= p.NormalizedFormsName
 				tr
-					th OtherFormsName
+					th &#8226; Other Forms Name
 					td= p.OtherFormsName
 				tr
-					th UnitDateInitial
+					th &#8226; Unit Date Initial
 					td= p.UnitDateInitial
 				tr
-					th UnitDateFinal
+					th &#8226; Unit Date Final
 					td= p.UnitDateFinal
 				tr
-					th UnitDateInitialCertainty
+					th &#8226; Unit Date Initial Certainty
 					td= p.UnitDateInitialCertainty
 				tr
-					th UnitDateFinalCertainty
+					th &#8226; Unit Date Final Certainty
 					td= p.UnitDateFinalCertainty
 				tr
-					th AllowUnitDatesInference
+					th &#8226; Allow Unit Dates Inference
 					td= p.AllowUnitDatesInference
 				tr 
-					th AccumulationDates
+					th &#8226; Accumulation Dates
 					td= p.AccumulationDates
 				tr
-					th UnitDateBulk
+					th &#8226; Unit Date Bulk
 					td= p.UnitDateBulk
 				tr
-					th UnitDateNotes
+					th &#8226; Unit Date Notes
 					td= p.UnitDateNotes
 				tr
-					th Dimensions
+					th &#8226; Dimensions
 					td= p.Dimensions
 				tr
-					th AllowExtentsInference
+					th &#8226; Allow Extents Inference
 					td= p.AllowExtentsInference
 				tr
-					th Repository
+					th &#8226; Repository
 					td= p.Repository
 				tr
-					th Producer
+					th &#8226; Producer
 					td= p.Producer
 				tr
-					th Author
+					th &#8226; Author
 					td= p.Author
 				tr
-					th MaterialAuthor
+					th &#8226; Material Author
 					td= p.MaterialAuthor
 				tr
-					th Contributor
+					th &#8226; Contributor
 					td= p.Contributor
 				tr
-					th Recipient
+					th &#8226; Recipient
 					td= p.Recipient
 				tr
-					th BiogHist
+					th &#8226; Biog. Hist.
 					td= p.BiogHist
 				tr
-					th GeogName
+					th &#8226; Geog. Name
 					td= p.GeogName
 				tr
-					th LegalStatus
+					th &#8226; Legal Status
 					td= p.LegalStatus
 				tr
-					th Functions
+					th &#8226; Functions
 					td= p.Functions
 				tr
-					th Authorities
+					th &#8226; Authorities
 					td= p.Authorities
 				tr
-					th InternalStructure
+					th &#8226; Internal Structure
 					td= p.InternalStructure
 				tr
-					th GeneralContext
+					th &#8226; General Context
 					td= p.GeneralContext
 				tr
-					th CustodHist
+					th &#8226; Custod. Hist.
 					td= p.CustodHist
 				tr
-					th AcqInfo
+					th &#8226; Acq. Info
 					td= p.AcqInfo
 				tr
-					th Classifier
+					th &#8226; Classifier
 					td= p.Classifier
 				tr
-					th ScopeContent
+					th &#8226; Scope Content
 					td= p.ScopeContent
 				tr
-					th Terms
+					th &#8226; Terms
 					td= p.Terms
 				tr
-					th DocumentalTradition
+					th &#8226; Documental Tradition
 					td= p.DocumentalTradition
 				tr
-					th DocumentalTypology
+					th &#8226; Documental Typology
 					td= p.DocumentalTypology
 				tr
-					th Marks
+					th &#8226; Marks
 					td= p.Marks
 				tr 
-					th Monograms
+					th &#8226; Monograms
 					td= p.Monograms
 				tr
-					th Stamps
+					th &#8226; Stamps
 					td= p.Stamps
 				tr
-					th Inscriptions
+					th &#8226; Inscriptions
 					td= p.Inscriptions
 				tr
-					th Signatures
+					th &#8226; Signatures
 					td= p.Signatures
 				tr
-					th Appraisal
+					th &#8226; Appraisal
 					td= p.Appraisal
 				tr
-					th AppraisalElimination
+					th &#8226; Appraisal Elimination
 					td= p.AppraisalElimination
 				tr
-					th AppraisalEliminationDate
+					th &#8226; Appraisal Elimination Date
 					td= p.AppraisalEliminationDate
 				tr
-					th Accruals
+					th &#8226; Accruals
 					td= p.Accruals
 				tr  
-					th Arrangement
-					td=  p.Arrangement
+					th &#8226; Arrangement
+					td= p.Arrangement
 				tr  
-					th AccessRestrict
+					th &#8226; Access Restrict
 					td= p.AccessRestrict
 				tr  
-					th UseRestrict
+					th &#8226; Use Restrict
 					td= p.UseRestrict
 				tr  
-					th PhysLoc
+					th &#8226; Phys. Loc.
 					td= p.PhysLoc
 				tr  
-					th OriginalNumbering
+					th &#8226; Original Numbering
 					td= p.OriginalNumbering
 				tr  
-					th PreviousLoc
+					th &#8226; Previous Loc.
 					td= p.PreviousLoc
 				tr  
-					th LangMaterial
+					th &#8226; Lang. Material
 					td= p.LangMaterial
 				tr  
-					th PhysTech
+					th &#8226; Phys. Tech.
 					td= p.PhysTech
 				tr  
-					th OtherFindAid
+					th &#8226; Other Find Aid
 					td= p.OtherFindAid
 				tr  
-					th ContainerTypeTerm
+					th &#8226; Container Type Term
 					td= p.ContainerTypeTerm
 				tr  
-					th OriginalsLoc
+					th &#8226; Originals Loc.
 					td= p.OriginalsLoc
 				tr  
-					th AltFormAvail
+					th &#8226; Alt Form Avail.
 					td= p.AltFormAvail
 				tr  
-					th RelatedMaterial
+					th &#8226; Related Material
 					td= p.RelatedMaterial
 				tr  
-					th Note
+					th &#8226; Note
 					td= p.Note
 				tr  
-					th AllowTextualContentInference
+					th &#8226; Allow Textual Content Inference
 					td= p.AllowTextualContentInference
 				tr  
-					th TextualContent
+					th &#8226; Textual Content
 					td= p.TextualContent
 				tr  
-					th RetentionDisposalDocumentState
+					th &#8226; Retention Disposal Document State
 					td= p.RetentionDisposalDocumentState
 				tr  
-					th ApplySelectionTable
+					th &#8226; Apply Selection Table
 					td= p.ApplySelectionTable
 				tr  
-					th RetentionDisposalPolicy
+					th &#8226; Retention Disposal Policy
 					td= p.RetentionDisposalPolicy
 				tr  
-					th RetentionDisposalReference
+					th &#8226; Retention Disposal Reference
 					td= p.RetentionDisposalReference
 				tr  
-					th RetentionDisposalClassification
+					th &#8226; Retention Disposal Classification
 					td= p.RetentionDisposalClassification
 				tr  
-					th RetentionDisposalPeriod
+					th &#8226; Retention Disposal Period
 					td= p.RetentionDisposalPeriod
 				tr  
-					th RetentionDisposalApplyDate
+					th &#8226; Retention Disposal Apply Date
 					td= p.RetentionDisposalApplyDate
 				tr  
-					th RetentionDisposalFinalDestination
+					th &#8226; Retention Disposal Final Destination
 					td= p.RetentionDisposalFinalDestination
 				tr  
-					th RetentionDisposalObservations
+					th &#8226; Retention Disposal Observations
 					td= p.RetentionDisposalObservations
 				tr  
-					th DescRules
+					th &#8226; Desc. Rules
 					td= p.DescRules
 				tr  
-					th Revised
+					th &#8226; Revised
 					td= p.Revised
 				tr  
-					th Published
+					th &#8226; Published
 					td= p.Published
 				tr  
-					th Available
+					th &#8226; Available
 					td= p.Available
 				tr  
-					th Highlighted
+					th &#8226; Highlighted
 					td= p.Highlighted
 				tr  
-					th Creator
+					th &#8226; Creator
 					td= p.Creator
 				tr  
-					th Created
+					th &#8226; Created
 					td= p.Created
 				tr  
-					th Username
+					th &#8226; Username
 					td= p.Username
 				tr  
-					th ProcessInfoDate
+					th &#8226; Process Info Date
 					td= p.ProcessInfoDate
 				tr  
-					th OtherDescriptiveData
+					th &#8226; Other Descriptive Data
 					td= p.OtherDescriptiveData
 				tr  
-					th ligacoes
-					td= p.ligacoes
+					th &#8226; Ligações
+					td
+						if p.ligacoes.length == 1
+							each l in p.ligacoes
+								a(href="/processos/"+l)= l
+						else 
+							each l in p.ligacoes
+								a(href="/processos/"+l)= l+" | "
 				tr
 			br
 			.w3-container
-				button.w3-btn.w3-round.w3-pale-green.w3-margin-right
-					a(href="/processos/edit/"+p._id)
-						i.w3-large.fa.fa-pencil-square-o(aria-hidden='true') #[b  Edit]
-				button.w3-btn.w3-round.w3-pale-red.w3-margin-right  
-					a(href="/processos/delete/"+p._id)
-						i.w3-large.fa.fa-trash(aria-hidden='true') #[b  Delete]
+				a(href="/processos/edit/"+p._id)
+					button.w3-btn.w3-pale-green.w3-border.w3-border-black.w3-hover-green.w3-round.w3-round-xlarge.w3-small
+						.w3-cell-row
+							.w3-cell
+								i.fa.fa-solid.fa-pencil-square-o.fa-2xl(style="color: #000000;")
+							.w3-cell(style="width:84%")
+								h5 &nbsp;&nbsp; #[b Editar Processo]
+				a(href="/processos/delete/"+p._id)
+					button.w3-btn.w3-pale-red.w3-border.w3-border-black.w3-hover-red.w3-round.w3-round-xlarge.w3-small(style="position:relative; left:10px;")
+						.w3-cell-row
+							.w3-cell
+								i.fa.fa-solid.fa-pencil-square-o.fa-2xl(style="color: #000000;")
+							.w3-cell(style="width:84%")
+								h5 &nbsp;&nbsp; #[b Apagar Processo]
 			br 
-		footer.w3-container.w3-teal
-			h5 João Loureiro, Gonçalo Braga e Simão Barroso | Engenharia Web 2023 - Universidade do Minho
-			h5 Generated by server in #{d} 
+		footer.w3-container.w3-teal.w3-center
+			h5 Gonçalo Braga, João Loureiro e Simão Barroso | Engenharia Web 2023 - Universidade do Minho
+			h5 Generated for TP_EngWeb2023 in #{d}

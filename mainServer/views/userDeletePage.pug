@@ -1,9 +1,12 @@
 extends layout 
 
+block append head
+	title Apagar User #{u}
+
 block content 
 		.w3-card-4
 				header.w3-container.w3-purple
-					.w3-bar
+					.w3-bar.w3-border-bottom
 						.w3-bar-item
 							h3 #[b Inquirição de Génere - Trabalho Prático de EngWeb2023]
 						a.w3-bar-item.w3-button(href="/home" style="position:relative; top:5px;")
@@ -12,7 +15,7 @@ block content
 									i.fa.fa-solid.fa-house(style="color: #000000;")
 								.w3-cell(style="width:80%")
 									h6 #[b Início]
-						a.w3-bar-item.w3-button(href="retrieveAll" style="position:relative; top:5px;")
+						a.w3-bar-item.w3-button(href="/retrieveAll" style="position:relative; top:5px;")
 							.w3-cell-row
 								.w3-cell
 									i.fa.fa-solid.fa-folder-open(style="color: #000000;")
