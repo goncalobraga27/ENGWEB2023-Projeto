@@ -296,7 +296,7 @@ router.get('/processos/delete/:id',verificaToken, function(req, res, next) {
 router.post('/processos/edit/:id',verificaToken, function(req, res, next) {
   axios.put(env.apiAccessPoint+"/processos/"+req.body._id+"?token=" + req.cookies.token,req.body)
     .then(dados => {
-      res.redirect('/processos');
+      res.redirect('/processos/'+req.params.id);
     })
     .catch(erro => {
       res.render('error', {error: erro,message: 'Erro nos dados da rota POST /processos/edit/:id'})
@@ -307,7 +307,7 @@ router.post('/processos/edit/:id',verificaToken, function(req, res, next) {
 router.post('/processos/delete/:id',verificaToken, function(req, res, next) {
   axios.delete(env.apiAccessPoint+"/processos/delete/"+req.body._id+"?token=" + req.cookies.token)
     .then(process=>{
-      res.redirect('/processos')
+      res.redirect('/retrieveAll')
     })
     .catch(erro => {
       res.render('error', {error: erro, message: "Erro no process da rota POST /processos/delete/:id"})
@@ -318,7 +318,7 @@ router.post('/processos/delete/:id',verificaToken, function(req, res, next) {
 router.post('/processos/registo',verificaToken, function(req, res, next) {
   axios.post(env.apiAccessPoint+"/processos/registo?token=" + req.cookies.token,req.body)
     .then(process =>{
-      res.redirect('/processos')
+      res.redirect('/retrieveAll')
     })
     .catch(erro => {
       res.render('error', {error: erro, message: "Erro no process da rota POST /processos/registo"})

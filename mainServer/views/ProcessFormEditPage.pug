@@ -3,187 +3,221 @@ extends layout
 block content 
     .w3-card-4
         header.w3-container.w3-purple
-            h2 Process Edit Form 
+            .w3-bar.w3-border-bottom
+                .w3-bar-item
+                    h3 #[b Inquirição de Génere - Trabalho Prático de EngWeb2023]
+                a.w3-bar-item.w3-button(href="/home" style="position:relative; top:5px;")
+                    .w3-cell-row
+                        .w3-cell
+                            i.fa.fa-solid.fa-house(style="color: #000000;")
+                        .w3-cell(style="width:80%")
+                            h6 #[b Início]
+                a.w3-bar-item.w3-button(href="/retrieveAll" style="position:relative; top:5px;")
+                    .w3-cell-row
+                        .w3-cell
+                            i.fa.fa-solid.fa-folder-open(style="color: #000000;")
+                        .w3-cell(style="width:84%")
+                            h6 #[b Registos]
+                a.w3-bar-item.w3-button(href="/processos/registo" style="position:relative; top:5px;")
+                    .w3-cell-row
+                        .w3-cell
+                            i.fa.fa-solid.fa-file-circle-plus(style="color: #000000;")
+                        .w3-cell(style="width:84%")
+                            h6 &nbsp; #[b Adicionar Registo]
+                input.w3-bar-item.w3-input.w3-border(type="text" name="quickSearch" style="position:relative; left:10px; top:15px;" placeholder="Pesquisa Rápida (ENTER)")
+            h3 &nbsp;&nbsp;&nbsp;#[b Editar Processo #{p._id} : #{p.UnitTitle}] 
     
         form.w3-container(method="POST")
             fieldset
-                legend MetaData
-                label Id
+                legend Processo #{p._id}
+                label #[b > Id]
                 input.w3-input.w3-round(type="text" name="_id" readonly value=p._id)
-                label DescriptionLevel
+                label #[b > Description Level]
                 input.w3-input.w3-round(type="text" name="DescriptionLevel" value=p.DescriptionLevel)
-                label EntityType
+                label #[b > Entity Type]
                 input.w3-input.w3-round(type="text" name="EntityType" value=p.EntityType)
-                label CompleteUnitId
+                label #[b > Complete Unit Id]
                 input.w3-input.w3-round(type="text" name="CompleteUnitId" value=p.CompleteUnitId)
-                label UnitId 
+                label #[b > Unit Id] 
                 input.w3-input.w3-round(type="text" name="UnitId" value=p.UnitId)
-                label RepositoryCode
+                label #[b > Repository Code]
                 input.w3-input.w3-round(type="text" name="RepositoryCode" value=p.RepositoryCode)
-                label CountryCode
+                label #[b > Country Code]
                 input.w3-input.w3-round(type="text" name="CountryCode" value=p.CountryCode)
-                label UnitTitleType
+                label #[b > Unit Title Type]
                 input.w3-input.w3-round(type="text" name="UnitTitleType" value=p.UnitTitleType)
-                label UnitTitle
+                label #[b > Unit Title]
                 input.w3-input.w3-round(type="text" name="UnitTitle" value=p.UnitTitle)
-                label AlternativeTitle
+                label #[b > Alternative Title]
                 input.w3-input.w3-round(type="text" name="AlternativeTitle" value=p.AlternativeTitle)
-                label NormalizedFormsName
+                label #[b > Normalized Forms Name]
                 input.w3-input.w3-round(type="text" name="NormalizedFormsName" value=p.NormalizedFormsName)
-                label OtherFormsName
+                label #[b > Other Forms Name]
                 input.w3-input.w3-round(type="text" name="OtherFormsName" value=p.OtherFormsName)
-                label UnitDateInitial
+                label #[b > Unit Date Initial]
                 input.w3-input.w3-round(type="text" name="UnitDateInitial"  value=p.UnitDateInitial)
-                label UnitDateFinal
+                label #[b > Unit Date Final]
                 input.w3-input.w3-round(type="text" name="UnitDateFinal" value=p.UnitDateFinal)
-                label UnitDateInitialCertainty
+                label #[b > Unit Date Initial Certainty]
                 input.w3-input.w3-round(type="text" name="UnitDateInitialCertainty" value=p.UnitDateInitialCertainty)
-                label UnitDateFinalCertainty
+                label #[b > Unit Date Final Certainty]
                 input.w3-input.w3-round(type="text" name="UnitDateFinalCertainty" value=p.UnitDateFinalCertainty)
-                label AllowUnitDatesInference
+                label #[b > Allow Unit Dates Inference]
                 input.w3-input.w3-round(type="text" name="AllowUnitDatesInference" value=p.AllowUnitDatesInference)
-                label AccumulationDates
+                label #[b > Accumulation Dates]
                 input.w3-input.w3-round(type="text" name="AccumulationDates" value=p.AccumulationDates)
-                label UnitDateBulk
+                label #[b > Unit Date Bulk]
                 input.w3-input.w3-round(type="text" name="UnitDateBulk" value=p.UnitDateBulk)
-                label UnitDateNotes
+                label #[b > Unit Date Notes]
                 input.w3-input.w3-round(type="text" name="UnitDateNotes" value=p.UnitDateNotes)
-                label Dimensions
+                label #[b > Dimensions]
                 input.w3-input.w3-round(type="text" name="Dimensions" value=p.Dimensions)
-                label AllowExtentsInference
+                label #[b > Allow Extents Inference]
                 input.w3-input.w3-round(type="text" name="AllowExtentsInference" value=p.AllowExtentsInference)
-                label Repository
+                label #[b > Repository]
                 input.w3-input.w3-round(type="text" name="Repository" value=p.Repository)
-                label Producer
+                label #[b > Producer]
                 input.w3-input.w3-round(type="text" name="Producer" value=p.Producer)
-                label Author
+                label #[b > Author]
                 input.w3-input.w3-round(type="text" name="Author" value=p.Author)
-                label MaterialAuthor
+                label #[b > Material Author]
                 input.w3-input.w3-round(type="text" name="MaterialAuthor" value=p.MaterialAuthor)
-                label Contributor
+                label #[b > Contributor]
                 input.w3-input.w3-round(type="text" name="Contributor" value=p.Contributor)
-                label Recipient
+                label #[b > Recipient]
                 input.w3-input.w3-round(type="text" name="Recipient" value=p.Recipient)
-                label BiogHist
+                label #[b > Biog. Hist.]
                 input.w3-input.w3-round(type="text" name="BiogHist" value=p.BiogHist)
-                label GeogName
+                label #[b > Geog. Name]
                 input.w3-input.w3-round(type="text" name="GeogName" value=p.GeogName)
-                label LegalStatus
+                label #[b > Legal Status]
                 input.w3-input.w3-round(type="text" name="LegalStatus" value=p.LegalStatus)
-                label Functions
+                label #[b > Functions]
                 input.w3-input.w3-round(type="text" name="Functions" value=p.Functions)
-                label Authorities
+                label #[b > Authorities]
                 input.w3-input.w3-round(type="text" name="Authorities" value=p.Authorities)
-                label InternalStructure
+                label #[b > Internal Structure]
                 input.w3-input.w3-round(type="text" name="InternalStructure" value=p.InternalStructure)
-                label GeneralContext
+                label #[b > General Context]
                 input.w3-input.w3-round(type="text" name="GeneralContext" value=p.GeneralContext)
-                label CustodHist
+                label #[b > Custod. Hist.]
                 input.w3-input.w3-round(type="text" name="CustodHist"  value=p.CustodHist)
-                label AcqInfo
+                label #[b > Acq. Info]
                 input.w3-input.w3-round(type="text" name="AcqInfo" value=p.AcqInfo)
-                label Classifier
+                label #[b > Classifier]
                 input.w3-input.w3-round(type="text" name="Classifier" value=p.Classifier)
-                label ScopeContent
+                label #[b > Scope Content]
                 input.w3-input.w3-round(type="text" name="ScopeContent" value=p.ScopeContent)
-                label Terms
+                label #[b > Terms]
                 input.w3-input.w3-round(type="text" name="Terms" value=p.Terms)
-                label DocumentalTradition
+                label #[b > Documental Tradition]
                 input.w3-input.w3-round(type="text" name="DocumentalTradition" value=p.DocumentalTradition)
-                label DocumentalTypology
+                label #[b > Documental Typology]
                 input.w3-input.w3-round(type="text" name="DocumentalTypology" value=p.DocumentalTypology)
-                label Marks
+                label #[b > Marks]
                 input.w3-input.w3-round(type="text" name="Marks" value=p.Marks)
-                label Monograms
+                label #[b > Monograms]
                 input.w3-input.w3-round(type="text" name="Monograms" value=p.Monograms)
-                label Stamps
+                label #[b > Stamps]
                 input.w3-input.w3-round(type="text" name="Stamps" value=p.Stamps)
-                label Inscriptions
+                label #[b > Inscriptions]
                 input.w3-input.w3-round(type="text" name="Inscriptions" value=p.Inscriptions)
-                label Signatures
+                label #[b > Signatures]
                 input.w3-input.w3-round(type="text" name="Signatures" value=p.Signatures)
-                label Appraisal
+                label #[b > Appraisal]
                 input.w3-input.w3-round(type="text" name="Appraisal" value=p.Appraisal)
-                label AppraisalElimination
+                label #[b > Appraisal Elimination]
                 input.w3-input.w3-round(type="text" name="AppraisalElimination" value=p.AppraisalElimination)
-                label AppraisalEliminationDate
+                label #[b > Appraisal Elimination Date]
                 input.w3-input.w3-round(type="text" name="AppraisalEliminationDate" value=p.AppraisalEliminationDate)
-                label Accruals
+                label #[b > Accruals]
                 input.w3-input.w3-round(type="text" name="Accruals" value=p.Accruals)
-                label Arrangement
+                label #[b > Arrangement]
                 input.w3-input.w3-round(type="text" name="Arrangement" value=p.Arrangement)
-                label AccessRestrict
+                label #[b > Access Restrict]
                 input.w3-input.w3-round(type="text" name="AccessRestrict" value=p.AccessRestrict)
-                label UseRestrict
+                label #[b > Use Restrict]
                 input.w3-input.w3-round(type="text" name="UseRestrict" value=p.UseRestrict)
-                label PhysLoc
+                label #[b > Phys. Loc.]
                 input.w3-input.w3-round(type="text" name="PhysLoc" value=p.PhysLoc)
-                label OriginalNumbering
+                label #[b > Original Numbering]
                 input.w3-input.w3-round(type="text" name="OriginalNumbering" value=p.OriginalNumbering)
-                label PreviousLoc
+                label #[b > Previous Loc.]
                 input.w3-input.w3-round(type="text" name="PreviousLoc" value=p.PreviousLoc)
-                label LangMaterial
+                label #[b > Lang. Material]
                 input.w3-input.w3-round(type="text" name="LangMaterial" value=p.LangMaterial)
-                label PhysTech
+                label #[b > Phys. Tech.]
                 input.w3-input.w3-round(type="text" name="PhysTech"  value=p.PhysTech)
-                label OtherFindAid
+                label #[b > Other Find Aid]
                 input.w3-input.w3-round(type="text" name="OtherFindAid" value=p.OtherFindAid)
-                label ContainerTypeTerm
+                label #[b > Container Type Term]
                 input.w3-input.w3-round(type="text" name="ContainerTypeTerm" value=p.ContainerTypeTerm)
-                label OriginalsLoc
+                label #[b > Originals Loc.]
                 input.w3-input.w3-round(type="text" name="OriginalsLoc" value=p.OriginalsLoc)
-                label AltFormAvail
+                label #[b > Alt Form Avail.]
                 input.w3-input.w3-round(type="text" name="AltFormAvail" value=p.AltFormAvail)
-                label RelatedMaterial
+                label #[b > Related Material]
                 input.w3-input.w3-round(type="text" name="RelatedMaterial" value=p.RelatedMaterial)
-                label Note
+                label #[b > Note]
                 input.w3-input.w3-round(type="text" name="Note" value=p.Note)
-                label AllowTextualContentInference
+                label #[b > Allow Textual Content Inference]
                 input.w3-input.w3-round(type="text" name="AllowTextualContentInference" value=p.AllowTextualContentInference)
-                label TextualContent
+                label #[b > Textual Content]
                 input.w3-input.w3-round(type="text" name="TextualContent" value=p.TextualContent)
-                label RetentionDisposalDocumentState
+                label #[b > Retention Disposal Document State]
                 input.w3-input.w3-round(type="text" name="RetentionDisposalDocumentState" value=p.RetentionDisposalDocumentState)
-                label ApplySelectionTable
+                label #[b > Apply Selection Table]
                 input.w3-input.w3-round(type="text" name="ApplySelectionTable" value=p.ApplySelectionTable)
-                label RetentionDisposalPolicy
+                label #[b > Retention Disposal Policy]
                 input.w3-input.w3-round(type="text" name="RetentionDisposalPolicy" value=p.RetentionDisposalPolicy)
-                label RetentionDisposalReference
+                label #[b > Retention Disposal Reference]
                 input.w3-input.w3-round(type="text" name="RetentionDisposalReference" value=p.RetentionDisposalReference)
-                label RetentionDisposalClassification
+                label #[b > Retention Disposal Classification]
                 input.w3-input.w3-round(type="text" name="RetentionDisposalClassification" value=p.RetentionDisposalClassification)
-                label RetentionDisposalPeriod
+                label #[b > Retention Disposal Period]
                 input.w3-input.w3-round(type="text" name="RetentionDisposalPeriod" value=p.RetentionDisposalPeriod)
-                label RetentionDisposalApplyDate
+                label #[b > Retention Disposal Apply Date]
                 input.w3-input.w3-round(type="text" name="RetentionDisposalApplyDate"  value=p.RetentionDisposalApplyDate)
-                label RetentionDisposalFinalDestination
+                label #[b > Retention Disposal Final Destination]
                 input.w3-input.w3-round(type="text" name="RetentionDisposalFinalDestination" value=p.RetentionDisposalFinalDestination)
-                label RetentionDisposalObservations
+                label #[b > Retention Disposal Observations]
                 input.w3-input.w3-round(type="text" name="RetentionDisposalObservations" value=p.RetentionDisposalObservations)
-                label DescRules
+                label #[b > Desc. Rules]
                 input.w3-input.w3-round(type="text" name="DescRules" value=p.DescRules)
-                label Revised
+                label #[b > Revised]
                 input.w3-input.w3-round(type="text" name="Revised" value=p.Revised)
-                label Published
+                label #[b > Published]
                 input.w3-input.w3-round(type="text" name="Published" value=p.Published)
-                label Available
+                label #[b > Available]
                 input.w3-input.w3-round(type="text" name="Available" value=p.Available)
-                label Highlighted
+                label #[b > Highlighted]
                 input.w3-input.w3-round(type="text" name="Highlighted" value=p.Highlighted)
-                label Creator
+                label #[b > Creator]
                 input.w3-input.w3-round(type="text" name="Creator" value=p.Creator)
-                label Created
+                label #[b > Created]
                 input.w3-input.w3-round(type="text" name="Created" value=p.Created)
-                label Username
+                label #[b > Username]
                 input.w3-input.w3-round(type="text" name="Username" value=p.Username)
-                label ProcessInfoDate
+                label #[b > Process Info Date]
                 input.w3-input.w3-round(type="text" name="ProcessInfoDate" value=p.ProcessInfoDate)
-                label OtherDescriptiveData
+                label #[b > Other Descriptive Data]
                 input.w3-input.w3-round(type="text" name="OtherDescriptiveData" value=p.OtherDescriptiveData)
            
-                button.w3-btn.w3-purple.w3-mb-2(type="submit") Register
-                button.w3-btn.w3-purple.w3-mb-2
-                    a(href="/retrieveAll") Return
+                .w3-panel
+                    .w3-cell-row
+                        .w3-cell              
+                            button.w3-btn.w3-pale-green.w3-mb-2.w3-hover-green.w3-border.w3-border-black(type="submit")
+                                .w3-cell
+                                    i.fa.fa-solid.fa-check.fa-lg
+                                .w3-cell(style="width:84%")
+                                    h5  &nbsp;&nbsp;#[b Guardar Alterações]
+                        .w3-cell(style="width:83%")
+                            a.w3-btn.w3-pale-red.w3-mb-2.w3-hover-red.w3-border.w3-border-black(type="submit" href="/processos/"+p._id)
+                                    .w3-cell
+                                        i.fa.fa-solid.fa-arrow-left.fa-lg
+                                    .w3-cell(style="width:84%")
+                                        h5  &nbsp;&nbsp;#[b Voltar Atrás]
             
-        footer.w3-container.w3-purple
-            h5 Generated by EngWeb2023 in #{d} 
+        footer.w3-container.w3-purple.w3-center
+            h5 Gonçalo Braga, João Loureiro e Simão Barroso | Engenharia Web 2023 - Universidade do Minho
+            h5 Generated for TP_EngWeb2023 in #{d}

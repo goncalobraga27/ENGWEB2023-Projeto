@@ -118,7 +118,10 @@ block content
                                     h6 &#8226;&nbsp;
                                 .w3-cell(style="width:92%")
                                      a(href="/processos/"+p._id)
-                                        h6 #[b #{p._id}]
+                                        if p._id == ''
+                                            h6 #[b N/A]
+                                        else
+                                            h6 #[b #{p._id}]
                         td= p.UnitTitle
                         td
                             if p.ligacoes.length == 1

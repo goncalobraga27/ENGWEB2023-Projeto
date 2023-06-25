@@ -47,12 +47,20 @@ block content
 								option("") Escolha um nível...
 												option(value="Admin") Admin
 												option(value="User") User
-				.w3-panel              
-					button.w3-btn.w3-pale-blue.w3-mb-2.w3-border.w3-border-black.w3-hover-blue(type="submit")
-						.w3-cell
-							i.fa.fa-sharp.fa-solid.fa-user-plus.fa-lg
-						.w3-cell(style="width:84%")
-							h5  &nbsp;&nbsp;#[b Criar]
+				.w3-panel
+					.w3-cell-row
+						.w3-cell              
+							button.w3-btn.w3-pale-blue.w3-mb-2.w3-border.w3-border-black.w3-hover-blue(type="submit")
+								.w3-cell
+									i.fa.fa-sharp.fa-solid.fa-user-plus.fa-lg
+								.w3-cell(style="width:84%")
+									h5  &nbsp;&nbsp;#[b Criar]
+						.w3-cell(style="width:91%")
+							a.w3-btn.w3-khaki.w3-mb-2.w3-hover-yellow.w3-border.w3-border-black(type="submit" href="/adminUsers")
+									.w3-cell
+										i.fa.fa-solid.fa-arrow-left.fa-lg
+									.w3-cell(style="width:84%")
+										h5  &nbsp;&nbsp;#[b Voltar Atrás]
 		footer.w3-container.w3-teal.w3-center.w3-center
 			h5 Gonçalo Braga, João Loureiro e Simão Barroso | Engenharia Web 2023 - Universidade do Minho
 			h5 Generated for TP_EngWeb2023 in #{d}
