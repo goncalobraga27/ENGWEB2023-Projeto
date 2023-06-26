@@ -305,7 +305,7 @@ router.post('/processos/edit/:id',verificaToken, function(req, res, next) {
 
 /* POST /processos/delete/:id */
 router.post('/processos/delete/:id',verificaToken, function(req, res, next) {
-  axios.delete(env.apiAccessPoint+"/processos/delete/"+req.body._id+"?token=" + req.cookies.token)
+  axios.delete(env.apiAccessPoint+"/processos/delete/"+req.params.id+"?token=" + req.cookies.token)
     .then(process=>{
       res.redirect('/retrieveAll')
     })
