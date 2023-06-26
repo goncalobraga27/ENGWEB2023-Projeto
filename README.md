@@ -1,4 +1,4 @@
-# TP_EngWeb2023
+# ENGWEB2023-Projeto
 Trabalho Prático de EngWeb2023 realizado por :
 - Simão Oliveira Alvim Barroso : A96834
 - João Miguel Ferreira Loureiro : A97257
