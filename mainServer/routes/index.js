@@ -9,6 +9,7 @@ var axios = require('axios')
 var jwt = require('jsonwebtoken')
 
 var tipoUser = ""
+var idAnterior = ""
 
 // Verificação do token recebido na comunicação
 function verificaToken(req, res, next){
@@ -261,9 +262,8 @@ router.get('/processos/:id',verificaToken,function(req, res, next) {
   var data = new Date().toISOString().substring(0, 16)
   axios.get(env.apiAccessPoint+"/processos/"+req.params.id+"?token=" + req.cookies.token)
     .then(dados => {
-      // const atributos = Object.keys(dados.data)
-      // const tratados = auxiliar.typeSpacer(atributos)
-      res.render('process', { p: dados.data, d: data }); 
+      res.render('process', { p: dados.data, d: data,idA:idAnterior }); 
+      idAnterior = req.params.id
     })
     .catch(erro =>{
       res.render('error', {error: erro,message: 'Erro nos dados da rota GET /processos/:id'})
