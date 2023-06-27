@@ -103,6 +103,20 @@ module.exports.listnome = () => {
      })
  
  }
+
+ module.exports.procuraRegex = (reg_ex) => {
+  return  Process
+  .find()
+  .sort({Created:1})
+   .then(dados=>{
+       return dados
+   })
+   .catch(erro =>{
+       return erro
+   })
+
+}
+
  module.exports.listlugar = () => {
     return  Process
     .find()

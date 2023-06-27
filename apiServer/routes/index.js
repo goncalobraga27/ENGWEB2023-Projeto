@@ -84,6 +84,17 @@ router.get('/api/processos/:id', function(req, res, next) {
     })
     .catch(erro => res.status(602).json(({erro: erro})))
 });
+
+router.get('/regexSearch/:exp', function(req, res, next) {
+  Process.procuraRegex(req.params.exp)
+    .then(dados => {
+      res.jsonp(dados);
+    })
+    .catch(erro => {
+      res.render('error', {error: erro, message: "Erro na pesquisa rapida!"})
+    })
+});
+
 router.get('/api/processos/edit/:id', function(req, res, next) {
   Process.getProcess(req.params.id)
     .then(process => {
