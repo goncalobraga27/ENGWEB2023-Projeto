@@ -178,9 +178,9 @@ block content
                 .w3-bar-item(style="width:25%")
                     .w3-cell-row
                         .w3-cell
-                            input.w3-input.w3-border(type="text" name="page")
+                            input.w3-input.w3-border(type="text" name="page" id="pageInput")
                         .w3-cell
-                            a(href="" id="goTo")
+                            a(id="goTo")
                                 button.w3-button.w3-medium
                                     i.fa.fa-solid.fa-magnifying-glass.fa-2xs(style="color: #97a0af;")
                 .w3-bar-item 
@@ -188,3 +188,28 @@ block content
         footer.w3-container.w3-teal.w3-center
             h5 Gonçalo Braga, João Loureiro e Simão Barroso | Engenharia Web 2023 - Universidade do Minho
             h5 Generated for TP_EngWeb2023 in #{d}
+        script.
+              document.getElementById('goTo').addEventListener('click', function(event) {
+                event.preventDefault();
+                var type = "#{tipo}";
+                var input = document.getElementById('pageInput');
+                var num = input.value;
+                console.log("--------------")
+                console.log(type)
+                console.log("--------------")
+                window.location.href = `${type}?page=${num}`;
+            });
+
+            document.getElementById('pageInput').addEventListener('keyup', function(event) {
+                if (event.keyCode === 13) {
+                    event.preventDefault();
+                    var type = "#{tipo}";
+                    var input = document.getElementById('pageInput');
+                    var num = input.value;
+                    console.log("--------------")
+                    console.log(type)
+                    console.log("--------------")
+                    window.location.href = `${type}?page=${num}`;
+                }
+            });
+
