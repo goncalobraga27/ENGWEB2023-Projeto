@@ -547,4 +547,26 @@ router.get('/posts/deleteComment/:id',verificaToken, function(req, res, next) {
       res.render('error', {error: erro, message: "Erro no process da rota GET /posts/deleteComment/:id?..."})
     })
 });
+
+/*GET /processos/:id/deleteLigacoes */
+router.get('/processos/:id/deleteLigacoes',verificaToken,function(req, res,next){
+  var data = new Date().toISOString().substring(0, 16);
+  axios.get(env.apiAccessPoint+"/processos/"+req.params.id+"/deleteLigacoes?token="+req.cookies.token)
+  .then(process =>{
+    res.render ('deleteLigacoes', {llist:process.data,d:data,id:req.params.id});
+  })
+  .catch(erro => {
+    res.render('error', {error: erro, message: "Erro no process da rota GET /processos/:id/deleteLigacoes"})
+  })
+});
+/* POST /processos/:id/deleteLigacoes */
+router.post('/processos/:id/deleteLigacoes',verificaToken, function(req, res, next) {
+  axios.post(env.apiAccessPoint+"/processos/"+req.params.id+"/deleteLigacoes?token=" + req.cookies.token,req.body.elementoSelec)
+    .then(process =>{
+      res.redirect('/retrieveAll');
+    })
+    .catch(erro => {
+      res.render('error', {error: erro, message: "POST /processos/:id/deleteLigacoes"})
+    })
+});
 module.exports = router;

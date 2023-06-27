@@ -298,7 +298,44 @@ module.exports.deletePost = async (postParams, processId) => {
   
       return { status: 200, message: 'Comentário removido com sucesso' };
     } catch (error) {
-      console.error(error);
       return { status: 500, message: 'Erro ao apagar o comentário' };
+    }
+  };
+
+  module.exports.getLigacoes = id => {
+    return  Process
+    .findOne({_id: id})
+     .then(dados=>{
+         return dados.ligacoes
+     })
+     .catch(erro =>{
+         return erro
+     })
+}
+module.exports.deleteLigacao = async (ligacao,id) => {
+    try {
+      const processo = await Process.findById(id); // Encontre o documento do processo pelo _id
+  
+      if (!processo) {
+        return { status: 404, message: 'Processo não encontrado' };
+      }
+  
+      // Verifique se "ligacao" é um número ou uma lista de números
+      if (Array.isArray(ligacao)) {
+        // Remova todos os números presentes na lista "ligacao" da lista "ligacoes"
+        processo.ligacoes = processo.ligacoes.filter(num => !ligacao.includes(num));
+      } else {
+        // Remova o número "ligacao" da lista "ligacoes"
+        const keys = Object.keys(ligacao);
+        const valor = keys[0];
+        processo.ligacoes = processo.ligacoes.filter(num => num !== valor);
+      }
+  
+      // Salve as alterações no documento do processo
+      await processo.save();
+  
+      return processo;
+    } catch (error) {
+      return { status: 500, message: 'Erro ao apagar as ligações' };
     }
   };

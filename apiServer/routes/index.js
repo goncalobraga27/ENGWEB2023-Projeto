@@ -227,4 +227,23 @@ router.post('/api/processos/:id/addLigacoes',function(req,res,next){
   })
 })
 
+router.get('/api/processos/:id/deleteLigacoes',function(req, res,next){
+  Process.getLigacoes(req.params.id)
+  .then(process => {
+    res.jsonp(process)
+  })
+  .catch(erro => {
+    res.render('error', {error: erro, message: "Erro na obtenção do process em questão"})
+  })
+})
+
+router.post('/api/processos/:id/deleteLigacoes',function(req,res,next){
+  Process.deleteLigacao(req.body,req.params.id)
+  .then(process=>{
+    res.jsonp(process)
+  })
+  .catch(erro => {
+    res.render('error', {error: erro, message: "Erro no armazenamento do registo de um post"})
+  })
+})
 module.exports = router;

@@ -163,6 +163,14 @@ block content
                                                 h9 &nbsp;&nbsp; #[b Adicionar Nova Ligação]    
                             //button.w3-btn.w3-round.w3-indigo.w3-margin-right  
                                 a(href="/processos/"+p._id+"/addLigacoes") Add a new ligação
+                            .w3-panel
+                                a(href="/processos/"+p._id+"/deleteLigacoes")
+                                    button.w3-btn.w3-light-blue.w3-border.w3-border-black.w3-hover-indigo.w3-round.w3-round-xlarge.w3-small
+                                        .w3-cell-row
+                                            .w3-cell
+                                                i.fa.fa-solid.fa-trash(style="color: #000000;")
+                                            .w3-cell(style="width:84%")
+                                                h9 &nbsp;&nbsp; #[b Apagar Ligação]
         .w3-panel.w3-center
             .w3-bar
                 .w3-bar-item
