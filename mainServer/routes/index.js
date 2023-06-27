@@ -480,9 +480,9 @@ router.post('/processos/:id/addLigacoes',verificaToken, function(req, res, next)
 /* GET /pesquisaRapida/:exp */
 router.get('/pesquisaRapida/:exp',verificaToken, function(req, res, next) {
   var data = new Date().toISOString().substring(0, 16);
-  axios.get(env.authAccessPoint+"/regexSearch/"+req.params.exp+"?token=" + req.cookies.token)
+  axios.get(env.apiAccessPoint+"/regexSearch/"+req.params.exp+"?token=" + req.cookies.token)
     .then(dados => {
-      res.render('searchList', {u: dados.data, d: data });
+      res.render('searchList', {plist: dados.data, d: data });
     })
   .catch(erro => {
       res.render('error', {error: erro, message: "Erro no dados da rota GET /pesquisaRapida/:exp"})

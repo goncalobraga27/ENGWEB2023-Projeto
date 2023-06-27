@@ -104,19 +104,6 @@ module.exports.listnome = () => {
  
  }
 
- module.exports.procuraRegex = (reg_ex) => {
-  return  Process
-  .find()
-  .sort({Created:1})
-   .then(dados=>{
-       return dados
-   })
-   .catch(erro =>{
-       return erro
-   })
-
-}
-
  module.exports.listlugar = () => {
     return  Process
     .find()
@@ -353,3 +340,106 @@ module.exports.deleteLigacao = async (ligacao,id) => {
       return { status: 500, message: 'Erro ao apagar as ligações' };
     }
   };
+
+
+module.exports.procuraRegex = (reg_ex) => {
+    return  Process.
+    find({ // nao falta?
+    $or:[
+      { _id: { $regex: reg_ex, $options: 'i' } },
+      { DescriptionLevel: { $regex: reg_ex, $options: 'i' } },
+      { EntityType: { $regex: reg_ex, $options: 'i' } },
+      { CompleteUnitId: { $regex: reg_ex, $options: 'i' } },
+      { UnitId: { $regex: reg_ex, $options: 'i' } },
+      { RepositoryCode: { $regex: reg_ex, $options: 'i' } },
+      { CountryCode: { $regex: reg_ex, $options: 'i' } },
+      { UnitTitleType: { $regex: reg_ex, $options: 'i' } },
+      { UnitTitle: { $regex: reg_ex, $options: 'i' } },
+      { AlternativeTitle: { $regex: reg_ex, $options: 'i' } },
+      { NormalizedFormsName: { $regex: reg_ex, $options: 'i' } },
+      { OtherFormsName: { $regex: reg_ex, $options: 'i' } },
+      { UnitDateInitial: { $regex: reg_ex, $options: 'i' } },
+      { UnitDateFinal: { $regex: reg_ex, $options: 'i' } },
+      { UnitDateInitialCertainty: { $regex: reg_ex, $options: 'i' } },
+      { UnitDateFinalCertainty: { $regex: reg_ex, $options: 'i' } },
+      { AllowUnitDatesInference: { $regex: reg_ex, $options: 'i' } },
+      { AccumulationDates: { $regex: reg_ex, $options: 'i' } },
+      { UnitDateBulk: { $regex: reg_ex, $options: 'i' } },
+      { UnitDateNotes: { $regex: reg_ex, $options: 'i' } },
+      { Dimensions: { $regex: reg_ex, $options: 'i' } },
+      { AllowExtentsInference: { $regex: reg_ex, $options: 'i' } },
+      { Repository: { $regex: reg_ex, $options: 'i' } },
+      { Producer: { $regex: reg_ex, $options: 'i' } },
+      { Author: { $regex: reg_ex, $options: 'i' } },
+      { MaterialAuthor: { $regex: reg_ex, $options: 'i' } },
+      { Contributor: { $regex: reg_ex, $options: 'i' } },
+      { Recipient: { $regex: reg_ex, $options: 'i' } },
+      { BiogHist: { $regex: reg_ex, $options: 'i' } },
+      { GeogName: { $regex: reg_ex, $options: 'i' } },
+      { LegalStatus: { $regex: reg_ex, $options: 'i' } },
+      { Functions: { $regex: reg_ex, $options: 'i' } },
+      { Authorities: { $regex: reg_ex, $options: 'i' } },
+      { InternalStructure: { $regex: reg_ex, $options: 'i' } },
+      { GeneralContext: { $regex: reg_ex, $options: 'i' } },
+      { CustodHist: { $regex: reg_ex, $options: 'i' } },
+      { AcqInfo: { $regex: reg_ex, $options: 'i' } },
+      { Classifier: { $regex: reg_ex, $options: 'i' } },
+      { ScopeContent: { $regex: reg_ex, $options: 'i' } },
+      { Terms: { $regex: reg_ex, $options: 'i' } },
+      { DocumentalTradition: { $regex: reg_ex, $options: 'i' } },
+      { DocumentalTypology: { $regex: reg_ex, $options: 'i' } },
+      { Marks: { $regex: reg_ex, $options: 'i' } },
+      { Monograms: { $regex: reg_ex, $options: 'i' } },
+      { Stamps: { $regex: reg_ex, $options: 'i' } },
+      { Inscriptions: { $regex: reg_ex, $options: 'i' } },
+      { Signatures: { $regex: reg_ex, $options: 'i' } },
+      { Appraisal: { $regex: reg_ex, $options: 'i' } },
+      { AppraisalElimination: { $regex: reg_ex, $options: 'i' } },
+      { AppraisalEliminationDate: { $regex: reg_ex, $options: 'i' } },
+      { Accruals: { $regex: reg_ex, $options: 'i' } },
+      { Arrangement: { $regex: reg_ex, $options: 'i' } },
+      { AccessRestrict: { $regex: reg_ex, $options: 'i' } },
+      { UseRestrict: { $regex: reg_ex, $options: 'i' } },
+      { PhysLoc: { $regex: reg_ex, $options: 'i' } },
+      { OriginalNumbering: { $regex: reg_ex, $options: 'i' } },
+      { PreviousLoc: { $regex: reg_ex, $options: 'i' } },
+      { LangMaterial: { $regex: reg_ex, $options: 'i' } },
+      { PhysTech: { $regex: reg_ex, $options: 'i' } },
+      { OtherFindAid: { $regex: reg_ex, $options: 'i' } },
+      { ContainerTypeTerm: { $regex: reg_ex, $options: 'i' } },
+      { OriginalsLoc: { $regex: reg_ex, $options: 'i' } },
+      { AltFormAvail: { $regex: reg_ex, $options: 'i' } },
+      { RelatedMaterial: { $regex: reg_ex, $options: 'i' } },
+      { Note: { $regex: reg_ex, $options: 'i' } },
+      { AllowTextualContentInference: { $regex: reg_ex, $options: 'i' } },
+      { TextualContent: { $regex: reg_ex, $options: 'i' } },
+      { RetentionDisposalDocumentState: { $regex: reg_ex, $options: 'i' } },
+      { ApplySelectionTable: { $regex: reg_ex, $options: 'i' } },
+      { RetentionDisposalPolicy: { $regex: reg_ex, $options: 'i' } },
+      { RetentionDisposalReference: { $regex: reg_ex, $options: 'i' } },
+      { RetentionDisposalClassification: { $regex: reg_ex, $options: 'i' } },
+      { RetentionDisposalPeriod: { $regex: reg_ex, $options: 'i' } },
+      { RetentionDisposalApplyDate: { $regex: reg_ex, $options: 'i' } },
+      { RetentionDisposalFinalDestination: { $regex: reg_ex, $options: 'i' } },
+      { RetentionDisposalObservations: { $regex: reg_ex, $options: 'i' } },
+      { DescRules: { $regex: reg_ex, $options: 'i' } },
+      { Revised: { $regex: reg_ex, $options: 'i' } },
+      { Published: { $regex: reg_ex, $options: 'i' } },
+      { Available: { $regex: reg_ex, $options: 'i' } },
+      { Highlighted: { $regex: reg_ex, $options: 'i' } },
+      { Creator: { $regex: reg_ex, $options: 'i' } },
+      { Created: { $regex: reg_ex, $options: 'i' } },
+      { Username: { $regex: reg_ex, $options: 'i' } },
+      { ProcessInfoDate: { $regex: reg_ex, $options: 'i' } },
+      { OtherDescriptiveData: { $regex: reg_ex, $options: 'i' } }
+    ] 
+    })
+     .then(dados=>{
+         return dados
+     })
+     .catch(erro =>{
+         return erro
+     })
+  
+  }
+  

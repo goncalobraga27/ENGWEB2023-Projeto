@@ -85,7 +85,7 @@ router.get('/api/processos/:id', function(req, res, next) {
     .catch(erro => res.status(602).json(({erro: erro})))
 });
 
-router.get('/regexSearch/:exp', function(req, res, next) {
+router.get('/api/regexSearch/:exp', function(req, res, next) {
   Process.procuraRegex(req.params.exp)
     .then(dados => {
       res.jsonp(dados);
