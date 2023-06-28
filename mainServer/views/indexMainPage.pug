@@ -94,14 +94,20 @@ block content
                     th
                         .w3-cell-row
                             .w3-cell
+                                i.fa.fa-regular.fa-calendar-days(style="color: #000000;")
+                            .w3-cell(style="width:70%")
+                                h6  #[b Unit Date Final]
+                    th
+                        .w3-cell-row
+                            .w3-cell
                                 i.fa.fa-solid.fa-circle-info(style="color: #000000;")
-                            .w3-cell(style="width:96%")
+                            .w3-cell(style="width:94%")
                                 h6  #[b Scope Content]
                     th
                         .w3-cell-row
                             .w3-cell
                                 i.fa.fa-solid.fa-people-arrows(style="color: #000000;")
-                            .w3-cell(style="width:94%")
+                            .w3-cell(style="width:92%")
                                 h6 #[b Related Material]
                     th
                         .w3-cell-row
@@ -130,6 +136,7 @@ block content
                             else 
                                 each l in p.ligacoes
                                     a(href="/processos/"+l)= l+" | "
+                        td= p.UnitDateFinal
                         td= p.ScopeContent
                         td= p.RelatedMaterial
                         td
@@ -170,7 +177,7 @@ block content
                                             .w3-cell
                                                 i.fa.fa-solid.fa-trash(style="color: #000000;")
                                             .w3-cell(style="width:84%")
-                                                h9 &nbsp;&nbsp; #[b Apagar Ligação]
+                                                h9 &nbsp;&nbsp; #[b Apagar Ligações]
         .w3-panel.w3-center
             .w3-bar
                 .w3-bar-item
