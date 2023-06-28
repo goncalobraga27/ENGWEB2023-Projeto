@@ -42,7 +42,7 @@ module.exports.listLimitNome = (x) => {
 module.exports.listLimitData = (x) => {
     return  Process
     .find()
-    .sort({UnitDateInitial:1}) //.sort({Created:1})
+    .sort({UnitDateFinal:1}) //.sort({Created:1})
     .skip(x * 500)
     .limit(500) // 1348406
     .then(dados=>{
