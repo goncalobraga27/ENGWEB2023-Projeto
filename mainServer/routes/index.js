@@ -62,7 +62,7 @@ router.get('/retrieveAll', verificaToken, function(req, res) {
          if(req.query.page){
           axios.get(env.apiAccessPoint+"/"+req.query.page+"?token=" + req.cookies.token)
               .then(processos => {
-                res.render('indexMainPage', { plist: processos.data, d: data,prevPage:prevPage,nextPage:nextPage,t:processos.data.length,tipo: "retrieveAll"});
+                res.render('indexMainPage', {type: tipoUser,  plist: processos.data, d: data,prevPage:prevPage,nextPage:nextPage,t:processos.data.length,tipo: "retrieveAll"});
                 })
               .catch(erro => {
                 res.render('error', {error: erro, message: "Erro no processos da rota GET /retrieveAll"}) })
@@ -71,7 +71,7 @@ router.get('/retrieveAll', verificaToken, function(req, res) {
           axios.get(env.apiAccessPoint+"/0?token=" + req.cookies.token)
               .then(processos => {
                 
-                res.render('indexMainPage', { plist: processos.data, d: data,prevPage:prevPage,nextPage:nextPage,tipo: "retrieveAll"});
+                res.render('indexMainPage', {type: tipoUser, plist: processos.data, d: data,prevPage:prevPage,nextPage:nextPage,tipo: "retrieveAll"});
                 })
               .catch(erro => {
                 res.render('error', {error: erro, message: "Erro no req.query.page == 0 da rota GET /retrieveAll"})
@@ -87,7 +87,7 @@ router.get('/retrieveAll', verificaToken, function(req, res) {
 /* GET /processos/registo */ 
 router.get('/processos/registo',verificaToken, function(req, res, next) {
     var data = new Date().toISOString().substring(0, 16)
-    res.render('addProcess', {d: data});
+    res.render('addProcess', {type: tipoUser, d: data});
 });
 // GET /nome 
 router.get('/nome',verificaToken,function(req, res, next) {
@@ -100,7 +100,7 @@ router.get('/nome',verificaToken,function(req, res, next) {
          if(req.query.page){
           axios.get(env.apiAccessPoint+"/"+req.query.page+"/nome?token=" + req.cookies.token)
               .then(processos => {
-                res.render('indexMainPage', { plist: processos.data, d: data,prevPage:prevPage,nextPage:nextPage,t:processos.data.length,tipo: "nome"});
+                res.render('indexMainPage', {type: tipoUser, plist: processos.data, d: data,prevPage:prevPage,nextPage:nextPage,t:processos.data.length,tipo: "nome"});
                 })
               .catch(erro => {
               res.render('error', {error: erro, message: "Erro no req.query.page na rota GET /nome"})
@@ -110,7 +110,7 @@ router.get('/nome',verificaToken,function(req, res, next) {
           axios.get(env.apiAccessPoint+"/0/nome?token=" + req.cookies.token)
               .then(processos => {
                 
-                res.render('indexMainPage', { plist: processos.data, d: data,prevPage:prevPage,nextPage:nextPage,tipo: "nome"});
+                res.render('indexMainPage', {type: tipoUser, plist: processos.data, d: data,prevPage:prevPage,nextPage:nextPage,tipo: "nome"});
                 })
               .catch(erro => {
               res.render('error', {error: erro, message: "Erro no req.query.page == null na rota GET /nome"})
@@ -133,7 +133,7 @@ router.get('/lugar',verificaToken,function(req, res, next) {
          if(req.query.page){
           axios.get(env.apiAccessPoint+"/"+req.query.page+"/lugar?token=" + req.cookies.token)
               .then(processos => {
-                res.render('indexMainPage', { plist: processos.data, d: data,prevPage:prevPage,nextPage:nextPage,t:processos.data.length,tipo: "lugar"});
+                res.render('indexMainPage', {type: tipoUser, plist: processos.data, d: data,prevPage:prevPage,nextPage:nextPage,t:processos.data.length,tipo: "lugar"});
                 })
               .catch(erro => {
               res.render('error', {error: erro, message: "Erro no req.query.page na rota GET /lugar"})
@@ -143,7 +143,7 @@ router.get('/lugar',verificaToken,function(req, res, next) {
           axios.get(env.apiAccessPoint+"/0/lugar?token=" + req.cookies.token)
               .then(processos => {
                 
-                res.render('indexMainPage', { plist: processos.data, d: data,prevPage:prevPage,nextPage:nextPage,tipo: "lugar"});
+                res.render('indexMainPage', {type: tipoUser, plist: processos.data, d: data,prevPage:prevPage,nextPage:nextPage,tipo: "lugar"});
                 })
               .catch(erro => {
               res.render('error', {error: erro, message: "Erro no req.query.page == null na rota GET /lugar"})
@@ -165,7 +165,7 @@ router.get('/data',verificaToken,function(req, res, next) {
          if(req.query.page){
           axios.get(env.apiAccessPoint+"/"+req.query.page+"/data?token=" + req.cookies.token)
               .then(processos => {
-                res.render('indexMainPage', { plist: processos.data, d: data,prevPage:prevPage,nextPage:nextPage,t:processos.data.length,tipo: "data"});
+                res.render('indexMainPage', {type: tipoUser, plist: processos.data, d: data,prevPage:prevPage,nextPage:nextPage,t:processos.data.length,tipo: "data"});
                 })
               .catch(erro => {
               res.render('error', {error: erro, message: "Erro no req.query.page na rota GET /data"})
@@ -175,7 +175,7 @@ router.get('/data',verificaToken,function(req, res, next) {
           axios.get(env.apiAccessPoint+"/0/data?token=" + req.cookies.token)
               .then(processos => {
                 
-                res.render('indexMainPage', { plist: processos.data, d: data,prevPage:prevPage,nextPage:nextPage,tipo: "data"});
+                res.render('indexMainPage', {type: tipoUser, plist: processos.data, d: data,prevPage:prevPage,nextPage:nextPage,tipo: "data"});
                 })
               .catch(erro => {
               res.render('error', {error: erro, message: "Erro no req.query.page == null na rota GET /data"})
@@ -192,7 +192,7 @@ router.get('/processos',verificaToken, function(req, res, next) {
   var data = new Date().toISOString().substring(0, 16)
   axios.get(env.apiAccessPoint+"/processos"+"?token=" + req.cookies.token)
     .then(processos => {
-      res.render('index', { plist: processos.data, d: data });
+      res.render('index', {type: tipoUser, plist: processos.data, d: data });
     })
     .catch(erro => {
       res.render('error', {error: erro, message: "Erro nos processos da rota GET /processos "})
@@ -223,7 +223,7 @@ router.get('/logout', verificaToken, (req, res) => {
 })
 // GET /register
 router.get('/register', (req, res)=>{
-  res.render('registerForm')
+  res.render('registerForm',{type: tipoUser})
 })
 // POST /register
 router.post('/register', (req, res)=>{
@@ -255,14 +255,14 @@ var total = 0;
 /* GET /processos/:id/posts/add */ 
 router.get('/processos/:id/posts/add', verificaToken,function(req, res, next) {
   var data = new Date().toISOString().substring(0, 16)
-  res.render('addPost', {d: data, id: req.params.id});
+  res.render('addPost', {type: tipoUser, d: data, id: req.params.id});
 });
 /* GET /processos/:id */
 router.get('/processos/:id',verificaToken,function(req, res, next) {
   var data = new Date().toISOString().substring(0, 16)
   axios.get(env.apiAccessPoint+"/processos/"+req.params.id+"?token=" + req.cookies.token)
     .then(dados => {
-      res.render('process', { p: dados.data, d: data,idA:idAnterior }); 
+      res.render('process', {type: tipoUser, p: dados.data, d: data,idA:idAnterior }); 
       idAnterior = req.params.id
     })
     .catch(erro =>{
@@ -274,7 +274,7 @@ router.get('/processos/edit/:id',verificaToken, function(req, res, next) {
   var data = new Date().toISOString().substring(0, 16)
   axios.get(env.apiAccessPoint+"/processos/"+req.params.id+"?token=" + req.cookies.token)
     .then(dados => {
-      res.render('ProcessFormEditPage', {p: dados.data, d: data });
+      res.render('ProcessFormEditPage', {type: tipoUser, p: dados.data, d: data });
     })
     .catch(erro => {
       res.render('error', {error: erro,message: 'Erro nos dados da rota GET /processos/edit/:id'})
@@ -285,7 +285,7 @@ router.get('/processos/delete/:id',verificaToken, function(req, res, next) {
   var data = new Date().toISOString().substring(0, 16)
   axios.get(env.apiAccessPoint+"/processos/"+req.params.id+"?token=" + req.cookies.token)
     .then(dados => {
-      res.render('processDeletePage', {p: dados.data, d: data });
+      res.render('processDeletePage', {type: tipoUser, p: dados.data, d: data });
     })
     .catch(erro => {
       res.render('error', {error: erro,message: 'Erro nos dados da rota GET /processos/delete/:id'})
@@ -342,10 +342,10 @@ router.get('/processos/:id/posts',verificaToken, function(req, res, next) {
     .then(process =>{
       if (process.data.posts.length > 0){
         if (tipoUser == "User"){
-        res.render('postsList', {p: process.data, d: data });
+        res.render('postsList', {type: tipoUser, p: process.data, d: data });
         }
         else {
-          res.render('postsListAdmin', {p: process.data, d: data });
+          res.render('postsListAdmin', {type: tipoUser, p: process.data, d: data });
         }
      }
      else res.redirect('/retrieveAll');
@@ -368,7 +368,7 @@ router.post('/posts/addComments/:id',verificaToken, function(req, res, next) {
 /* GET /posts/addComments/:id */
 router.get('/posts/addComments/:id',verificaToken, function(req, res, next) {
   var data = new Date().toISOString().substring(0, 16)
-  res.render('addComment', { d: data });
+  res.render('addComment', {type: tipoUser, d: data });
 });
 function contaComments(lista){
   var totalComments = 0;
@@ -385,10 +385,10 @@ router.get('/posts/seeComments/:id',verificaToken, function(req, res, next) {
       var numberComments= contaComments(process.data.posts);
       if (numberComments > 0){
         if (tipoUser == "User"){
-          res.render('commentsList', {p: process.data, d: data });
+          res.render('commentsList', {type: tipoUser, p: process.data, d: data });
         }
         else {
-          res.render('commentsListAdmin', {p: process.data, d: data });
+          res.render('commentsListAdmin', {type: tipoUser, p: process.data, d: data });
         }
       }
       else {
@@ -405,7 +405,7 @@ router.get('/adminUsers',verificaToken, function(req, res, next) {
   var data = new Date().toISOString().substring(0, 16)
   axios.get(env.authAccessPoint+"/get?token=" + req.cookies.token)
     .then(users =>{
-      res.render('usersList', {u: users.data, d: data });
+      res.render('usersList', {type: tipoUser, u: users.data, d: data });
     })
     .catch(erro => {
       res.render('error', {error: erro, message: "Erro no users da rota GET /posts/seeComments/:id"})
@@ -415,7 +415,7 @@ router.get('/adminUsers',verificaToken, function(req, res, next) {
 /* GET /edit/user/:username */
 router.get('/edit/user/:username',verificaToken, function(req, res, next) {
   var data = new Date().toISOString().substring(0, 16);
-  res.render('userEditPage', {u: req.params.username, d: data });
+  res.render('userEditPage', {type: tipoUser, u: req.params.username, d: data });
    
 });
 
@@ -433,7 +433,7 @@ router.post('/edit/user/:username',verificaToken, function(req, res, next) {
 /* GET /edit/user/:username */
 router.get('/edit/user/:username',verificaToken, function(req, res, next) {
   var data = new Date().toISOString().substring(0, 16);
-  res.render('userEditPage', {u: req.params.username, d: data });
+  res.render('userEditPage', {type: tipoUser, u: req.params.username, d: data });
    
 });
 
@@ -452,7 +452,7 @@ router.get('/delete/user/:username',verificaToken, function(req, res, next) {
   var data = new Date().toISOString().substring(0, 16)
   axios.get(env.authAccessPoint+"/get/"+req.params.username+"?token=" + req.cookies.token)
     .then(dados => {
-      res.render('userDeletePage', {u: dados.data, d: data });
+      res.render('userDeletePage', {type: tipoUser, u: dados.data, d: data });
     })
     .catch(erro => {
       res.render('error', {error: erro, message: "Erro no dados da rota GET /delete/user/:username"})
@@ -462,7 +462,7 @@ router.get('/delete/user/:username',verificaToken, function(req, res, next) {
 /* GET /processos/:id/addLigacoes  */
 router.get('/processos/:id/addLigacoes',verificaToken, function(req, res, next) {
   var data = new Date().toISOString().substring(0, 16);
-  res.render('addLigacoesPage', {id:req.params.id,d: data});
+  res.render('addLigacoesPage', {type: tipoUser, id:req.params.id,d: data});
    
 });
 
@@ -482,7 +482,7 @@ router.get('/pesquisaRapida/:exp',verificaToken, function(req, res, next) {
   var data = new Date().toISOString().substring(0, 16);
   axios.get(env.apiAccessPoint+"/regexSearch/"+req.params.exp+"?token=" + req.cookies.token)
     .then(dados => {
-      res.render('searchList', {plist: dados.data, d: data });
+      res.render('searchList', {type: tipoUser, plist: dados.data, d: data });
     })
   .catch(erro => {
       res.render('error', {error: erro, message: "Erro no dados da rota GET /pesquisaRapida/:exp"})
@@ -493,7 +493,7 @@ router.get('/pesquisaRapida/:exp',verificaToken, function(req, res, next) {
 /* GET /search */
 router.get('/search',verificaToken, function(req, res, next) {
   var data = new Date().toISOString().substring(0, 16);
-  res.render('searchPage', {d: data});
+  res.render('searchPage', {type: tipoUser, d: data});
    
 });
 // Função que nos dá o parametros que não são nulos
@@ -529,7 +529,7 @@ router.get('/searchReg',verificaToken, function(req, res, next) {
   queryString=convertObjectToQueryString(result)
   axios.get(env.apiAccessPoint +"/searchReg?"+"token="+req.cookies.token+"&"+queryString)
   .then (dados =>{
-    res.render ('searchList', {plist:dados.data,d:data});
+    res.render ('searchList', {type: tipoUser, plist:dados.data,d:data});
   })
   .catch(erro => {
     res.render('error', {error: erro, message: "Erro nos dados da rota GET /searchReg?..."});
@@ -566,7 +566,7 @@ router.get('/processos/:id/deleteLigacoes',verificaToken,function(req, res,next)
   var data = new Date().toISOString().substring(0, 16);
   axios.get(env.apiAccessPoint+"/processos/"+req.params.id+"/deleteLigacoes?token="+req.cookies.token)
   .then(process =>{
-    res.render ('deleteLigacoes', {llist:process.data,d:data,id:req.params.id});
+    res.render ('deleteLigacoes', {type: tipoUser, llist:process.data,d:data,id:req.params.id});
   })
   .catch(erro => {
     res.render('error', {error: erro, message: "Erro no process da rota GET /processos/:id/deleteLigacoes"})

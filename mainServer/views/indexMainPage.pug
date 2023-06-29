@@ -21,18 +21,19 @@ block content
                                 i.fa.fa-solid.fa-folder-open(style="color: #000000;")
                             .w3-cell(style="width:84%")
                                 h6 #[b Registos]
-                    a.w3-bar-item.w3-button(href="/processos/registo" style="position:relative; top:5px;")
-                        .w3-cell-row
-                            .w3-cell
-                                i.fa.fa-solid.fa-file-circle-plus(style="color: #000000;")
-                            .w3-cell(style="width:84%")
-                                h6 &nbsp; #[b Adicionar Registo]
+                    if type == "Admin"
+                        a.w3-bar-item.w3-button(href="/processos/registo" stylee="position:relative; top:5px;")
+                            .w3-cell-row
+                                .w3-cell
+                                    i.fa.fa-solid.fa-file-circle-plus(style="color: #000000;")
+                                .w3-cell(style="width:84%")
+                                    h6 &nbsp; #[b Adicionar Registo]
                     input.w3-bar-item.w3-input.w3-border(type="text" id="pesquisa_rapida" name="quickSearch" style="position:relative; left:10px; top:15px;" placeholder="Pesquisa Rápida (ENTER)")
                 h3 &nbsp;&nbsp;&nbsp;#[b Registos de Inquirição de Génere]     
         .w3-panel.w3-leftbar.w3-border-blue.w3-pale-blue
             .w3-cell-row
                 .w3-cell(style="width:90%")
-                    h3 #[b Nº de Processos na Página:] #{plist.length} 
+                    h3 #[b Nº de Processos na Página:] #{plist.length} #{type}
                     //h1 Process List [Nº de Processos: #{plist.length}] #[a.w3-btn.w3-round.w3-grey(href="/processos/registo") New ] #[a.w3-btn.w3-round.w3-light-green(href="/nome") Ord por nome ] #[a.w3-btn.w3-round.w3-light-green(href="/lugar") Ord por lugar ] #[a.w3-btn.w3-round.w3-light-green(href="/data") Ord por data ] #[a.w3-btn.w3-round.w3-light-green(href="/retrieveAll") Normal ]
                 .w3-cell(style="position:relative; left:-10px;")
                     a(href="/search")
@@ -42,14 +43,15 @@ block content
                                     i.fa.fa-solid.fa-magnifying-glass-plus.fa-xl(style="color: #000000;")
                                 .w3-cell(style="width:84%")
                                     h4 &nbsp;&nbsp; #[b Pesquisa Avançada]                     
-                .w3-cell
-                    a(href="/processos/registo")
-                        button.w3-btn.w3-pale-green.w3-border.w3-border-black.w3-hover-green.w3-round
-                            .w3-cell-row
-                                .w3-cell
-                                    i.fa.fa-solid.fa-file-circle-plus.fa-xl(style="color: #000000;")
-                                .w3-cell(style="width:84%")
-                                    h4 &nbsp;&nbsp; #[b Adicionar Registo]               
+                if type == "Admin"    
+                    .w3-cell
+                        a(href="/processos/registo")
+                            button.w3-btn.w3-pale-green.w3-border.w3-border-black.w3-hover-green.w3-round
+                                .w3-cell-row
+                                    .w3-cell
+                                        i.fa.fa-solid.fa-file-circle-plus.fa-xl(style="color: #000000;")
+                                    .w3-cell(style="width:84%")
+                                        h4 &nbsp;&nbsp; #[b Adicionar Registo]               
         .w3-panel
             .w3-cell-row
                 .w3-cell(style="width:93%")
@@ -160,24 +162,26 @@ block content
                                                 h9 &nbsp;&nbsp; #[b Adicionar Post]    
                             //button.w3-btn.w3-round.w3-indigo.w3-margin-right  
                                 a(href="/processos/"+p._id+"/posts/add") Add a new post
-                            .w3-panel
-                                a(href="/processos/"+p._id+"/addLigacoes")
-                                    button.w3-btn.w3-light-blue.w3-border.w3-border-black.w3-hover-indigo.w3-round.w3-round-xlarge.w3-small
-                                        .w3-cell-row
-                                            .w3-cell
-                                                i.fa.fa-solid.fa-paperclip(style="color: #000000;")
-                                            .w3-cell(style="width:84%")
-                                                h9 &nbsp;&nbsp; #[b Adicionar Nova Ligação]    
+                            if type == "Admin"
+                                .w3-panel
+                                    a(href="/processos/"+p._id+"/addLigacoes")
+                                        button.w3-btn.w3-light-blue.w3-border.w3-border-black.w3-hover-indigo.w3-round.w3-round-xlarge.w3-small
+                                            .w3-cell-row
+                                                .w3-cell
+                                                    i.fa.fa-solid.fa-paperclip(style="color: #000000;")
+                                                .w3-cell(style="width:84%")
+                                                    h9 &nbsp;&nbsp; #[b Adicionar Nova Ligação]    
                             //button.w3-btn.w3-round.w3-indigo.w3-margin-right  
                                 a(href="/processos/"+p._id+"/addLigacoes") Add a new ligação
-                            .w3-panel
-                                a(href="/processos/"+p._id+"/deleteLigacoes")
-                                    button.w3-btn.w3-light-blue.w3-border.w3-border-black.w3-hover-indigo.w3-round.w3-round-xlarge.w3-small
-                                        .w3-cell-row
-                                            .w3-cell
-                                                i.fa.fa-solid.fa-trash(style="color: #000000;")
-                                            .w3-cell(style="width:84%")
-                                                h9 &nbsp;&nbsp; #[b Apagar Ligações]
+                            if type == "Admin"
+                                .w3-panel
+                                    a(href="/processos/"+p._id+"/deleteLigacoes")
+                                        button.w3-btn.w3-light-blue.w3-border.w3-border-black.w3-hover-indigo.w3-round.w3-round-xlarge.w3-small
+                                            .w3-cell-row
+                                                .w3-cell
+                                                    i.fa.fa-solid.fa-trash(style="color: #000000;")
+                                                .w3-cell(style="width:84%")
+                                                    h9 &nbsp;&nbsp; #[b Apagar Ligações]
         .w3-panel.w3-center
             .w3-bar
                 .w3-bar-item
