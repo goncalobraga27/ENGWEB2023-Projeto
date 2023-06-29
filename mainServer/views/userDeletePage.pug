@@ -21,12 +21,13 @@ block content
 									i.fa.fa-solid.fa-folder-open(style="color: #000000;")
 								.w3-cell(style="width:84%")
 									h6 #[b Registos]
-						a.w3-bar-item.w3-button(href="/processos/registo" style="position:relative; top:5px;")
-							.w3-cell-row
-								.w3-cell
-									i.fa.fa-solid.fa-file-circle-plus(style="color: #000000;")
-								.w3-cell(style="width:84%")
-									h6 &nbsp; #[b Adicionar Registo]
+						if type == "Admin"
+							a.w3-bar-item.w3-button(href="/processos/registo" style="position:relative; top:5px;")
+								.w3-cell-row
+									.w3-cell
+										i.fa.fa-solid.fa-file-circle-plus(style="color: #000000;")
+									.w3-cell(style="width:84%")
+										h6 &nbsp; #[b Adicionar Registo]
 						input.w3-bar-item.w3-input.w3-border(type="text" id="pesquisa_rapida" name="quickSearch" style="position:relative; left:10px; top:15px;" placeholder="Pesquisa Rápida (ENTER)")
 					h3 &nbsp;&nbsp;&nbsp;#[b Apagar Utilizador #{u.username}]
 				form.w3-container(method="POST")
