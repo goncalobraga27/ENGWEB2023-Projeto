@@ -27,7 +27,7 @@ block content
 							i.fa.fa-solid.fa-file-circle-plus(style="color: #000000;")
 						.w3-cell(style="width:84%")
 							h6 &nbsp; #[b Adicionar Registo]
-				input.w3-bar-item.w3-input.w3-border(type="text" name="quickSearch" style="position:relative; left:10px; top:15px;" placeholder="Pesquisa Rápida (ENTER)")
+				input.w3-bar-item.w3-input.w3-border(type="text" id="pesquisa_rapida" name="quickSearch" style="position:relative; left:10px; top:15px;" placeholder="Pesquisa Rápida (ENTER)")
 			h3 &nbsp;&nbsp;&nbsp; #[b Criar Novo Utilizador]
 		form.w3-container(action="/register" method="POST")
 				fieldset 
@@ -73,3 +73,12 @@ block content
 					x.type = "password";
 				}
 			}
+			//pesquisa_rapida
+			document.getElementById('pesquisa_rapida').addEventListener('keyup', function(event) {
+				if (event.keyCode === 13) {
+					event.preventDefault();
+					var input = document.getElementById('pesquisa_rapida');
+					var p = input.value;
+					window.location.href = '/pesquisaRapida/' + p;
+				}
+			});

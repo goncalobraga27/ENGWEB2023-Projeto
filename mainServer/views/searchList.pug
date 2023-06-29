@@ -1,33 +1,225 @@
 extends layout
 
+block append head
+    title Resultados da Pesquisa
+
 block content
-  .w3-card-4
-    header.w3-container.w3-teal
-      h1 Process List [Nº de Processos: #{plist.length}] 
-    .w3-container
-      table.w3-table-all
-        tr
-          th Id
-          th ScopeContent
-          th Related Material 
-          th Actions
-        
-        each p in plist
-          tr
-            td
-              a(href="/processos/"+p._id)= p._id
-            td= p.ScopeContent
-            td= p.RelatedMaterial
-            td
-              button.w3-btn.w3-round.w3-indigo.w3-margin-right 
-                a(href="/processos/"+p._id+"/posts") See the posts
-              button.w3-btn.w3-round.w3-indigo.w3-margin-right  
-                a(href="/processos/"+p._id+"/posts/add") Add a new post
-              button.w3-btn.w3-round.w3-indigo.w3-margin-right  
-                a(href="/processos/"+p._id+"/addLigacoes") Add a new ligação
-    .w3-bar
-      a.w3-button(href= tipo + `?page=${prevPage}`) &laquo;
-      a.w3-button(href=tipo +`?page=${nextPage}`) &raquo;
-    footer.w3-container.w3-teal
-      h5 Generated for TP_EngWeb2023 in #{d}
+    .w3-card-4
+        header.w3-container.w3-teal
+                .w3-bar.w3-border-bottom
+                    .w3-bar-item
+                        h3 #[b Inquirição de Génere - Trabalho Prático de EngWeb2023]
+                    a.w3-bar-item.w3-button(href="/home" style="position:relative; top:5px;")
+                        .w3-cell-row
+                            .w3-cell
+                                i.fa.fa-solid.fa-house(style="color: #000000;")
+                            .w3-cell(style="width:80%")
+                                h6 #[b Início]
+                    a.w3-bar-item.w3-button(href="/retrieveAll" style="position:relative; top:5px;")
+                        .w3-cell-row
+                            .w3-cell
+                                i.fa.fa-solid.fa-folder-open(style="color: #000000;")
+                            .w3-cell(style="width:84%")
+                                h6 #[b Registos]
+                    a.w3-bar-item.w3-button(href="/processos/registo" style="position:relative; top:5px;")
+                        .w3-cell-row
+                            .w3-cell
+                                i.fa.fa-solid.fa-file-circle-plus(style="color: #000000;")
+                            .w3-cell(style="width:84%")
+                                h6 &nbsp; #[b Adicionar Registo]
+                    input.w3-bar-item.w3-input.w3-border(type="text" id="pesquisa_rapida" name="quickSearch" style="position:relative; left:10px; top:15px;" placeholder="Pesquisa Rápida (ENTER)")
+                h3 &nbsp;&nbsp;&nbsp;#[b Resultados da Pesquisa]     
+        .w3-panel.w3-leftbar.w3-border-blue.w3-pale-blue
+            .w3-cell-row
+                .w3-cell(style="width:90%")
+                    h3 #[b Nº de Processos encontrados:] #{plist.length} 
+                    //h1 Process List [Nº de Processos: #{plist.length}] #[a.w3-btn.w3-round.w3-grey(href="/processos/registo") New ] #[a.w3-btn.w3-round.w3-light-green(href="/nome") Ord por nome ] #[a.w3-btn.w3-round.w3-light-green(href="/lugar") Ord por lugar ] #[a.w3-btn.w3-round.w3-light-green(href="/data") Ord por data ] #[a.w3-btn.w3-round.w3-light-green(href="/retrieveAll") Normal ]
+                .w3-cell(style="position:relative; left:-10px;")
+                    a(href="/search")
+                        button.w3-btn.w3-khaki.w3-border.w3-border-black.w3-hover-yellow.w3-round
+                            .w3-cell-row
+                                .w3-cell
+                                    i.fa.fa-solid.fa-magnifying-glass-plus.fa-xl(style="color: #000000;")
+                                .w3-cell(style="width:84%")
+                                    h4 &nbsp;&nbsp; #[b Pesquisa Avançada]                     
+                .w3-cell
+                    a(href="/processos/registo")
+                        button.w3-btn.w3-pale-green.w3-border.w3-border-black.w3-hover-green.w3-round
+                            .w3-cell-row
+                                .w3-cell
+                                    i.fa.fa-solid.fa-file-circle-plus.fa-xl(style="color: #000000;")
+                                .w3-cell(style="width:84%")
+                                    h4 &nbsp;&nbsp; #[b Adicionar Registo]               
+        .w3-panel
+            .w3-cell-row
+                .w3-cell(style="width:93%")
+                    select.w3-select.w3-border.w3-round-xxlarge(id="order")
+                        option("") &#8226; Ordene por...
+                            option(value="/retrieveAll") &#9033; Default (Ordem Inicial)
+                            option(value="/nome") &#9786; Nome (Índice Antroponímico)
+                            option(value="/lugar") &#127757; Lugar (Índice Toponímico)
+                            option(value="/data") &#128467; Data (Índice Cronológico)
+                .w3-cell(style="width:2%")
+                    h3 &nbsp;&nbsp;
+                .w3-cell
+                    a(href="" id="apply")
+                        button.w3-btn.w3-pale-blue.w3-mb-2.w3-hover-blue.w3-border.w3-border-black.w3-round-xxlarge
+                            .w3-cell-row
+                                .w3-cell
+                                    i.fa.fa-solid.fa-magnifying-glass.fa-xl
+                                .w3-cell(style="width:84%")
+                                    h3 &nbsp;&nbsp; #[b Aplicar]
+
+        .w3-container
+            table.w3-table-all
+                tr
+                    th
+                        .w3-cell-row
+                            .w3-cell
+                                i.fa.fa-solid.fa-id-card(style="color: #000000;")
+                            .w3-cell(style="width:80%")
+                                h6 &nbsp; #[b Id]
+                    th
+                        .w3-cell-row
+                            .w3-cell
+                                i.fa.fa-solid.fa-book-open-reader(style="color: #000000;")
+                            .w3-cell(style="width:86%")
+                                h6  #[b Título]
+                    th
+                        .w3-cell-row
+                            .w3-cell
+                                i.fa.fa-solid.fa-link(style="color: #000000;")
+                            .w3-cell(style="width:88%")
+                                h6  #[b Ligações]
+                    th
+                        .w3-cell-row
+                            .w3-cell
+                                i.fa.fa-regular.fa-calendar-days(style="color: #000000;")
+                            .w3-cell(style="width:70%")
+                                h6  #[b Unit Date Final]
+                    th
+                        .w3-cell-row
+                            .w3-cell
+                                i.fa.fa-solid.fa-circle-info(style="color: #000000;")
+                            .w3-cell(style="width:94%")
+                                h6  #[b Scope Content]
+                    th
+                        .w3-cell-row
+                            .w3-cell
+                                i.fa.fa-solid.fa-people-arrows(style="color: #000000;")
+                            .w3-cell(style="width:92%")
+                                h6 #[b Related Material]
+                    th
+                        .w3-cell-row
+                            .w3-cell
+                                i.fa.fa-solid.fa-wrench(style="color: #000000;")
+                            .w3-cell(style="width:90%")
+                                h6 #[b Ações]
+                
+                each p in plist
+                    tr
+                        td
+                            .w3-cell-row
+                                .w3-cell
+                                    h6 &#8226;&nbsp;
+                                .w3-cell(style="width:92%")
+                                     a(href="/processos/"+p._id)
+                                        if p._id == ''
+                                            h6 #[b N/A]
+                                        else
+                                            h6 #[b #{p._id}]
+                        td= p.UnitTitle
+                        td
+                            if p.ligacoes.length == 1
+                                each l in p.ligacoes
+                                    a(href="/processos/"+l)= l
+                            else 
+                                each l in p.ligacoes
+                                    a(href="/processos/"+l)= l+" | "
+                        td= p.UnitDateFinal
+                        td= p.ScopeContent
+                        td= p.RelatedMaterial
+                        td
+                            .w3-panel
+                                a(href="/processos/"+p._id+"/posts")
+                                    button.w3-btn.w3-light-blue.w3-border.w3-border-black.w3-hover-indigo.w3-round.w3-round-xlarge.w3-small
+                                        .w3-cell-row
+                                            .w3-cell
+                                                i.fa.fa-solid.fa-comments(style="color: #000000;")
+                                            .w3-cell(style="width:84%")
+                                                h9 &nbsp;&nbsp; #[b Ver Posts]
+                            //button.w3-btn.w3-round.w3-indigo.w3-margin-right 
+                                a(href="/processos/"+p._id+"/posts") See the posts
+                            .w3-panel
+                                a(href="/processos/"+p._id+"/posts/add")
+                                    button.w3-btn.w3-light-blue.w3-border.w3-border-black.w3-hover-indigo.w3-round.w3-round-xlarge.w3-small
+                                        .w3-cell-row
+                                            .w3-cell
+                                                i.fa.fa-solid.fa-comment-medical(style="color: #000000;")
+                                            .w3-cell(style="width:84%")
+                                                h9 &nbsp;&nbsp; #[b Adicionar Post]    
+                            //button.w3-btn.w3-round.w3-indigo.w3-margin-right  
+                                a(href="/processos/"+p._id+"/posts/add") Add a new post
+                            .w3-panel
+                                a(href="/processos/"+p._id+"/addLigacoes")
+                                    button.w3-btn.w3-light-blue.w3-border.w3-border-black.w3-hover-indigo.w3-round.w3-round-xlarge.w3-small
+                                        .w3-cell-row
+                                            .w3-cell
+                                                i.fa.fa-solid.fa-paperclip(style="color: #000000;")
+                                            .w3-cell(style="width:84%")
+                                                h9 &nbsp;&nbsp; #[b Adicionar Nova Ligação]    
+                            //button.w3-btn.w3-round.w3-indigo.w3-margin-right  
+                                a(href="/processos/"+p._id+"/addLigacoes") Add a new ligação
+                            .w3-panel
+                                a(href="/processos/"+p._id+"/deleteLigacoes")
+                                    button.w3-btn.w3-light-blue.w3-border.w3-border-black.w3-hover-indigo.w3-round.w3-round-xlarge.w3-small
+                                        .w3-cell-row
+                                            .w3-cell
+                                                i.fa.fa-solid.fa-trash(style="color: #000000;")
+                                            .w3-cell(style="width:84%")
+                                                h9 &nbsp;&nbsp; #[b Apagar Ligações]
+        .w3-panel.w3-center
+            .w3-bar
+                .w3-bar-item
+                    a.w3-button.w(href= tipo + `?page=${prevPage}`) &laquo;
+                .w3-bar-item(style="width:25%")
+                    .w3-cell-row
+                        .w3-cell
+                            input.w3-input.w3-border(type="text" name="page" id="pageInput")
+                        .w3-cell
+                            a(id="goTo")
+                                button.w3-button.w3-medium
+                                    i.fa.fa-solid.fa-magnifying-glass.fa-2xs(style="color: #97a0af;")
+                .w3-bar-item 
+                    a.w3-button(href=tipo +`?page=${nextPage}`) &raquo; 
+        footer.w3-container.w3-teal.w3-center
+            h5 Gonçalo Braga, João Loureiro e Simão Barroso | Engenharia Web 2023 - Universidade do Minho
+            h5 Generated for TP_EngWeb2023 in #{d}
+        script.
+              document.getElementById('goTo').addEventListener('click', function(event) {
+                event.preventDefault();
+                var type = "#{tipo}";
+                var input = document.getElementById('pageInput');
+                var num = input.value;
+                window.location.href = `${type}?page=${num}`;
+            });
+
+            document.getElementById('pageInput').addEventListener('keyup', function(event) {
+                if (event.keyCode === 13) {
+                    event.preventDefault();
+                    var type = "#{tipo}";
+                    var input = document.getElementById('pageInput');
+                    var num = input.value;
+                    window.location.href = `${type}?page=${num}`;
+                }
+            });
+            //pesquisa_rapida
+            document.getElementById('pesquisa_rapida').addEventListener('keyup', function(event) {
+                if (event.keyCode === 13) {
+                    event.preventDefault();
+                    var input = document.getElementById('pesquisa_rapida');
+                    var p = input.value;
+                    window.location.href = '/pesquisaRapida/' + p;
+                }
+            });
     
