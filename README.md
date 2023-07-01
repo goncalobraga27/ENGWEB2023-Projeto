@@ -47,10 +47,23 @@ Já no *"NOMEDOOUTROCAMPOQUENAOMELEMBRO!!!!!"* verificavamos se se existia núme
 
 ## [API de dados](https://github.com/goncalobraga27/ENGWEB2023-Projeto/tree/main/apiServer)
 
+A resolução desta parte, à semelhança das outras, está de acordo com o feito nas aulas práticas. Sendo uma API de dados serve principalmente para devolver os dados da base de dados de acordo com os vários critérios.
+Utilizando a base de dados guardada em mongo que foi descrita no exercicio anterior, utilizamos o modúlo *mongoose* para conectarmo-nos à base de dados. De seguida, tratamos da criação dos [modelos](https://github.com/goncalobraga27/ENGWEB2023-Projeto/blob/main/apiServer/models/process.js) dos vários objetos da BD. O objeto presente neste ficheiro e na BD tem um formato muito parecido ao que vinha por defeito no ficheiro dado, apenas com 2 campos acrescentado: o campo ligações, que representa as ligações do requerido da inquirição com outros requeridos; e o campo posts, uma vez que a cada processo pode ser feito uma lista de posts.
+
+Os posts tem associado a si um id, titlo, tipo, descrição e uma lista de comentários. Os comentários tem um autor, assunto e descrição.
+
+Relativamente às rotas e aos constrollers, estes segundos são usados para servir de auxilio as rotas. Os controllers são os pedidos diretos à base dados. As rotas usam os controllers para ...
+
+
+Não utilizamos *views* uma vez que este servidor serve apenas de suporte e nunca para ser apresentado.
+
+**FALAR DA AUTENTICACAO**
+
 ## [Servidor Principar](https://github.com/goncalobraga27/ENGWEB2023-Projeto/tree/main/mainServer)
 
 ## [Servidor de Autenticação](https://github.com/goncalobraga27/ENGWEB2023-Projeto/tree/main/authServer)
 
-## Conclusão e Trabalho Futuro 
+## Conclusão e Trabalho Futuro
 
 MB+
+
