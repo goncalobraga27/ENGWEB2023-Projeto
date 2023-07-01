@@ -68,22 +68,70 @@ router.post('/register', auth.verificaAcesso, function(req, res) {
                   }     
   })
 })
-
+/*
+Este router é usado para fazer o login caso não tenhamos a funcionar a ATIVAÇÃO e a DESATIVAÇÃO de users
 router.post('/login', passport.authenticate('local'), function(req, res){
-  jwt.sign({ username: req.user.username, level: req.user.level, 
-    sub: 'aula de EngWeb2023'}, 
-    "EngWeb2023",
-    {expiresIn: 3600},
-    function(e, token) {
-      if(e) res.status(500).jsonp({error: "Erro na geração do token: " + e}) 
-      else res.status(201).jsonp({token: token})
-});
-})
+    jwt.sign({ username: req.user.username, level: req.user.level, 
+      sub: 'aula de EngWeb2023'}, 
+      "EngWeb2023",
+      {expiresIn: 3600},
+      function(e, token) {
+        if(e) res.status(500).jsonp({error: "Erro na geração do token: " + e}) 
+        else res.status(201).jsonp({token: token})
+    });
 
+})
+*/
+router.post('/login', function(req, res, next) {
+  passport.authenticate('local', function(err, user) {
+    if (err) {
+      return res.status(500).jsonp({ error: 'Erro no servidor.' });
+    }
+    if (!user || !user.active) {
+      return res.status(401).jsonp({ error: 'Acesso não permitido para este utilizador.' });
+    }
+
+    req.logIn(user, function(err) {
+      if (err) {
+        return res.status(500).jsonp({ error: 'Erro ao fazer o login.' });
+      }
+
+      jwt.sign(
+        { username: req.user.username, level: req.user.level, sub: 'aula de EngWeb2023' },
+        'EngWeb2023',
+        { expiresIn: 3600 },
+        function(e, token) {
+          if (e) {
+            return res.status(500).jsonp({ error: 'Erro na geração do token: ' + e });
+          } else {
+            return res.status(201).jsonp({ token: token });
+          }
+        }
+      );
+    });
+  })(req, res, next);
+});
 router.delete('/delete/user/:username',auth.verificaAcesso,function(req,res){
   User.deleteUser(req.params.username)
     .then(dados => res.jsonp(dados))
     .catch(erro => res.status(605).json({erro:erro}))
 
 })
+
+router.put('/deactivate/user/:username', auth.verificaAcesso, function(req, res){
+  User.deactivateUser(req.params.username)
+    .then(user => {
+      res.status(200).jsonp(user)
+    })
+    .catch(erro => res.status(520).jsonp({error: "Erro na busca do utilizador: " + erro}))
+})
+
+router.put('/activate/user/:username', auth.verificaAcesso, function(req, res){
+  User.activateUser(req.params.username)
+    .then(user => {
+      res.status(200).jsonp(user)
+    })
+    .catch(erro => res.status(520).jsonp({error: "Erro na busca do utilizador: " + erro}))
+})
+
 module.exports = router;

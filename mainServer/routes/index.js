@@ -577,7 +577,28 @@ router.post('/processos/:id/deleteLigacoes',verificaToken, function(req, res, ne
       res.redirect('/retrieveAll');
     })
     .catch(erro => {
-      res.render('error', {error: erro, message: "POST /processos/:id/deleteLigacoes"})
+      res.render('error', {error: erro, message: "Erro no process do POST /processos/:id/deleteLigacoes"})
+    })
+});
+/* POST /deactivate/user/:username */
+router.post('/deactivate/user/:username',verificaToken, function(req, res, next) {
+  axios.put(env.authAccessPoint+"/deactivate/user/"+req.params.username+"?token=" + req.cookies.token,req.body)
+    .then(process =>{
+      res.redirect('/adminUsers');
+    })
+    .catch(erro => {
+      res.render('error', {error: erro, message: "Erro no process do  POST /deactivate/user/:username"})
+    })
+});
+
+/* POST /activate/user/:username */
+router.post('/activate/user/:username',verificaToken, function(req, res, next) {
+  axios.put(env.authAccessPoint+"/activate/user/"+req.params.username+"?token=" + req.cookies.token,req.body)
+    .then(process =>{
+      res.redirect('/adminUsers');
+    })
+    .catch(erro => {
+      res.render('error', {error: erro, message: "Erro no process do  POST /activate/user/:username"})
     })
 });
 module.exports = router;
