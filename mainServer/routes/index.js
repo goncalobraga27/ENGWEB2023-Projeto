@@ -367,7 +367,7 @@ router.post('/posts/addComments/:idR/:idP',verificaToken, function(req, res, nex
 /* GET /posts/addComments/:idR/:idP */
 router.get('/posts/addComments/:idR/:idP',verificaToken, function(req, res, next) {
   var data = new Date().toISOString().substring(0, 16)
-  res.render('addComment', {type: tipoUser, d: data });
+  res.render('addComment', {type: tipoUser, d: data, idR:req.params.idR});
 });
 /* GET /posts/seeComments/:idR/:idP */
 router.get('/posts/seeComments/:idR/:idP',verificaToken, function(req, res, next) {
@@ -375,7 +375,7 @@ router.get('/posts/seeComments/:idR/:idP',verificaToken, function(req, res, next
   axios.get(env.apiAccessPoint+"/posts/seeComments/"+req.params.idR+"/"+req.params.idP+"?token=" + req.cookies.token)
     .then(process =>{
       var numberComments= process.data.length
-      if (numberComments > 0){
+      if (numberComments >= 0){
         if (tipoUser == "User"){
           res.render('commentsList', {type: tipoUser, p: process.data, d: data,idR:req.params.idR,idP:req.params.idP});
         }
