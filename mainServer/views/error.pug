@@ -1,6 +1,48 @@
 extends layout
 
+block append head
+    title ERRO NO SERVIDOR
+
 block content
-  h1= message
-  h2= error.status
-  pre #{error.stack}
+  .w3-card-4
+    header.w3-container.w3-teal
+      .w3-bar.w3-border-bottom
+          .w3-bar-item
+            h3 #[b ERRO NO SERVIDOR - Trabalho Prático de EngWeb2023]
+    br
+  .w3-container
+    table.w3-table-all
+      tr 
+        th Erro
+        td
+          h1= message
+          h2= error.status
+          pre #{error.stack}
+      tr
+        th Ajuda
+        td
+          h3
+            button#ajuda Erro 404 - Por favor verifique as rotas disponiveis de serem utilizadas pelo utilizador
+          h3
+            button#contact Erro 500 - Erro interno do servidor, por favor informe os responsáveis pelo projeto
+          h3
+            button#login Erro 401 - Tempo de sessão expirado, por favor volte a iniciar sessão
+  footer.w3-container.w3-teal.w3-center
+      h5 Gonçalo Braga, João Loureiro e Simão Barroso | Engenharia Web 2023 - Universidade do Minho
+      h5 Generated for TP_EngWeb2023 in #{d}
+  script. 
+    $(document).ready(function() {
+      $("#ajuda").click(function() {
+        event.preventDefault()
+        alert("As rotas disponíveis são: / ou /home ou /retrieveAll ou /processos/registo ou /nome ou /lugar ou /data ou /processos ou /login ou /logout ou /register ou /processos/:id/posts/add ou /processos/:id ou /processos/edit/:id ou /processos/delete/:id ou /processos/:id/posts ou /posts/addComments/:id ou /posts/seeComments/:id ou /adminUsers(Só para admins) ou /edit/user/:username ou /edit/user/:username ou /delete/user/:username ou /processos/:id/addLigacoes ou /pesquisaRapida/:exp ou /search ou /searchReg?... ou /posts/deletePost/:id?... ou /posts/deleteComment/:id?... ou /processos/:id/deleteLigacoes")
+      });
+      $("#login").click(function() {
+        window.location.href = "http://localhost:7777";
+      });
+      $("#contact").click(function() {
+        event.preventDefault()
+        alert("Os responsáveis do projeto são: Gonçalo Braga, João Loureiro e Simão Barroso")
+      });
+    });
+
+
