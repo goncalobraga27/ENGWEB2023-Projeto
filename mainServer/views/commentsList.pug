@@ -10,12 +10,11 @@ block content
           th Autor
           th Assunto
           th Description
-        each post in p.posts
-            each comment in post.Comments
-              tr
-                td= comment.Autor
-                td= comment.Assunto
-                td= comment.Description
+        each comment in p
+            tr
+              td= comment.Autor
+              td= comment.Assunto
+              td= comment.Description
               
     footer.w3-container.w3-teal
       h5 Generated for TP_EngWeb2023 in #{d}

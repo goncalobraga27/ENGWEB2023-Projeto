@@ -325,7 +325,7 @@ router.post('/processos/registo',verificaToken, function(req, res, next) {
 
 /* POST /processos/:id/posts/add */
 router.post('/processos/:id/posts/add',verificaToken, function(req, res, next) {
-  axios.post(env.apiAccessPoint+"/processos/posts/add?token=" + req.cookies.token,req.body)
+  axios.post(env.apiAccessPoint+"/processos/posts/add/"+req.params.id+"?token=" + req.cookies.token,req.body)
     .then(process =>{
       res.redirect('/processos/'+req.params.id+'/posts');
     })
@@ -352,49 +352,43 @@ router.get('/processos/:id/posts',verificaToken, function(req, res, next) {
       res.render('error', {error: erro, message: "Erro no process da rota GET /processos/:id/posts"})
     })
 });
-/* POST /posts/addComments/:id */
-router.post('/posts/addComments/:id',verificaToken, function(req, res, next) {
-  axios.post(env.apiAccessPoint+"/posts/addComments/"+req.params.id+"?token=" + req.cookies.token,req.body)
+/* POST /posts/addComments/:idR/:idP */
+router.post('/posts/addComments/:idR/:idP',verificaToken, function(req, res, next) {
+  axios.post(env.apiAccessPoint+"/posts/addComments/"+req.params.idR+"/"+req.params.idP+"?token=" + req.cookies.token,req.body)
     .then(process =>{
-      res.redirect('/posts/seeComments/'+req.params.id);
+
+      res.redirect('/posts/seeComments/'+req.params.idR+"/"+req.params.idP);
     })
     .catch(erro => {
       res.render('error', {error: erro, message: "Erro no process da rota POST /posts/addComments/:id"})
     })
 });
 
-/* GET /posts/addComments/:id */
-router.get('/posts/addComments/:id',verificaToken, function(req, res, next) {
+/* GET /posts/addComments/:idR/:idP */
+router.get('/posts/addComments/:idR/:idP',verificaToken, function(req, res, next) {
   var data = new Date().toISOString().substring(0, 16)
   res.render('addComment', {type: tipoUser, d: data });
 });
-function contaComments(lista){
-  var totalComments = 0;
-  for (var i = 0; i < lista.length;i++) {
-    totalComments+= lista[i].Comments.length
-  }
-  return totalComments
-}
-/* GET /posts/seeComments/:id */
-router.get('/posts/seeComments/:id',verificaToken, function(req, res, next) {
+/* GET /posts/seeComments/:idR/:idP */
+router.get('/posts/seeComments/:idR/:idP',verificaToken, function(req, res, next) {
   var data = new Date().toISOString().substring(0, 16)
-  axios.get(env.apiAccessPoint+"/posts/seeComments/"+req.params.id+"?token=" + req.cookies.token)
+  axios.get(env.apiAccessPoint+"/posts/seeComments/"+req.params.idR+"/"+req.params.idP+"?token=" + req.cookies.token)
     .then(process =>{
-      var numberComments= contaComments(process.data.posts);
+      var numberComments= process.data.length
       if (numberComments > 0){
         if (tipoUser == "User"){
-          res.render('commentsList', {type: tipoUser, p: process.data, d: data });
+          res.render('commentsList', {type: tipoUser, p: process.data, d: data,idR:req.params.idR,idP:req.params.idP});
         }
         else {
-          res.render('commentsListAdmin', {type: tipoUser, p: process.data, d: data });
+          res.render('commentsListAdmin', {type: tipoUser, p: process.data, d: data,idR:req.params.idR,idP:req.params.idP});
         }
       }
       else {
-        res.redirect('/processos/'+req.params.id+'/posts');
+        res.redirect('/processos/'+req.params.idR+'/posts');
       }
     })
     .catch(erro => {
-      res.render('error', {error: erro, message: "Erro no process da rota GET /posts/seeComments/:id"})
+      res.render('error', {error: erro, message: "Erro no process da rota GET /posts/seeComments/:idR/:idP"})
     })
 });
 
@@ -533,29 +527,27 @@ router.get('/searchReg',verificaToken, function(req, res, next) {
     res.render('error', {error: erro, message: "Erro nos dados da rota GET /searchReg?..."});
   })
 });
-/* GET /posts/deletePost/:id?...*/
-router.get('/posts/deletePost/:id',verificaToken, function(req, res, next) {
-  result = getFieldsWithContent(req.query)
-  queryString=convertObjectToQueryString(result)
-  axios.delete(env.apiAccessPoint+"/posts/deletePost/"+req.params.id+"?token=" + req.cookies.token+"&"+queryString)
+/* GET /posts/deletePost/:idR/:idP*/
+router.get('/posts/deletePost/:idR/:idP',verificaToken, function(req, res, next) {
+  axios.delete(env.apiAccessPoint+"/posts/deletePost/"+req.params.idR+"/"+req.params.idP+"?token=" + req.cookies.token)
     .then(process=>{
-        res.redirect('/processos/'+req.params.id+'/posts')
+        res.redirect('/processos/'+req.params.idR+'/posts')
     })
     .catch(erro => {
       res.render('error', {error: erro, message: "Erro no process da rota GET /posts/deletePost/:id?..."})
     })
 });
 
-/* GET /posts/deleteComment/:id?...*/
-router.get('/posts/deleteComment/:id',verificaToken, function(req, res, next) {
+/* GET /posts/deleteComment/:idR/:idP?...*/
+router.get('/posts/deleteComment/:idR/:idP',verificaToken, function(req, res, next) {
   result = getFieldsWithContent(req.query)
   queryString=convertObjectToQueryString(result)
-  axios.delete(env.apiAccessPoint+"/posts/deleteComment/"+req.params.id+"?token=" + req.cookies.token+"&"+queryString)
+  axios.delete(env.apiAccessPoint+"/posts/deleteComment/"+req.params.idR+"/"+req.params.idP+"?token=" + req.cookies.token+"&"+queryString)
     .then(process=>{
-        res.redirect('/posts/seeComments/'+req.params.id)
+        res.redirect('/posts/seeComments/'+req.params.idR+"/"+req.params.idP)
     })
     .catch(erro => {
-      res.render('error', {error: erro, message: "Erro no process da rota GET /posts/deleteComment/:id?..."})
+      res.render('error', {error: erro, message: "Erro no process da rota GET /posts/deleteComment/:idR/:idP?..."})
     })
 });
 

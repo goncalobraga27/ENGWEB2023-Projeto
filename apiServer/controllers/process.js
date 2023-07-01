@@ -157,9 +157,9 @@ module.exports.deleteProcess = id => {
     })
 }
 
-module.exports.addPost = async (post) => {
+module.exports.addPost = async (post,idR) => {
     try {
-      const process = await Process.findById(post._id);
+      const process = await Process.findById(idR);
       if (!process) {
         throw new Error('Process not found');
       }
@@ -184,37 +184,56 @@ module.exports.getPosts = id => {
     })
 }
 
-module.exports.addCommentToPost = async (postId, comment) => {
+
+module.exports.addCommentToPost = async (idR, idP, commentData) => {
+  try {
+    const process = await Process.findById(idR).exec();
+    if (!process) {
+      
+      return null;
+    }
+
+    const post = process.posts.find((p) => p._id === idP);
+    if (!post) {
+
+      return null;
+    }
+
+    post.Comments.push(commentData);
+    await process.save();
+
+   
+    return post;
+  } catch (error) {
+
+    console.error('Erro ao adicionar o comentário:', error);
+    throw error;
+  }
+};
+
+
+  module.exports.getComments = async (idR, idP) => {
     try {
-      const process = await Process.findById(postId);
+      const process = await Process.findById(idR).exec();
       if (!process) {
-        throw new Error('Process not found');
+        // O processo com o _id fornecido não foi encontrado
+        return null;
       }
   
-      const post = process.posts.find((p) => p._id === postId);
+      const post = process.posts.find((p) => p._id === idP);
       if (!post) {
-        throw new Error('Post not found');
+        // O post com o _id fornecido não foi encontrado no processo
+        return null;
       }
   
-      post.Comments.push(comment);
-      await process.save();
-  
-      return process;
+      const comments = post.Comments;
+      return comments;
     } catch (error) {
-      throw new Error('Failed to add comment to post: ' + error.message);
+      // Tratar erros de consulta do Mongoose
+      console.error('Erro ao obter os comentários:', error);
+      throw error;
     }
   };
-
-module.exports.getComments = id => {
-    return Process
-    .findOne({_id: id})
-    .then(dados=>{
-        return dados
-    })
-    .catch(erro =>{
-        return erro
-    })
-}
 
 module.exports.addLigacao = async (link, processId) => {
     try {
@@ -244,64 +263,50 @@ module.exports.getProcessos = query => {
      })
 }
 
-module.exports.deletePost = async (postParams, processId) => {
-    try {
-      const process = await Process.findById(processId); // Encontre o processo com base no ID
-  
-      if (!process) {
-        return { success: false, message: 'Process not found' };
-      }
-  
-      const postIndex = process.posts.findIndex(post =>
-        post.Title === postParams.Title &&
-        post.Type === postParams.Type &&
-        post.Description === postParams.Description
-      );
-  
-      if (postIndex === -1) {
-        return { success: false, message: 'Post not found' };
-      }
-  
-      process.posts.splice(postIndex, 1); // Remova o post do array de subdocumentos
-  
-      await process.save(); // Salve as alterações no processo
-  
-      return { success: true, message: 'Post deleted successfully' };
-    } catch (error) {
-      console.error(error);
-      return { success: false, message: 'Internal server error' };
-    }
-  };
+module.exports.deletePost = async (idR, idP) => {
+  try {
+    const process = await Process.findById(idR); 
+    const post = process.posts.find((p) => p._id === idP); 
+    process.posts.pull({ _id: idP }); 
+    await process.save(); 
 
-  module.exports.deleteComment = async (postParams, processId) => {
-    try {
-      // Procura o processo pelo ID
-      const process = await Process.findById(processId);
-  
-      if (!process) {
-        return { status: 404, message: 'Processo não encontrado' };
-      }
-  
-      // Procura o índice do comentário com base no conteúdo
-      const commentIndex = process.posts.findIndex(
-        (post) => post.Comments.Description === postParams.commentContent
-      );
-  
-      if (commentIndex === -1) {
-        return { status: 404, message: 'Comentário não encontrado' };
-      }
-  
-      // Remove o comentário da array de comentários
-      process.posts[commentIndex].Comments.splice(commentIndex, 1);
-  
-      // Salva as alterações no processo
-      await process.save();
-  
-      return { status: 200, message: 'Comentário removido com sucesso' };
-    } catch (error) {
-      return { status: 500, message: 'Erro ao apagar o comentário' };
+    return { success: true, message: 'Post deleted successfully' };
+  } catch (error) {
+    console.error(error);
+    return { success: false, message: 'Internal server error' };
+  }
+};
+
+module.exports.deleteComment = async (commentContent, idR, idP) => {
+  try {
+    const process = await Process.findById(idR); // Encontre o processo com base no ID
+
+    if (!process) {
+      return { success: false, message: 'Process not found' };
     }
-  };
+
+    const post = process.posts.find((p) => p._id === idP); // Encontre o post com base no ID
+
+    if (!post) {
+      return { success: false, message: 'Post not found' };
+    }
+
+    const commentIndex = post.Comments.findIndex((comment) => comment.Description === commentContent.Description && comment.Autor === commentContent.Autor && comment.Assunto === commentContent.Assunto);
+
+    if (commentIndex === -1) {
+      return { success: false, message: 'Comment not found' };
+    }
+
+    post.Comments.splice(commentIndex, 1); // Remova o comentário do array de subdocumentos
+
+    await process.save(); // Salve as alterações no processo
+
+    return { success: true, message: 'Comment deleted successfully' };
+  } catch (error) {
+    console.error(error);
+    return { success: false, message: 'Internal server error' };
+  }
+};
 
   module.exports.getLigacoes = id => {
     return  Process

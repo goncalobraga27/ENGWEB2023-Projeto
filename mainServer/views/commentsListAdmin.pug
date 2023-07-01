@@ -11,15 +11,14 @@ block content
           th Assunto
           th Description
           th Action
-        each post in p.posts
-            each comment in post.Comments
+            each comment in p
               tr
                 td= comment.Autor
                 td= comment.Assunto
                 td= comment.Description
                 td 
                   button.w3-btn.w3-round.w3-indigo.w3-margin-right  
-                    a(href="/posts/deleteComment/"+post._id+"?Autor="+comment.Autor+"&Assunto="+comment.Assunto+"&Description="+comment.Description) Delete Comment
+                    a(href="/posts/deleteComment/"+idR+"/"+idP+"?Autor="+comment.Autor+"&Assunto="+comment.Assunto+"&Description="+comment.Description) Delete Comment
               
     footer.w3-container.w3-teal
       h5 Generated for TP_EngWeb2023 in #{d}

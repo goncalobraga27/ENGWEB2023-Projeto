@@ -13,18 +13,17 @@ router.get('/api/searchReg',function(req, res,next){
     })
     .catch(erro=> res.status(601).json({erro:erro}))
 });
-router.delete('/api/posts/deletePost/:id',(req,res) => {
-  object = removeTokenKey(req.query)
-  Process.deletePost(object,req.params.id)
+router.delete('/api/posts/deletePost/:idR/:idP',(req,res) => {
+  Process.deletePost(req.params.idR,req.params.idP)
   .then(dados =>{
     res.jsonp(dados)
   })
   .catch(erro => res.status(605).json({erro:erro}))
   
 })
-router.delete('/api/posts/deleteComment/:id',(req,res) => {
+router.delete('/api/posts/deleteComment/:idR/:idP',(req,res) => {
   object = removeTokenKey(req.query)
-  Process.deleteComment(object,req.params.id)
+  Process.deleteComment(object,req.params.idR,req.params.idP)
   .then(dados =>{
     res.jsonp(dados)
   })
@@ -188,13 +187,13 @@ router.get('/api/:pag/lugar', function(req, res, next) {
     .catch(erro=> res.status(601).json({erro:erro}))
 });
 
-router.post('/api/processos/posts/add',function(req, res, next){
-  Process.addPost(req.body)
+router.post('/api/processos/posts/add/:idR',function(req, res, next){
+  Process.addPost(req.body,req.params.idR)
   .then(process=>{
     res.jsonp(process)
   })
   .catch(erro => {
-    res.render('error', {error: erro, message: "Erro no armazenamento do registo de um post"})
+     res.status(601).json({erro:erro})
   })
 });
 
@@ -204,27 +203,27 @@ router.get('/api/processos/:id/posts', function(req, res, next) {
       res.jsonp(process)
     })
     .catch(erro => {
-      res.render('error', {error: erro, message: "Erro na obtenção do processo em questão"})
+     res.status(601).json({erro:erro})
     })
 });
 
-router.post('/api/posts/addComments/:id',function(req, res, next){
-  Process.addCommentToPost(req.params.id,req.body)
+router.post('/api/posts/addComments/:idR/:idP',function(req, res, next){
+  Process.addCommentToPost(req.params.idR,req.params.idP,req.body)
   .then(process=>{
     res.jsonp(process)
   })
   .catch(erro => {
-    res.render('error', {error: erro, message: "Erro no armazenamento do registo de um post"})
+    res.status(601).json({erro:erro})
   })
 });
 
-router.get('/api/posts/seeComments/:id', function(req, res, next) {
-  Process.getComments(req.params.id)
+router.get('/api/posts/seeComments/:idR/:idP', function(req, res, next) {
+  Process.getComments(req.params.idR,req.params.idP)
     .then(process => {
       res.jsonp(process)
     })
     .catch(erro => {
-      res.render('error', {error: erro, message: "Erro na obtenção do processo em questão"})
+      res.status(601).json({erro:erro})
     })
 });
 
@@ -234,7 +233,7 @@ router.post('/api/processos/:id/addLigacoes',function(req,res,next){
     res.jsonp(process)
   })
   .catch(erro => {
-    res.render('error', {error: erro, message: "Erro no armazenamento do registo de um post"})
+    res.status(601).json({erro:erro})
   })
 })
 
@@ -244,7 +243,7 @@ router.get('/api/processos/:id/deleteLigacoes',function(req, res,next){
     res.jsonp(process)
   })
   .catch(erro => {
-    res.render('error', {error: erro, message: "Erro na obtenção do process em questão"})
+    res.status(601).json({erro:erro})
   })
 })
 
@@ -254,7 +253,7 @@ router.post('/api/processos/:id/deleteLigacoes',function(req,res,next){
     res.jsonp(process)
   })
   .catch(erro => {
-    res.render('error', {error: erro, message: "Erro no armazenamento do registo de um post"})
+    res.status(601).json({erro:erro})
   })
 })
 module.exports = router;
