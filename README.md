@@ -59,11 +59,15 @@ Não utilizamos *views* uma vez que este servidor serve apenas de suporte e nunc
 
 **FALAR DA AUTENTICACAO**
 
-## [Servidor Principar](https://github.com/goncalobraga27/ENGWEB2023-Projeto/tree/main/mainServer)
+## [Servidor Principal](https://github.com/goncalobraga27/ENGWEB2023-Projeto/tree/main/mainServer)
+
+Este serve como servidor onde vai ser executadas as operações que vão ser envidas e intrepertadas pelos outros. Comunica com o servidor de autenticação para decidir se um utilizador pode ou não pode aceder a um determinado tipo de informação (devido aos 2 níveis e há existência de utilizadores). Comunica com a API de dados para ir buscar a informação de acordo com determinados pârametros, sejam eles organizados por nome ou fazer uma pesquisa de um determinado termo na base de dados e mostrar a lista resultante dessa procura.
+
+Este servidor é o único com *views* uma vez que é o servidor feito para demonstrar a informação. As nossas interface mantem a sua consistencia e asua simplicidade ao longo do trabalho. Utilizamos a biblioteca de css w3 (a utilizada nas aulas práticas) e a utilização do pug. Apesar da simplicidade, é bastante eficaz e permite uma navegação rápida no web site
+
 
 ## [Servidor de Autenticação](https://github.com/goncalobraga27/ENGWEB2023-Projeto/tree/main/authServer)
 
 ## Conclusão e Trabalho Futuro
 
 MB+
-
