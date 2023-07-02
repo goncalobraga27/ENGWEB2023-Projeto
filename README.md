@@ -52,7 +52,9 @@ Utilizando a base de dados guardada em mongo que foi descrita no exercicio anter
 
 Os posts tem associado a si um id, titlo, tipo, descrição e uma lista de comentários. Os comentários tem um autor, assunto e descrição.
 
-Relativamente às rotas e aos constrollers, estes segundos são usados para servir de auxilio as rotas. Os controllers são os pedidos diretos à base dados. As rotas usam os controllers para ...
+Relativamente às rotas e aos constrollers, estes segundos são usados para servir de auxilio as rotas. Os controllers são os pedidos diretos à base dados. As rotas usam os controllers para fazer pedidos à base de dados e depois devolvem o resultado dessa procura. De acordo com uma determinada rota, ou seja com um determinado url, é também feita uma pesquisa específica à base de dados.
+
+Um caso especial que temos de mencionar aqui é uma pesquisa particionada que utilizamos para obter a paginação no main server (isto para diminuir o tempo de resposta, uma vez que menos dados levam a que o tempo de resposta seja mais pequeno). Estas diferem das restantes apenas pelo facto de utilizarem skip e limit. O metodo skip passa o x primeiros registos que obtemos com aquela pesquisa e o limit limita em y o número de registos a devolver. Imaginemos o caso de termos 1500 registos podemos usar o skip(750) e o limit(250) para obter do registo 750 até ao 1000. Decidimos que por página deveriamos ter 500 registos no máximo pelo que a função no controller recebe um número x e damos skip(500*x) ou seja se estamos na pagina 0, ele não dá skip de nenhum e se estamos na 2 ele dá skip de 1000. O limit neste caso é 500 porque no máximo apenas queremos ter 500 registos por página.
 
 
 Não utilizamos *views* uma vez que este servidor serve apenas de suporte e nunca para ser apresentado.
@@ -63,11 +65,19 @@ Não utilizamos *views* uma vez que este servidor serve apenas de suporte e nunc
 
 Este serve como servidor onde vai ser executadas as operações que vão ser envidas e intrepertadas pelos outros. Comunica com o servidor de autenticação para decidir se um utilizador pode ou não pode aceder a um determinado tipo de informação (devido aos 2 níveis e há existência de utilizadores). Comunica com a API de dados para ir buscar a informação de acordo com determinados pârametros, sejam eles organizados por nome ou fazer uma pesquisa de um determinado termo na base de dados e mostrar a lista resultante dessa procura.
 
-Este servidor é o único com *views* uma vez que é o servidor feito para demonstrar a informação. As nossas interface mantem a sua consistencia e asua simplicidade ao longo do trabalho. Utilizamos a biblioteca de css w3 (a utilizada nas aulas práticas) e a utilização do pug. Apesar da simplicidade, é bastante eficaz e permite uma navegação rápida no web site
+Este servidor é o único com *views* uma vez que é o servidor feito para demonstrar a informação. As nossas interface mantem a sua consistencia e asua simplicidade ao longo do trabalho. Utilizamos a biblioteca de css w3 (a utilizada nas aulas práticas) e a utilização do pug. Apesar da simplicidade, é bastante eficaz e permite uma navegação rápida no web site.
+
+Tal como descrito no enunciado permite a ordenação segundo os vários tipos de ordem, a postagem de posts, o comentario destes mesmos entre outros. 
+É de mencionar que intrepertamos a parte do utilizador "normal" apenas poder dar indicações sobre os vários registos, aproveitando os posts para esse efeito.
+
+***POMOS IMAGENS?***
 
 
 ## [Servidor de Autenticação](https://github.com/goncalobraga27/ENGWEB2023-Projeto/tree/main/authServer)
+***BRAGA pls***
 
 ## Conclusão e Trabalho Futuro
 
-MB+
+Apesar de ter sido um trabalho do qual estamos bastantes satisfeitos, sentimos como sempre que há coisas a melhorar. Uma das ideias que temos sobre este trabalho, mas iria requerer um estudo mais aprofundado da utilização do website no seu dia a dia seria uma limpeza e uma expansão de campos. Um outro fator que consideramos é colocar a realização do login utilizando o facebook e o google.
+
+Consideramos que este trabalho nos tenha corrido bem, pelo que concluimos todos os objetivos propostos pelo professor, bem como expandimos alguns deles, no caso de premitir a procura aos registos. Também é de mencionar a aplicação dos diversos servidores e maneiras de programação aprendidas no decorrer da unidade curricular. 
