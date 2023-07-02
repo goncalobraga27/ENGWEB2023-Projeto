@@ -1,7 +1,7 @@
 version: "3"
 services:
   app:
-    container_name: tpApp
+    container_name: mainServer
     build: ./mainServer
     restart: always
     ports:
@@ -14,9 +14,7 @@ services:
     build: ./apiServer
     restart: always
     environment:
-      - MONGODB_URL=mongodb://mongodb:27018/tp
-    ports:
-      - "3000:3000"
+      - MONGODB_URL=mongodb://mongodb:27017/tp
     depends_on:
       - mongodb
     networks:
@@ -26,8 +24,6 @@ services:
     container_name: tp-mongodb
     image: mongo
     restart: always
-    ports:
-      - '27018:27017'
     volumes:
       - tpData:/data/db
     networks:
@@ -38,9 +34,7 @@ services:
     build: ./authServer
     restart: always
     environment:
-      - MONGODB_URL=mongodb://mongodb:27018/authEW_TP
-    ports:
-      - "7778:7778"
+      - MONGODB_URL=mongodb://mongodb:27017/authEW_TP
     depends_on:
       - mongodb
     networks:

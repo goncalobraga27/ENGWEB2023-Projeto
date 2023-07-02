@@ -226,7 +226,6 @@ router.get('/register', (req, res)=>{
 })
 // POST /register
 router.post('/register', (req, res)=>{
-  console.log("Token : "+req.cookies.token)
   axios.post(env.authAccessPoint + '/register?token='+req.cookies.token, req.body )
   .then(resp => {
     

@@ -6,8 +6,8 @@ var passport = require('passport')
 var LocalStrategy = require('passport-local').Strategy
 
 var mongoose = require('mongoose');
-
-mongoose.connect('mongodb://127.0.0.1/authEW_TP', 
+var mongoDB= process.env.MONGODB_URL;
+mongoose.connect(/*'mongodb://127.0.0.1/authEW_TP'*/mongoDB, 
       { useNewUrlParser: true,
         useUnifiedTopology: true,
         serverSelectionTimeoutMS: 5000});
@@ -18,17 +18,6 @@ db.once('open', function() {
   console.log("Conexão ao MongoDB realizada com sucesso...")
 });
 
-/*
-mongoose.connect(process.env.MONGODB_URL, 
-  { useNewUrlParser: true,
-    useUnifiedTopology: true,
-    serverSelectionTimeoutMS: 5000});
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'Erro de conexão ao MongoDB...'));
-db.once('open', function() {
-console.log("Conexão ao MongoDB realizada com sucesso...")
-});
-*/
 // passport config
 var User = require('./models/user');
 passport.use(new LocalStrategy(User.authenticate()));

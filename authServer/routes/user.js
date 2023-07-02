@@ -31,20 +31,7 @@ router.put('/edit/user/:username', auth.verificaAcesso, function(req, res){
     .catch(erro => res.status(503).jsonp({error: "Erro na edição do user: " + erro}))
 })
 
-router.put('/:username/profile/profilePic', auth.verificaAcesso, function(req, res){
-  User.getUser(req.params.username)
-    .then(user => {
-      user.profilePic = req.body.profilePic
-      User.updateUser(user)
-        .then(user => {
-          res.status(200).jsonp(user)
-        })
-        .catch(erro => res.status(521).jsonp({error: "Erro na adição da foto de perfil: " + erro}))
-    })
-    .catch(erro => res.status(520).jsonp({error: "Erro na busca do utilizador: " + erro}))
-})
-
-router.post('/register', auth.verificaAcesso, function(req, res) {
+router.post('/register',auth.verificaAcesso,function(req, res) {
   var d = new Date().toISOString().substring(0,19)
   userModel.register(new userModel({ email: req.body.email, name: req.body.name,
                                      username: req.body.username, level: req.body.level,
