@@ -151,9 +151,96 @@ O login de um determinado utilizador tem de passar por vários procedimentos, is
 É de valor mencionar também que os tokens têm a duração máxima de 1h, pelo que ao final de uma hora será preciso voltar a fazer login.
 
 É de mencionar a nossa não utilização de views à semelhança do que fizemos no servidor da API de dados, uma vez que este servidor serve apenas para verificar, por exemplo, se o login está correto e não fazer uma interface grátis para demonstrar isto. A informação de estar errado ou certo o login é demonstrado no servidor principal que analisa a resposta deste e mostra consoante.
+## Docker 
 
+Para a implementação do Docker no nosso trabalho prático tivemos que realizar certos procedimentos tais como:
+
+- Criação de um Dockerfile para cada um dos servidores 
+```Dockerfile
+FROM node:20-bullseye 
+WORKDIR /app
+COPY . .
+RUN npm i 
+EXPOSE 3000  
+CMD ["npm", "start"]
+```
+O parâmetro EXPOSE varia de servidor para servidor 
+- Alteração do URL de ligação de cada servidor á base de dados 
+(Antes)
+var mongoDB='mongodb://127.0.0.1/tp'
+(Depois)
+var mongoDB= process.env.MONGODB_URL
+- Criação de um docker-compose.yml para o conjunto dos três servidores, tendo em atenção á conexão com o mongoDB
+``` Dockerfile
+version: "3"
+services:
+  app:
+    container_name: mainServer
+    build: ./mainServer
+    restart: always
+    ports:
+      - "7777:7777"
+    networks:
+      - tpnet
+
+  data_server:
+    container_name: tp_data_server
+    build: ./apiServer
+    restart: always
+    environment:
+      - MONGODB_URL=mongodb://mongodb:27017/tp
+    depends_on:
+      - mongodb
+    networks:
+      - tpnet
+
+  mongodb:
+    container_name: tp-mongodb
+    image: mongo
+    restart: always
+    volumes:
+      - tpData:/data/db
+    networks:
+      - tpnet
+
+  auth_server:
+    container_name: tp_auth_server
+    build: ./authServer
+    restart: always
+    environment:
+      - MONGODB_URL=mongodb://mongodb:27017/authEW_TP
+    depends_on:
+      - mongodb
+    networks:
+      - tpnet
+      
+networks:
+  tpnet:
+    name: tpnet
+    driver: bridge
+volumes:
+  tpData:
+  
+```
+- Alteração dos acess points que o mainServer possuia
+Os acess points que o mainServer possui para fazer a conexão com os outros servidores foram alterados da seguinte forma:
+(Antes)
+module.exports.apiAccessPoint = "http://localhost:3000/api"
+module.exports.authAccessPoint = "http://localhost:7778/users" 
+(Depois)
+module.exports.apiAccessPoint = "http://data_server:3000/api"
+module.exports.authAccessPoint = "http://auth_server:7778/users"
+- Inserção da base de dados no docker
+Como nós possuímos um ficheiro **.json** que serve de suporte a aplicação então importamos esse ficheiro para o docker da seguinte forma:
+```
+sudo docker cp db.json tp-mongodb:/db.json
+docker exec -it tp-mongodb  mongoimport --db tp --collection processes --file /db.json --jsonArray
+```
+Assim conseguimos colocar todos os servidores em execução com apenas um comando. O comando por nós utilizado é o seguinte: sudo docker compose up --build
+
+Com base no que foi demonstrado em cima, é possível perceber como é que o Docker foi implementado no nosso projeto. 
 ## Conclusão e Trabalho Futuro
 
-Em geral, estamos bastantes satisfeitos com o estado final do trabalho, apesar de não termos conseguido implementar mais funcionalidades. Algumas delas consistiam na implementação de uma limpeza e uma expansão de campos (o que iria requerer um estudo mais aprofundado da utilização do website no seu dia a dia), a possibilidade de fazer login utilizando o *Facebook* ou uma *Google Account* (abandonada devido ao tempo que iria demorar a implementar e que decidimos aproveitar para outras funcionalidades), e a implementação do *Docker* (que não conseguimos por a funcionar devidamente).
+Em geral, estamos bastantes satisfeitos com o estado final do trabalho, apesar de não termos conseguido implementar mais funcionalidades. Algumas delas consistiam na implementação de uma limpeza e uma expansão de campos (o que iria requerer um estudo mais aprofundado da utilização do website no seu dia a dia), a possibilidade de fazer login utilizando o *Facebook* ou uma *Google Account* (abandonada devido ao tempo que iria demorar a implementar e que decidimos aproveitar para outras funcionalidades).
 
 Consideramos que este trabalho tenha corrido bem, pelo que concluimos todos os objetivos propostos pelo professor, bem como a expansão de alguns deles (como por exemplo a procura aos registos). Também é de mencionar a aplicação de diversos servidores e de todos os conhecimentos adquiridos no decorrer da unidade curricular. 
