@@ -191,7 +191,7 @@ router.get('/processos',verificaToken, function(req, res, next) {
   var data = new Date().toISOString().substring(0, 16)
   axios.get(env.apiAccessPoint+"/processos"+"?token=" + req.cookies.token)
     .then(processos => {
-      res.render('index', {type: tipoUser, plist: processos.data, d: data });
+      res.render('indexMainPage', {type: tipoUser, plist: processos.data, d: data });
     })
     .catch(erro => {
       res.render('error', {error: erro, message: "Erro nos processos da rota GET /processos "})
@@ -200,7 +200,7 @@ router.get('/processos',verificaToken, function(req, res, next) {
 
 // GET /login
 router.get('/login', function(req, res){
-  res.render('loginForm')
+  res.redirect('/home')
 })
 
 // POST /login

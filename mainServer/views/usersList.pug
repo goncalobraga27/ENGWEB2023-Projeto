@@ -48,7 +48,7 @@ block content
 					th Nome
 					th Username
 					th Nível de Acesso
-					th Active
+					th Ativo?
 				
 				each user in u
 					tr
@@ -56,7 +56,10 @@ block content
 						td= user.name
 						td= user.username
 						td= user.level
-						td= user.active
+						if user.active == true
+							td Sim
+						else
+							td Não
 						td
 							.w3-panel
 								td 
@@ -74,19 +77,19 @@ block content
 											.w3-cell(style="width:84%")
 												h6 &nbsp;&nbsp;Apagar User
 								td
-									form(action="/deactivate/user/"+user.username, method="POST")
-										button.w3-btn.w3-grey.w3-mb-2.w3-border.w3-border-black.w3-hover-grey.w3-margin-right(type="submit")
-											.w3-cell
-												i.fa.fa-solid.fa-xmark
-											.w3-cell(style="width:84%")
-												h6 &nbsp;&nbsp;Desativar User
-								td
 									form(action="/activate/user/"+user.username, method="POST")
-										button.w3-btn.w3-grey.w3-mb-2.w3-border.w3-border-black.w3-hover-grey.w3-margin-right(type="submit") 
+										button.w3-btn.w3-pale-green.w3-mb-2.w3-border.w3-border-black.w3-hover-green.w3-margin-right(type="submit") 
 											.w3-cell
 												i.fa.fa-solid.fa-check
 											.w3-cell(style="width:84%")
 												h6 &nbsp;&nbsp;Ativar User
+								td
+									form(action="/deactivate/user/"+user.username, method="POST")
+										button.w3-btn.w3-grey.w3-mb-2.w3-border.w3-border-black.w3-hover-black.w3-margin-right(type="submit")
+											.w3-cell
+												i.fa.fa-solid.fa-xmark
+											.w3-cell(style="width:84%")
+												h6 &nbsp;&nbsp;Desativar User
 		footer.w3-container.w3-teal.w3-center
 			h5 Gonçalo Braga, João Loureiro e Simão Barroso | Engenharia Web 2023 - Universidade do Minho
 			h5 Generated for TP_EngWeb2023 in #{d}
