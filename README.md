@@ -70,14 +70,15 @@ Desta forma, conseguimos proteger este servidor do acesso indevido de utilizador
 
 ## [Servidor Principal](https://github.com/goncalobraga27/ENGWEB2023-Projeto/tree/main/mainServer)
 
-Este serve como servidor onde vão ser executadas as operações que vão ser enviadas e interpretadas pelos outros. Comunica com o servidor de autenticação para decidir se um utilizador pode ou não pode aceder a um determinado tipo de informação (devido aos 2 níveis e há existência de utilizadores). Comunica com a API de dados para ir buscar a informação de acordo com determinados pârametros, sejam eles organizados por nome ou fazer uma pesquisa de um determinado termo na base de dados e mostrar a lista resultante dessa procura.
+Este serve como o servidor onde vão ser executadas as operações que vão ser enviadas e interpretadas pelos outros. Comunica com o servidor de autenticação para decidir se um utilizador pode ou não pode aceder a um determinado tipo de informação (devido aos 2 níveis de acesso de utilizadores: Admin e User). Comunica com a API de dados para ir buscar a informação de acordo com determinados pârametros, sejam eles organizados por nome ou fazer uma pesquisa de um determinado termo na base de dados e mostrar a lista resultante dessa procura.
 
-Este servidor é o único com *views* uma vez que é o servidor feito para demonstrar a informação. As nossas interface mantem a sua consistencia e asua simplicidade ao longo do trabalho. Utilizamos a biblioteca de css w3 (a utilizada nas aulas práticas) e a utilização do pug. Apesar da simplicidade, é bastante eficaz e permite uma navegação rápida no web site.
+Este servidor é o único com *views* uma vez que é o servidor feito para apresentar a informação. As nossas interface mantem a sua consistencia e a sua simplicidade ao longo das páginas. Para as construirmos, utilizamos a biblioteca CSS [**w3-css**](https://www.w3schools.com/w3css/default.asp) e a utilização da linguagem [**pug**](https://pugjs.org/api/getting-started.html) para as construirmos (ambos utilizados nas aulas práticas). Apesar da sua simplicidade, é bastante eficaz e permite uma navegação rápida e intuitiva do site.
 
-Tal como descrito no enunciado permite a ordenação segundo os vários tipos de ordem, a postagem de posts, o comentario destes mesmos entre outros. 
-É de mencionar que intrepertamos a parte do utilizador "normal" apenas poder dar indicações sobre os vários registos, aproveitando os posts para esse efeito.
+Tal como requisitado pelo o enunciado, o site permite a visualização e ordenação dos registos segundo vários tipos de ordem, a criação de posts e comentários destes mesmos, bem como a gestão (criação, edição e eliminação) de users e registos.
 
-Este servidor apenas têm uma página cuja autenticação não é requerida, e esta trata-se da página */home* onde é apresentado o formulário de login. Assumimos portanto que não é preciso criar contas sozinho, elas têm de ser criadas pelo um *admin* do sistema que já tem conta.
+De notar que um utilizador não-administrador apenas poder ver os registos e dar indicações sobre eles, através de posts e comentários.
+
+Este servidor apenas possiu uma página cuja autenticação não é requerida, a página */home* onde é apresentado o formulário de login. Assumimos também que a única maneira de criar contas é através de uma conta *admin* já existente no sistema, não sendo esta uma funcionalidade pública.
 
 **POR IMAGENS DE CADA UM DESTAS CENAS PARA DEMONSTRAR E SERVE DE GUIA.**
 
