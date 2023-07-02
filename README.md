@@ -1,4 +1,3 @@
-
 # ENGWEB2023-Projeto
 
 Trabalho Prático de EngWeb2023 realizado por :
@@ -25,7 +24,9 @@ O relatório está dividido em 4 partes, cada uma das pastas deste repositório 
 O tema escolhido pelo nosso grupo foi o [Tema 2: Inquirições de Génere](https://github.com/goncalobraga27/ENGWEB2023-Projeto/blob/main/%5BEW%5D%20Enunciado.pdf).
 
 ## [Tratamento de dados](https://github.com/goncalobraga27/ENGWEB2023-Projeto/tree/main/data)
+
 ### Script program.py
+
 Recebendo o ficheiro de dados em formato [.csv](https://github.com/goncalobraga27/ENGWEB2023-Projeto/blob/main/data/registos.csv) teriamos não só de o tratar como passar para [.json](https://github.com/goncalobraga27/ENGWEB2023-Projeto/blob/main/data/db.json) e para isso utilizamos uma ***[script](https://github.com/goncalobraga27/ENGWEB2023-Projeto/blob/main/program.py)*** escrita na linguagem *python*, há semelhança do que já tinhamos feito em aulas da UC.
 
 Decidimos ter um tratamento de dados muito simples, preservando ao máximo aquilo que estava presente nos dados existentes no formato **.csv**. O facto de não tratarmos mais dos dados e dividirmos mais os dados deve se ao facto de já estar com uma quantidade enorme em cada processo e a simplificação em torno da divisão não nos pareceu uma opção viável.
@@ -37,14 +38,16 @@ Caso o nome próprio esteja presente, registamos o **"_id"** do registo que poss
 
 Com base no que vimos em cima, conseguimos criar uma rede de ligações entre registos existentes no ficheiro. 
 ### Script biconnections.py 
+
 Esta script **python** serve para complementar a script **program.py**
 
 
-No caso do ***ScopeContent*** tinhamos de procurar por aqueles nomes nos restantes do processo, e se encontrassemos colocar o id desse processo no original.
 
-Já no *"NOMEDOOUTROCAMPOQUENAOMELEMBRO!!!!!"* verificavamos se se existia número do processo lá e se sim colocar-lo na lista de ligações.
+No caso do *ScopeContent* tinhamos de procurar por aqueles nomes nos restantes do processo, e se encontrassemos colocar o id desse processo no original.
 
-!!!! EXPLICAR AS LIGAÇÕES BIDERECIONAIS !!!!!!!!!!!! + POR EXEMPLOS
+Já no *RelatedMaterial* verificavamos se se existia número do processo lá e se sim colocar-lo na lista de ligações.
+
+**Temos que mencionar que devido ao limite de tamanho de ficheiros no github, não conseguimos dar upload de uma nova versão do ficheiro de *JSON*, pelo que a versão que se encontra na pasta de *data* é uma versão antiga, para obter a nova é preciso fazer: Correr a script program.py e depois a biconnections.py e de seguida dar upload da BD para o mongo.**
 
 ## [API de dados](https://github.com/goncalobraga27/ENGWEB2023-Projeto/tree/main/apiServer)
 
@@ -118,6 +121,8 @@ Estes controllers são utilizados pelas rotas, rotas as quais vão ser acedidas 
 É de mencionar a nossa não utilização de views à semelhança do que fizemos no servidor da API de dados, uma vez que este servidor serve apenas para verificar, por exemplo, se o login está correto e não fazer uma interface grátis para demonstrar isto. A informação de estar errado ou certo o login é demonstrado no servidor principal que analisa a resposta deste e mostra consoante.
 
 ## Conclusão e Trabalho Futuro
+
+**DOCKER???**
 
 Apesar de ter sido um trabalho do qual estamos bastantes satisfeitos, sentimos como sempre que há coisas a melhorar. Uma das ideias que temos sobre este trabalho, mas iria requerer um estudo mais aprofundado da utilização do website no seu dia a dia seria uma limpeza e uma expansão de campos. Um outro fator que consideramos é colocar a realização do login utilizando o *facebook* e o *google*.
 
