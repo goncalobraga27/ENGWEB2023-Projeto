@@ -80,7 +80,7 @@ De notar que um utilizador não-administrador apenas poder ver os registos e dar
 
 Este servidor apenas possiu uma página cuja autenticação não é requerida, a página */home* onde é apresentado o formulário de login. Assumimos também que a única maneira de criar contas é através de uma conta *admin* já existente no sistema, não sendo esta uma funcionalidade pública.
 
-**POR IMAGENS DE CADA UM DESTAS CENAS PARA DEMONSTRAR E SERVE DE GUIA.**
+![login](https://github.com/goncalobraga27/ENGWEB2023-Projeto/blob/main/imagensRelatorio/home.png)
 
 Depois de dado o login, é nos apresentado um menu com várias opções, onde podemos ir para a página das inquirições, tratar dos utilizadores (seja criando ou eliminando) e até dar logout. As três ultimas são autoexplicativas, pelo que vamos explicar a página das inquirições.
 
