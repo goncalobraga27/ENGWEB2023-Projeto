@@ -166,10 +166,12 @@ CMD ["npm", "start"]
 ```
 O parâmetro EXPOSE varia de servidor para servidor 
 - Alteração do URL de ligação de cada servidor á base de dados 
+```
 (Antes)
 var mongoDB='mongodb://127.0.0.1/tp'
 (Depois)
 var mongoDB= process.env.MONGODB_URL
+```
 - Criação de um docker-compose.yml para o conjunto dos três servidores, tendo em atenção á conexão com o mongoDB
 ``` Dockerfile
 version: "3"
