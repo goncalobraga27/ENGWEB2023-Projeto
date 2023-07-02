@@ -62,7 +62,11 @@ Um caso especial que temos de mencionar aqui é uma pesquisa particionada que ut
 
 Não utilizamos *views* neste servidor, uma vez que serve apenas de suporte e nunca para ser apresentado.
 
-**!!!!!!!!!!!!!!!!! BRAGA NÃO TE ESQUEÇAS DE FALAR DA AUTENTICACAO !!!!!!!!!!!!!!!!!**
+Este servidor tem de se encontrar protegido, desta forma é preciso um utilizador estar autenticado para poder aceder a este servidor. 
+
+Assim para verificarmos se um utilizador se encontra autenticado, verificamos o token de autenticação que este possui. Caso o token se encontre inválido não é permitido o acesso á API de dados por parte do utilizador. 
+
+Desta forma, conseguimos proteger este servidor do acesso indevido de utilizadores não permitidos. 
 
 ## [Servidor Principal](https://github.com/goncalobraga27/ENGWEB2023-Projeto/tree/main/mainServer)
 
@@ -114,7 +118,13 @@ Relativamente ao controllers, temos os seguintes:
 - deactivateUser : Para desativarmos um utilizador
 - activateUser : Para aticar um utilizador
 
-Estes controllers são utilizados pelas rotas, rotas as quais vão ser acedidas pelo servidor principal. Por exemplo, no caso do login, o utilizador no formulário do servidor principal coloca os seus dados, dados os quais vão ser enviados pelo servidor principal para a rota */login*  que utiliza uma função de autenticação que verifica este acesso. ***BRAGA EXPLICA ISTO SFF !!!***
+Estes controllers são utilizados pelas rotas, rotas as quais vão ser acedidas pelo servidor principal. Por exemplo, no caso do login, o utilizador no formulário do servidor principal coloca os seus dados, dados os quais vão ser enviados pelo servidor principal para a rota */login*  que utiliza uma função de autenticação que verifica este acesso.
+
+O login de um determinado utilizador tem de passar por vários procedimentos, isto é: 
+- Encriptação da informação de um utilizador no servidor principal da aplicação;
+- Passagem desta informação encriptada para o servidor de autenticação;
+- Descodificação da informação e consequente procura da informação na base de dados que possui os registos dos users
+- Caso o utilizador esteja registado na aplicação é emitido um novo token de sessão, permitindo assim ao utilizador aceder a todos os serviços fornecidos pela aplicação 
 
 É de valor mencionar também que os tokens têm a duração máxima de 1h, pelo que ao final de uma hora será preciso voltar a fazer login.
 
