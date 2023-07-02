@@ -80,16 +80,37 @@ De notar que um utilizador não-administrador apenas poder ver os registos e dar
 
 Este servidor apenas possiu uma página cuja autenticação não é requerida, a página */home* onde é apresentado o formulário de login. Assumimos também que a única maneira de criar contas é através de uma conta *admin* já existente no sistema, não sendo esta uma funcionalidade pública.
 
-![login](https://github.com/goncalobraga27/ENGWEB2023-Projeto/blob/main/imagensRelatorio/home.png)
+![login](https://github.com/goncalobraga27/ENGWEB2023-Projeto/blob/main/imagensRelatorio/login.png)
 
-Depois de dado o login, é nos apresentado um menu com várias opções, onde podemos ir para a página das inquirições, tratar dos utilizadores (seja criando ou eliminando) e até dar logout. As três ultimas são autoexplicativas, pelo que vamos explicar a página das inquirições.
+Depois de dado o login, é nos apresentado uma página principal com um menu com várias opções, onde podemos ir para a página das inquirições, tratar dos utilizadores (seja criando ou eliminando, e exclusivamente para um admin) ou dar logout. As três últimas são autoexplicativas, pelo que vamos explicar a página das inquirições.
 
-Nesta página, temos opção de fazer várias coisas. Na *NavBar* são mostradas as opções de adicionar registo e de pesquisar por um registo **NAO TEMOS MAIS, NAO ME LEMBRO??**. Temos 2 opções de registo, uma mais avançada que demonstra os parâmetros todos, caso queiramos pesquisar por exemplo por um id específico. Já a pesquisa rápida, permite procurar por um determinado texto por todos os registos da base de dados. Há também outro fator que as diferencia, o facto de a pesquisa rápida usar regex enquanto a pesquisa avançada utiliza uma pesquisa na qual o texto precisa de estar exatamente como no registo.
-Por baixo...
+![home](https://github.com/goncalobraga27/ENGWEB2023-Projeto/blob/main/imagensRelatorio/home.png)
 
-***POMOS IMAGENS?***
-![bears](http://placebear.com/200/200)
+Nesta página, são apresentados os registos existentes e algumas dos seus atributos que consideramos mais relevantes, bem como as ações disponíveis relacionadas com eles. Estes podem ser ordenados conforme o critério desejado pelo o utilizador ou premidos de forma a abrir a página relacionada com o registo correspondente (donde um admin pode editar ou apagar-lo). O utilizador pode também optar por executar uma pesquisa avançada, onde pode preencher os campos com a informação exata/igual de um registo que pretende observar (por exemplo um id ou título específico). Possui também no seu fim, botões de paginação, bem como uma *textbox* onde se pode escrever o número da página a que deseja aceder.
 
+De notar também a *NavBar* presente em todas as páginas futuras, que apresenta atalhos para a pagina principal, página de registos, página de adição de registos (exclusivo admin) e uma barra de pesquisa rápida, que é mais geral que a avançada e abrange todos os parâmetros.
+
+![registos](https://github.com/goncalobraga27/ENGWEB2023-Projeto/blob/main/imagensRelatorio/registos.png)
+
+![pagRegisto](https://github.com/goncalobraga27/ENGWEB2023-Projeto/blob/main/imagensRelatorio/pagRegisto.png)
+
+O utlizador pode também optar por ver os posts de um determinado registo, donde será deparado com a página de Posts, podendo acrescentar novos a esta.
+
+![posts](https://github.com/goncalobraga27/ENGWEB2023-Projeto/blob/main/imagensRelatorio/posts.png)
+
+![addPost](https://github.com/goncalobraga27/ENGWEB2023-Projeto/blob/main/imagensRelatorio/addPost.png)
+
+Pode também aceder aos comentários de um determinado post, podendo nesta página acrescentar um da sua autoria ou através de uma página separada através de um botão existente na página dos posts.
+
+![comments](https://github.com/goncalobraga27/ENGWEB2023-Projeto/blob/main/imagensRelatorio/comments.png)
+
+Se o utilizador for um admin, pode também gerir os utilizadores existentes na base de dados, podendo editar, apagar, ativar ou desativar um user á sua escolha.
+
+![users](https://github.com/goncalobraga27/ENGWEB2023-Projeto/blob/main/imagensRelatorio/users.png)
+
+Em caso de erro, fizemos também uma página informativa com o auxilio de *JQuery* com os tipos de erros mais comuns com que nos deparamos nos testes dos projetos, bem como sugestões de como prosseguir.
+
+![error](https://github.com/goncalobraga27/ENGWEB2023-Projeto/blob/main/imagensRelatorio/error.png)
 
 ## [Servidor de Autenticação](https://github.com/goncalobraga27/ENGWEB2023-Projeto/tree/main/authServer)
 
