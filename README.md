@@ -10,7 +10,7 @@ Trabalho Prático de EngWeb2023 realizado por :
 
 Este documento serve como relatório para o projeto da Unidade Curricular de Engenharia Web, do 3º ano da Licenciatura em Engenharia Informática.
 
-Ao longo deste relatório vamos explicar o nosso racicionio, as nossas intrepertações e a nossa resolução do problema dado no enunciado.
+Ao longo deste relatório vamos explicar o nosso raciocínio, as nossas interpretações e a nossa resolução do problema dado no enunciado.
 
 O relatório está dividido em 4 partes, cada uma das pastas deste repositório representa uma divisão do trabalho.
 
@@ -27,9 +27,9 @@ O tema escolhido pelo nosso grupo foi o [Tema 2: Inquirições de Génere](https
 
 ### Script *program.py*
 
-Recebendo o ficheiro de dados em formato [.csv](https://github.com/goncalobraga27/ENGWEB2023-Projeto/blob/main/data/registos.csv) teriamos não só de o tratar como passar para [.json](https://github.com/goncalobraga27/ENGWEB2023-Projeto/blob/main/data/db.json) e para isso utilizamos uma ***[script](https://github.com/goncalobraga27/ENGWEB2023-Projeto/blob/main/program.py)*** escrita na linguagem *python*, há semelhança do que já tinhamos feito em aulas da UC.
+Recebendo o ficheiro de dados em formato [.csv](https://github.com/goncalobraga27/ENGWEB2023-Projeto/blob/main/data/registos.csv) teríamos não só de o tratar como passar para [.json](https://github.com/goncalobraga27/ENGWEB2023-Projeto/blob/main/data/db.json) e para isso utilizamos uma ***[script](https://github.com/goncalobraga27/ENGWEB2023-Projeto/blob/main/program.py)*** escrita na linguagem *python*, há semelhança do que já tínhamos feito em aulas da UC.
 
-Decidimos ter um tratamento de dados muito simples, preservando ao máximo aquilo que estava presente nos dados existentes no formato **.csv**. O facto de não tratarmos e  e dividido mais os dados deve se ao facto de já existir uma quantidade enorme em cada processo e a simplificação em torno da divisão não nos pareceu uma opção viável.
+Decidimos ter um tratamento de dados muito simples, preservando ao máximo aquilo que estava presente nos dados existentes no formato **.csv**. O facto de não tratarmos e  dividido mais os dados deve se ao facto de já existir uma quantidade enorme em cada processo e a simplificação em torno da divisão não nos pareceu uma opção viável.
 
 De acordo com as indicações dadas no enunciado e depois de retirarmos dúvida com o professor, optamos apenas por mexer na parte das ligações. 
 Assim criamos uma script **python** que vai analisar os campos *"ScopeContent"* e o *"UnitTitle"* de cada registo. 
@@ -43,22 +43,22 @@ Esta script **python** serve para complementar a script **program.py**
 
 
 
-No caso do *ScopeContent* tinhamos de procurar por aqueles nomes nos restantes do processo, e se encontrassemos colocar o id desse processo no original.
+No caso do *ScopeContent* tínhamos de procurar por aqueles nomes nos restantes do processo, e se encontrassemos colocar o id desse processo no original.
 
-Já no *RelatedMaterial* verificavamos se se existia número do processo lá e se sim colocar-lo na lista de ligações.
+Já no *RelatedMaterial* verificávamos se se existia número do processo lá e se sim colocá-lo na lista de ligações.
 
 **NOTA: Devido ao limite de tamanho de ficheiros no github, não conseguimos dar upload de uma nova versão do ficheiro de *JSON*, pelo que para o obter é preciso fazer os seguintes passos: Correr a script program.py e depois a biconnections.py e de seguida dar upload da BD para o mongo.**
 
 ## [API de dados](https://github.com/goncalobraga27/ENGWEB2023-Projeto/tree/main/apiServer)
 
 A resolução desta parte, à semelhança das outras, está de acordo com o feito nas aulas práticas. Sendo uma API de dados, serve principalmente para devolver os dados da base de dados de acordo com os vários critérios.
-Utilizando a base de dados guardada em mongoDB, utilizamos o modúlo *mongoose* para conectarmo-nos à base de dados. De seguida, tratamos da criação dos [modelos](https://github.com/goncalobraga27/ENGWEB2023-Projeto/blob/main/apiServer/models/process.js) dos vários objetos da BD. O objeto presente neste ficheiro e na BD tem um formato muito parecido ao que vinha por defeito no ficheiro dado, apenas com 2 campos acrescentado: o campo **ligações**, que representa as ligações do requerido da inquirição com outros requeridos; e o campo **posts**, uma vez que a cada processo pode ser feito uma lista de posts.
+Utilizando a base de dados guardada em mongoDB, utilizamos o módulo *mongoose* para conectarmo-nos à base de dados. De seguida, tratamos da criação dos [modelos](https://github.com/goncalobraga27/ENGWEB2023-Projeto/blob/main/apiServer/models/process.js) dos vários objetos da BD. O objeto presente neste ficheiro e na BD tem um formato muito parecido ao que vinha por defeito no ficheiro dado, apenas com 2 campos acrescentado: o campo **ligações**, que representa as ligações do requerido da inquirição com outros requeridos; e o campo **posts**, uma vez que a cada processo pode ser feito uma lista de posts.
 
-Os posts tem associado a si um id, titlo, tipo, descrição e uma lista de comentários. Os comentários tem um autor, assunto e descrição.
+Os posts tem associado a si um id, titulo, tipo, descrição e uma lista de comentários. Os comentários tem um autor, assunto e descrição.
 
 Relativamente às rotas e aos controllers, estes segundos são usados para servir de auxilio dos primeiros. Os controllers são os pedidos diretos à base dados. As rotas usam os controllers para fazer pedidos à base de dados e depois devolvem o resultado dessa procura. De acordo com uma determinada rota, ou seja com um determinado url, é também feita uma pesquisa específica à base de dados.
 
-Um caso especial que temos de mencionar aqui é uma pesquisa particionada que utilizamos para obter a paginação no main server (isto para diminuir o tempo de resposta, uma vez que menos dados levam a que o tempo de resposta seja mais pequeno). Estas diferem das restantes apenas pelo facto de utilizarem skip e limit. O metodo *skip* passa os **x** primeiros registos que obtemos com aquela pesquisa e o *limit* limita em **y** o número de registos a devolver. Por exemplo, imaginemos o caso de termos 1500 registos podemos usar o *skip*(750) e o *limit*(250) para obter do registo 750 até ao 1000. Decidimos que por página deveriamos ter 500 registos no máximo pelo que a função no controller recebe um número **x** e damos *skip*(500*x) ou seja se estamos na pagina 0, ele não dá skip de nenhum e se estamos na 2 ele dá skip de 1000. O limit neste caso é 500 porque no máximo apenas queremos ter 500 registos por página.
+Um caso especial que temos de mencionar aqui é uma pesquisa particionada que utilizamos para obter a paginação no main server (isto para diminuir o tempo de resposta, uma vez que menos dados levam a que o tempo de resposta seja mais pequeno). Estas diferem das restantes apenas pelo facto de utilizarem skip e limit. O método *skip* passa os **x** primeiros registos que obtemos com aquela pesquisa e o *limit* limita em **y** o número de registos a devolver. Por exemplo, imaginemos o caso de termos 1500 registos podemos usar o *skip*(750) e o *limit*(250) para obter do registo 750 até ao 1000. Decidimos que por página deveríamos ter 500 registos no máximo pelo que a função no controller recebe um número **x** e damos *skip*(500*x) ou seja se estamos na pagina 0, ele não dá skip de nenhum e se estamos na 2 ele dá skip de 1000. O limit neste caso é 500 porque no máximo apenas queremos ter 500 registos por página.
 
 Não utilizamos *views* neste servidor, uma vez que serve apenas de suporte e nunca para ser apresentado.
 
@@ -70,15 +70,15 @@ Desta forma, conseguimos proteger este servidor do acesso indevido de utilizador
 
 ## [Servidor Principal](https://github.com/goncalobraga27/ENGWEB2023-Projeto/tree/main/mainServer)
 
-Este serve como o servidor onde vão ser executadas as operações que vão ser enviadas e interpretadas pelos outros. Comunica com o servidor de autenticação para decidir se um utilizador pode ou não pode aceder a um determinado tipo de informação (devido aos 2 níveis de acesso de utilizadores: Admin e User). Comunica com a API de dados para ir buscar a informação de acordo com determinados pârametros, sejam eles organizados por nome ou fazer uma pesquisa de um determinado termo na base de dados e mostrar a lista resultante dessa procura.
+Este serve como o servidor onde vão ser executadas as operações que vão ser enviadas e interpretadas pelos outros. Comunica com o servidor de autenticação para decidir se um utilizador pode ou não pode aceder a um determinado tipo de informação (devido aos 2 níveis de acesso de utilizadores: Admin e User). Comunica com a API de dados para ir buscar a informação de acordo com determinados parâmetros, sejam eles organizados por nome ou fazer uma pesquisa de um determinado termo na base de dados e mostrar a lista resultante dessa procura.
 
-Este servidor é o único com *views* uma vez que é o servidor feito para apresentar a informação. As nossas interface mantem a sua consistencia e a sua simplicidade ao longo das páginas. Para as construirmos, utilizamos a biblioteca CSS [**w3-css**](https://www.w3schools.com/w3css/default.asp) e a utilização da linguagem [**pug**](https://pugjs.org/api/getting-started.html) para as construirmos (ambos utilizados nas aulas práticas). Apesar da sua simplicidade, é bastante eficaz e permite uma navegação rápida e intuitiva do site.
+Este servidor é o único com *views* uma vez que é o servidor feito para apresentar a informação. As nossas interface mantem a sua consistência e a sua simplicidade ao longo das páginas. Para as construirmos, utilizamos a biblioteca CSS [**w3-css**](https://www.w3schools.com/w3css/default.asp) e a utilização da linguagem [**pug**](https://pugjs.org/api/getting-started.html) para as construirmos (ambos utilizados nas aulas práticas). Apesar da sua simplicidade, é bastante eficaz e permite uma navegação rápida e intuitiva do site.
 
 Tal como requisitado pelo o enunciado, o site permite a visualização e ordenação dos registos segundo vários tipos de ordem, a criação de posts e comentários destes mesmos, bem como a gestão (criação, edição e eliminação) de users e registos.
 
 De notar que um utilizador não-administrador apenas poder ver os registos e dar indicações sobre eles, através de posts e comentários.
 
-Este servidor apenas possiu uma página cuja autenticação não é requerida, a página */home* onde é apresentado o formulário de login. Assumimos também que a única maneira de criar contas é através de uma conta *admin* já existente no sistema, não sendo esta uma funcionalidade pública.
+Este servidor apenas possui uma página cuja autenticação não é requerida, a página */home* onde é apresentado o formulário de login. Assumimos também que a única maneira de criar contas é através de uma conta *admin* já existente no sistema, não sendo esta uma funcionalidade pública.
 
 ![login](https://github.com/goncalobraga27/ENGWEB2023-Projeto/blob/main/imagensRelatorio/login.png)
 
@@ -114,7 +114,7 @@ Em caso de erro, fizemos também uma página informativa com o auxilio de *JQuer
 
 ## [Servidor de Autenticação](https://github.com/goncalobraga27/ENGWEB2023-Projeto/tree/main/authServer)
 
-Este servidor funciona de maneira parecida ao servidor de API de dados, só que em vez de tratar dos dados da , trata dos dados de autenticação. Na pasta models, temos a descrição de como é um registo numa base de dados:
+Este servidor funciona de maneira parecida ao servidor de API de dados, só que em vez de tratar dos dados da BD, trata dos dados de autenticação. Na pasta models, temos a descrição de como é um registo numa base de dados:
 ```js
 var userSchema = new mongoose.Schema({
     email: String,
@@ -128,7 +128,7 @@ var userSchema = new mongoose.Schema({
     profilePic: String
 })
 ```
-Há também que mencionar o uso do módulo *passport-local-mongoose* que nos permite "mascarar a password". Ao utilizar este módulo, a password é guardada com um *hash* e um *salt* conhecido pelo sistema e por este apenas decripatdo. Ou seja, isto ajuda na segurança e impende que a captura de um pacote http se obtenha a password diretamente.
+Há também que mencionar o uso do módulo *passport-local-mongoose* que nos permite "mascarar a password". Ao utilizar este módulo, a password é guardada com um *hash* e um *salt* conhecido pelo sistema e por este apenas decriptado. Ou seja, isto ajuda na segurança e impende que a captura de um pacote http se obtenha a password diretamente.
 
 Relativamente ao controllers, temos os seguintes:
 
@@ -154,8 +154,6 @@ O login de um determinado utilizador tem de passar por vários procedimentos, is
 
 ## Conclusão e Trabalho Futuro
 
-**DOCKER???**
+Em geral, estamos bastantes satisfeitos com o estado final do trabalho, apesar de não termos conseguido implementar mais funcionalidades. Algumas delas consistiam na implementação de uma limpeza e uma expansão de campos (o que iria requerer um estudo mais aprofundado da utilização do website no seu dia a dia), a possibilidade de fazer login utilizando o *Facebook* ou uma *Google Account* (abandonada devido ao tempo que iria demorar a implementar e que decidimos aproveitar para outras funcionalidades), e a implementação do *Docker* (que não conseguimos por a funcionar devidamente).
 
-Apesar de ter sido um trabalho do qual estamos bastantes satisfeitos, sentimos como sempre que há coisas a melhorar. Uma das ideias que temos sobre este trabalho, mas iria requerer um estudo mais aprofundado da utilização do website no seu dia a dia seria uma limpeza e uma expansão de campos. Um outro fator que consideramos é colocar a realização do login utilizando o *facebook* e o *google*.
-
-Consideramos que este trabalho nos tenha corrido bem, pelo que concluimos todos os objetivos propostos pelo professor, bem como expandimos alguns deles, no caso de premitir a procura aos registos. Também é de mencionar a aplicação dos diversos servidores e maneiras de programação aprendidas no decorrer da unidade curricular. 
+Consideramos que este trabalho tenha corrido bem, pelo que concluimos todos os objetivos propostos pelo professor, bem como a expansão de alguns deles (como por exemplo a procura aos registos). Também é de mencionar a aplicação de diversos servidores e de todos os conhecimentos adquiridos no decorrer da unidade curricular. 
