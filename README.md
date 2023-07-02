@@ -224,19 +224,24 @@ volumes:
 ```
 - Alteração dos acess points que o mainServer possuia
 Os acess points que o mainServer possui para fazer a conexão com os outros servidores foram alterados da seguinte forma:
+```
 (Antes)
 module.exports.apiAccessPoint = "http://localhost:3000/api"
 module.exports.authAccessPoint = "http://localhost:7778/users" 
 (Depois)
 module.exports.apiAccessPoint = "http://data_server:3000/api"
 module.exports.authAccessPoint = "http://auth_server:7778/users"
+```
 - Inserção da base de dados no docker
 Como nós possuímos um ficheiro **.json** que serve de suporte a aplicação então importamos esse ficheiro para o docker da seguinte forma:
 ```
 sudo docker cp db.json tp-mongodb:/db.json
 docker exec -it tp-mongodb  mongoimport --db tp --collection processes --file /db.json --jsonArray
 ```
-Assim conseguimos colocar todos os servidores em execução com apenas um comando. O comando por nós utilizado é o seguinte: sudo docker compose up --build
+Assim conseguimos colocar todos os servidores em execução com apenas um comando. O comando por nós utilizado é o seguinte: 
+```
+sudo docker compose up --build
+```
 
 Com base no que foi demonstrado em cima, é possível perceber como é que o Docker foi implementado no nosso projeto. 
 ## Conclusão e Trabalho Futuro
